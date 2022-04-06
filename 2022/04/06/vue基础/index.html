@@ -271,7 +271,7 @@
 <h3 id="v-on修饰符"><a href="#v-on修饰符" class="headerlink" title="v-on修饰符"></a>v-on修饰符</h3><p><code>@click.stop</code>，阻止冒泡</p>
 <p><code>@click.prevent</code>，阻止默认事件</p>
 <p><code>@click.once</code>，响应一次</p>
-<p><a href="mailto:&#x31;&#x2e;&#64;&#x63;&#108;&#x69;&#x63;&#107;&#x2e;&#115;&#x74;&#111;&#x70;">&#x31;&#x2e;&#64;&#x63;&#108;&#x69;&#x63;&#107;&#x2e;&#115;&#x74;&#111;&#x70;</a></p>
+<p><a href="mailto:&#49;&#x2e;&#64;&#99;&#108;&#x69;&#x63;&#107;&#46;&#115;&#x74;&#x6f;&#x70;">&#49;&#x2e;&#64;&#99;&#108;&#x69;&#x63;&#107;&#46;&#115;&#x74;&#x6f;&#x70;</a></p>
 <p>对于如下代码，我们点击按钮，会冒泡至父盒子：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;box&quot;</span> @click=<span class="string">&quot;boxClick&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;btnClick&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
@@ -281,7 +281,7 @@
 <p>在Vue中我们使用的是给 <code>v-on</code>后面加修饰符，<code>@click.stop</code>来阻止冒泡，代码如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;box&quot;</span> @click=<span class="string">&quot;boxClick&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.stop</span>=<span class="string">&quot;btnClick&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
-<p><a href="mailto:&#50;&#x2e;&#64;&#99;&#108;&#x69;&#99;&#x6b;&#46;&#x70;&#114;&#x65;&#118;&#x65;&#x6e;&#116;">&#50;&#x2e;&#64;&#99;&#108;&#x69;&#99;&#x6b;&#46;&#x70;&#114;&#x65;&#118;&#x65;&#x6e;&#116;</a></p>
+<p><a href="mailto:&#x32;&#46;&#x40;&#x63;&#108;&#x69;&#99;&#107;&#46;&#112;&#x72;&#x65;&#118;&#101;&#110;&#116;">&#x32;&#46;&#x40;&#x63;&#108;&#x69;&#99;&#107;&#46;&#112;&#x72;&#x65;&#118;&#101;&#110;&#116;</a></p>
 <p>如下代码，我们点击提交，会先在控制台打印<code>表单提交</code>,然后默认跳转<code>http://www.jd.com</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=<span class="string">&quot;http://www.jd.com&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;doSubmit&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
