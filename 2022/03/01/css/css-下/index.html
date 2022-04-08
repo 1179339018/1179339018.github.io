@@ -1,0 +1,527 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>css(下) | yuchen blog</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="title: css3下date: 2021-11-24 16:20:51tags:  变形2d转换转换(transform)是CSS3中具有颠覆性的特征之一，可以实现元素的位移，旋转，缩放等效果  移动：translate 旋转：rotate 缩放：scale  移动translate🔥2D移动是2D转换里面的一种功能，可以改变元素在页面中的位置，类似定位。 语法： 123456789tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css(下)">
+<meta property="og:url" content="http://example.com/2022/03/01/css/css-%E4%B8%8B/index.html">
+<meta property="og:site_name" content="yuchen blog">
+<meta property="og:description" content="title: css3下date: 2021-11-24 16:20:51tags:  变形2d转换转换(transform)是CSS3中具有颠覆性的特征之一，可以实现元素的位移，旋转，缩放等效果  移动：translate 旋转：rotate 缩放：scale  移动translate🔥2D移动是2D转换里面的一种功能，可以改变元素在页面中的位置，类似定位。 语法： 123456789tra">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-03-01T02:20:46.000Z">
+<meta property="article:modified_time" content="2022-03-01T04:20:57.329Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/03/01/css/css-%E4%B8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'css(下)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-01 12:20:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">css(下)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-01T02:20:46.000Z" title="发表于 2022-03-01 10:20:46">2022-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-01T04:20:57.329Z" title="更新于 2022-03-01 12:20:57">2022-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CSS/">CSS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="css(下)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><hr>
+<p>title: css3下<br>date: 2021-11-24 16:20:51<br>tags:</p>
+<hr>
+<h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><h3 id="2d转换"><a href="#2d转换" class="headerlink" title="2d转换"></a>2d转换</h3><p><code>转换(transform)</code>是CSS3中具有颠覆性的特征之一，可以实现元素的位移，旋转，缩放等效果</p>
+<ul>
+<li>移动：translate</li>
+<li>旋转：rotate</li>
+<li>缩放：scale</li>
+</ul>
+<h4 id="移动translate🔥"><a href="#移动translate🔥" class="headerlink" title="移动translate🔥"></a>移动translate🔥</h4><p>2D移动是2D转换里面的一种功能，可以改变元素在页面中的位置，类似定位。</p>
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">transform:translate(x,y); </span><br><span class="line">/* 或者分开写 */</span><br><span class="line">transform:translateX(n);</span><br><span class="line">transform:translateY(n);</span><br><span class="line"></span><br><span class="line">transform:translate(100px,100px);</span><br><span class="line">/* 如果只移动X轴           */</span><br><span class="line">transform:translate(100px,0);</span><br><span class="line">translateX(100px);</span><br></pre></td></tr></table></figure>
+
+<p>定义2D转换中的移动，沿着X和Y轴移动元素<br>translate 最大的优点：不会影响到其他元素的位置<br>translate 中的百分比单位是相对于自身元素的<br><code>translate:(50%,50%);</code><br>对<code>行内标签</code>没有效果</p>
+<h4 id="旋转rotate🔥"><a href="#旋转rotate🔥" class="headerlink" title="旋转rotate🔥"></a>旋转rotate🔥</h4><p>2D旋转指的是让元素在2维平面内顺时针旋转或者逆时针旋转。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">rotate</span>(度数)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>rotate 里面跟度数，单位是 deg 比如 rotate(45deg)</p>
+</li>
+<li><p><strong>角度为正时，顺时针，负时，为逆时针</strong></p>
+</li>
+<li><p>默认旋转的中心点是元素的中心点</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">   &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">img</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">            <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">            <span class="attribute">border</span>: <span class="number">5px</span> solid pink;</span><br><span class="line">            <span class="comment">/* 过渡写到本身，谁做动画给谁加 */</span></span><br><span class="line">            <span class="attribute">transition</span>: all <span class="number">0.3s</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">  &lt;head&gt;</span><br><span class="line">   &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">img</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">150px</span>;</span><br><span class="line">            <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">            <span class="attribute">border</span>: <span class="number">5px</span> solid pink;</span><br><span class="line">            <span class="comment">/* 过渡写到本身，谁做动画给谁加 */</span></span><br><span class="line">            <span class="attribute">transition</span>: all <span class="number">0.3s</span>;</span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="selector-tag">img</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">img</span> <span class="attribute">src</span>=&quot;#&quot; alt=&quot;&quot;&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="旋转中心点transform-origin🔥"><a href="#旋转中心点transform-origin🔥" class="headerlink" title="旋转中心点transform-origin🔥"></a>旋转中心点transform-origin🔥</h4><p>2D转换中心点：我们可以设置元素转换的中心点 <code>transform-origin</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform-origin</span>: x y;</span><br></pre></td></tr></table></figure>
+
+<p>注意后面的参数x 和 y 用空格隔开<br>x y 默认转换的中心点是元素的中心点(50% 50%)<br>还可以给x y 设置 像素或者方位名词(top bottom left right center)</p>
+</li>
+</ol>
+   <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">    &lt;head&gt;</span><br><span class="line">   &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">div</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: pink;</span><br><span class="line">            <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span><br><span class="line">            <span class="attribute">transition</span>: all <span class="number">1s</span>;</span><br><span class="line">            <span class="comment">/* 1.可以跟方位名词 ,以左下角为轴进行旋转*/</span></span><br><span class="line">            <span class="attribute">transform-origin</span>: left bottom;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">360deg</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="缩放scale🔥"><a href="#缩放scale🔥" class="headerlink" title="缩放scale🔥"></a>缩放scale🔥</h4><p>   缩放：scale,只要给元素添加上了这个属性就能控制它放大还是缩小</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">transform</span>: <span class="built_in">scale</span>(x,y);</span><br></pre></td></tr></table></figure>
+
+<p>   注意其中的x和y用逗号分割<br>   transform:scale(1,1): 宽和高都放大一倍，相当于没有放大<br>   transform:scale(2,2)：宽和高都放大了2倍<br>   transform:scale(2)：只写一个参数，第二个参数则和第一个参数一样，相当于 scale(2,2)<br>   transform:scale(0.5,0.5)：缩小<br>   sacle缩放最大的优势：可以设置转换中心点缩放，默认以中心点缩放的，而且不影响其他盒子</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">   &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">div</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: pink;</span><br><span class="line">            <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">        <span class="comment">/* 1.里面写的数字不跟单位 就是倍数的意思 1就是1倍，2就是2倍 */</span></span><br><span class="line">        <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2D转换综合写法🔥"><a href="#2D转换综合写法🔥" class="headerlink" title="2D转换综合写法🔥"></a>2D转换综合写法🔥</h4><blockquote>
+<ol>
+<li>同时使用多个转换，其格式为: transform:translate() rotate() scale() 移动-旋转-缩放</li>
+<li>其顺序会影响转换的效果(先旋转会改变坐标轴方向)</li>
+<li><strong>当我们同时有位移和其他属性时候，记得要将位移放到最前面</strong></li>
+</ol>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;   </span><br><span class="line">   &lt;style&gt;</span><br><span class="line">        <span class="selector-tag">div</span> &#123;</span><br><span class="line">            <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">            <span class="attribute">background-color</span>: pink;</span><br><span class="line">            <span class="attribute">transition</span>: all .<span class="number">5s</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">            <span class="comment">/* 我们同时有位移和其他属性，我们需要把位移放到最前面 位移，旋转，缩放*/</span></span><br><span class="line">            <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">150px</span>, <span class="number">50px</span>) <span class="built_in">rotate</span>(<span class="number">180deg</span>) <span class="built_in">scale</span>(<span class="number">1.2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;<span class="selector-tag">div</span>&gt;&lt;/<span class="selector-tag">div</span>&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="2D转换总结🔥"><a href="#2D转换总结🔥" class="headerlink" title="2D转换总结🔥"></a>2D转换总结🔥</h4><blockquote>
+<ul>
+<li>转换transform 我们简单理解就是变形 有2D 和 3D 之分</li>
+<li>我们暂且学了三个 分别是 位移 旋转 和 缩放</li>
+<li>2D 移动 translate(x, y) 最大的优势是不影响其他盒子， 里面参数用%，是相对于自身宽度和高度来计算的</li>
+<li>可以分开写比如 translateX(x) 和 translateY(y)</li>
+<li>2D 旋转 rotate(度数) 可以实现旋转元素 度数的单位是deg</li>
+<li>2D 缩放 sacle(x,y) 里面参数是数字 不跟单位 可以是小数 最大的优势 不影响其他盒子</li>
+<li>设置转换中心点 transform-origin : x y; 参数可以百分比、像素或者是方位名词</li>
+<li>当我们进行综合写法，同时有位移和其他属性的时候，记得要将位移放到最前</li>
+</ul>
+</blockquote>
+<h3 id="动画🔥"><a href="#动画🔥" class="headerlink" title="动画🔥"></a>动画🔥</h3><ul>
+<li>先定义动画</li>
+<li>再使用（调用）动画</li>
+</ul>
+<h4 id="用keyframs定义动画🔥"><a href="#用keyframs定义动画🔥" class="headerlink" title="用keyframs定义动画🔥"></a>用keyframs定义动画🔥</h4><p>用 keyframes 定义动画（类似定义类选择器）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> 动画名称 &#123;</span><br><span class="line">   <span class="number">0%</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">   &#125;  </span><br><span class="line">   <span class="number">100%</span>&#123;</span><br><span class="line">        <span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>0% 是动画的开始，100% 是动画的完成。这样的规则就是动画序列。</li>
+<li>在 @keyframes 中规定某项 CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果</li>
+<li>动画是使元素从一种样式逐渐变化为另一种样式的效果。您可以改变任意多的样式任意多的次数。</li>
+<li>请用百分比来规定变化发生的时间，或用关键词 “from” 和 “to”，等同于 0% 和 100%</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">       <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">       <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">       <span class="attribute">background-color</span>: aqua;</span><br><span class="line">       <span class="attribute">margin</span>: <span class="number">100px</span> auto;</span><br><span class="line">       <span class="comment">/* 调用动画 */</span></span><br><span class="line">       <span class="attribute">animation-name</span>: 动画名称;</span><br><span class="line">       <span class="comment">/* 持续时间 */</span></span><br><span class="line">       <span class="attribute">animation-duration</span>: 持续时间;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="动画常用属性🔥"><a href="#动画常用属性🔥" class="headerlink" title="动画常用属性🔥"></a>动画常用属性🔥</h4><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@keyframes</td>
+<td align="center">规定动画</td>
+</tr>
+<tr>
+<td align="center">animation</td>
+<td align="center">所有动画属性的简写属性，除了animation-play-state属性。</td>
+</tr>
+<tr>
+<td align="center">animation-name</td>
+<td align="center">规定@keyframes动画的名称。（必须的）</td>
+</tr>
+<tr>
+<td align="center">animation-duration</td>
+<td align="center">规定动画完成一个周期所花费的秒或毫秒，默认是0。（必须的）</td>
+</tr>
+<tr>
+<td align="center">animation-timing-function</td>
+<td align="center">规定动画的速度曲线，默认是“ease”。</td>
+</tr>
+<tr>
+<td align="center">animation-delay</td>
+<td align="center">规定动画何时开始，默认是0。</td>
+</tr>
+<tr>
+<td align="center">animation-iteration-count</td>
+<td align="center">规定动画被播放的次数，默认是1，还有infinite</td>
+</tr>
+<tr>
+<td align="center">animation-direction</td>
+<td align="center">规定动画是否在下一周期逆向播放，默认是“normal“,alternate逆播放</td>
+</tr>
+<tr>
+<td align="center">animation-play-state</td>
+<td align="center">规定动画是否正在运行或暂停。默认是”running”,还有”paused”。</td>
+</tr>
+<tr>
+<td align="center">animation-fill-mode</td>
+<td align="center">规定动画结束后状态，保持forwards回到起始backwards</td>
+</tr>
+</tbody></table>
+<h4 id="动画简写属性🔥"><a href="#动画简写属性🔥" class="headerlink" title="动画简写属性🔥"></a>动画简写属性🔥</h4><blockquote>
+<pre><code>   animation：动画名称 持续时间 运动曲线 何时开始 播放次数 是否反方向 动画起始或者结束的状态;
+</code></pre>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">animation</span>: myfirst <span class="number">5s</span> linear <span class="number">2s</span> infinite alternate;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>简写属性里面不包含 animation-play-state</li>
+<li>暂停动画：animation-play-state: puased; 经常和鼠标经过等其他配合使用</li>
+<li>想要动画走回来 ，而不是直接跳回来：animation-direction: alternate</li>
+<li>盒子动画结束后，停在结束位置： animation-fill-mode : forwards</li>
+</ul>
+<h4 id="速度曲线细节"><a href="#速度曲线细节" class="headerlink" title="速度曲线细节"></a>速度曲线细节</h4><ul>
+<li><code>animation-timing-function</code>：规定动画的速度曲线，默认是“ease”</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>值</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>linear</td>
+<td>动画从头到尾的速度是相同的。匀速</td>
+</tr>
+<tr>
+<td>ease</td>
+<td>默认。动画以低速开始，然后加快，在结束前变慢。</td>
+</tr>
+<tr>
+<td>ease-in</td>
+<td>动画以低速开始。</td>
+</tr>
+<tr>
+<td>ease-out</td>
+<td>动画以低速结束。</td>
+</tr>
+<tr>
+<td>ease-in-out</td>
+<td>动画以低速开始和结束。</td>
+</tr>
+<tr>
+<td>steps()</td>
+<td>指定了时间函数中的间隔数量（步长）</td>
+</tr>
+</tbody></table>
+<h3 id="3D转换🔥"><a href="#3D转换🔥" class="headerlink" title="3D转换🔥"></a>3D转换🔥</h3><p>我们生活的环境是3D的，照片就是3D物体在2D平面呈现的例子.</p>
+<p>3D转换的特点：</p>
+<ul>
+<li>近大远小。</li>
+<li>物体后面遮挡不可见</li>
+</ul>
+<p>当我们在网页上构建3D效果的时候参考这些特点就能产出3D效果。</p>
+<ul>
+<li>x轴：水平向右 <strong>注意： x 右边是正值，左边是负值</strong></li>
+<li>y轴：垂直向下 <strong>注意： y 下面是正值，上面是负值</strong></li>
+<li>z轴：垂直屏幕 <strong>注意： 往外面是正值，往里面是负值</strong></li>
+</ul>
+<h4 id="3D位移translate3d🔥"><a href="#3D位移translate3d🔥" class="headerlink" title="3D位移translate3d🔥"></a>3D位移translate3d🔥</h4><p>3D移动在2D移动的基础上多加了一个可以移动的方向，就是z轴方向</p>
+<ul>
+<li>translform:translateX(100px)：仅仅是在x轴上移动</li>
+<li>translform:translateY(100px)：仅仅是在Y轴上移动</li>
+<li>translform:translateZ(100px)：仅仅是在Z轴上移动（注意：translateZ一般用px单位）</li>
+<li>transform:translate3d(x,y,z)：其中 x、y、z 分别指要移动的轴的方向的距离</li>
+</ul>
+<p>因为z轴是垂直屏幕，由里指向外面，所以默认是看不到元素在z轴的方向上移动</p>
+<h4 id="透视perspective🔥"><a href="#透视perspective🔥" class="headerlink" title="透视perspective🔥"></a>透视perspective🔥</h4><p>透视：在2D平面产生近大远小视觉立体，但是只是效果二维的</p>
+<ul>
+<li><p>如果想要在网页产生3D效果需要透视（理解成3D物体投影在2D平面内）</p>
+</li>
+<li><p>模拟人类的视觉位置，可认为安排一只眼睛去看</p>
+</li>
+<li><p>透视我们也称为视距：视距就是人的眼睛到屏幕的距离</p>
+</li>
+<li><p>距离视觉点越近的在电脑平面成像越大，越远成像越小</p>
+</li>
+<li><p>透视的单位是像素</p>
+<p><strong>透视写在被观察元素的父盒子上面的</strong></p>
+</li>
+</ul>
+<h4 id="translateZ🔥"><a href="#translateZ🔥" class="headerlink" title="translateZ🔥"></a>translateZ🔥</h4><ul>
+<li>translform:translateZ(100px)：仅仅是在Z轴上移动。</li>
+<li>有了透视，就能看到translateZ 引起的变化了<ul>
+<li>translateZ：近大远小</li>
+<li>translateZ：往外是正值</li>
+<li>translateZ：往里是负值</li>
+</ul>
+</li>
+</ul>
+<h4 id="3D旋转rotate3d🔥"><a href="#3D旋转rotate3d🔥" class="headerlink" title="3D旋转rotate3d🔥"></a>3D旋转rotate3d🔥</h4><p>3D旋转：3D旋转指可以让元素在三维平面内沿着 x轴，y轴，z轴或者自定义轴进行旋转。</p>
+<p>transform: rotateX(45deg) ：沿着X轴正方向旋转45度<br>transform: rotateY(45deg) ：沿着Y轴正方向旋转45度<br>transform: rotateZ(45deg) ：沿着Z轴正方向旋转45度<br>transform: rotate3d(x,y,z,deg) ：沿着自定义轴旋转 deg为角度(了解即可)<br>xyz是表示旋转轴的矢量，是标示你是否希望沿着该轴旋转，最后一个标示旋转的角度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/*沿着X轴旋转45deg*/</span></span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">rotate3d</span>(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">45deg</span>) </span><br><span class="line"><span class="comment">/*沿着对角线旋转45deg*/</span></span><br><span class="line">transform: <span class="built_in">rotate3d</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">45deg</span>) transform: <span class="built_in">rotate3d</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">45deg</span>) </span><br></pre></td></tr></table></figure>
+
+<h4 id="3D呈现transform-style🔥"><a href="#3D呈现transform-style🔥" class="headerlink" title="3D呈现transform-style🔥"></a>3D呈现transform-style🔥</h4><p>3D呈现：transform-style</p>
+<ol>
+<li>控制子元素是否开启三维立体环境</li>
+<li>transform-style: flat 子元素不开启3d立体空间 默认的</li>
+<li>transform-style: preserve-3d 子元素开启立体空间</li>
+<li>代码写给父级，但是影响的是子盒子</li>
+<li>这个属性很重要</li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="1-渐变色"><a href="#1-渐变色" class="headerlink" title="1.渐变色"></a>1.渐变色</h3><p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/54b72b2e0001500103790158.jpg" alt="img"></p>
+<p><strong>参数：</strong></p>
+<p>第一个参数:<strong>指定渐变方向</strong>，可以用“<strong>角度</strong>”的关键词或<strong>“英文”</strong>来表示：</p>
+<p><img src="https://img.mukewang.com/542a25da00017e9406980223.jpg" alt="img"></p>
+<p>第一个参数省略时，默认为“180deg”，等同于“to bottom”。</p>
+<p>第二个和第三个参数，<strong>表示颜色的起始点和结束点</strong>，可以有多个颜色值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background-image</span>:<span class="built_in">linear-gradient</span>(to left, red, orange,yellow,green,blue,indigo,violet);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-鼠标样式"><a href="#2-鼠标样式" class="headerlink" title="2.鼠标样式"></a>2.鼠标样式</h3><p>鼠标样式<code>cursor</code></p>
+<ul>
+<li>设置或检索在对象上移动的鼠标指针采用何种系统预定义的光标形状</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>default</td>
+<td>小白，默认</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>小手</td>
+</tr>
+<tr>
+<td>move</td>
+<td>移动</td>
+</tr>
+<tr>
+<td>text</td>
+<td>文本</td>
+</tr>
+<tr>
+<td>not-allowed</td>
+<td>禁止</td>
+</tr>
+</tbody></table>
+<h3 id="3-轮廓线outline"><a href="#3-轮廓线outline" class="headerlink" title="3.轮廓线outline"></a>3.轮廓线outline</h3><p>轮廓线<code>outline</code>：</p>
+<ul>
+<li>给表单添加 <code>outline:0</code>; 或者<code>outline: none</code>;样式后，就可以去掉默认的蓝色边框</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input &#123;</span><br><span class="line">    outline: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>outline属性的基本语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outline: ［outline-color］ || [outline-style] || [outline-width] || [outline-offset] || inherit</span><br></pre></td></tr></table></figure>
+
+<p>有一个border属性，外面还有outline</p>
+<h3 id="4-自由缩放属性resize"><a href="#4-自由缩放属性resize" class="headerlink" title="4.自由缩放属性resize"></a>4.自由缩放属性resize</h3><blockquote>
+<p>为了增强用户体验，CSS3增加了很多新的属性，其中<strong>resize</strong>就是一个重要的属性，它允许用户通过拖动的方式来修改元素的尺寸来改变元素的大小。到目前为止，可以使用overflow属性的任何容器元素。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">resize</span>: none | both | horizontal | vertical | inherit</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>属性值</strong></th>
+<th><strong>取值说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>用户不能拖动元素修改尺寸大小。</td>
+</tr>
+<tr>
+<td>both</td>
+<td>用户可以拖动元素，同时修改元素的宽度和高度</td>
+</tr>
+<tr>
+<td>horizontal</td>
+<td>用户可以拖动元素，仅可以修改元素的宽度，但不能修改元素的高度。</td>
+</tr>
+<tr>
+<td>vertical</td>
+<td>用户可以拖动元素，仅可以修改元素的高度，但不能修改元素的宽度。</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>继承父元素的resize属性值。</td>
+</tr>
+</tbody></table>
+<h3 id="5-多列布局Columns"><a href="#5-多列布局Columns" class="headerlink" title="5.多列布局Columns"></a>5.多列布局Columns</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">columns：&lt;column-width&gt; || &lt;column-count&gt;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>参数说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>column-width</td>
+<td>主要用来定义多列中每列的宽度</td>
+</tr>
+<tr>
+<td>column-count</td>
+<td>主要用来定义多列中的列数</td>
+</tr>
+<tr>
+<td>column-gap</td>
+<td>设置列与列之间的<strong>间距</strong></td>
+</tr>
+</tbody></table>
+<h4 id="列表边框column-rule"><a href="#列表边框column-rule" class="headerlink" title="列表边框column-rule"></a>列表边框column-rule</h4><blockquote>
+<p>column-rule主要是用来定义列与列之间的<strong>边框宽度、边框样式</strong>和<strong>边框颜色</strong>。简单点说，就有点类似于常用的border属性。但column-rule是不占用任何空间位置的，在列与列之间改变其宽度不会改变任何列的位置。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">column-rule</span>:&lt;column-rule-width&gt;|&lt;column-rule-style&gt;|&lt;column-rule-color&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="跨列设置column-span"><a href="#跨列设置column-span" class="headerlink" title="跨列设置column-span"></a>跨列设置column-span</h4><blockquote>
+<p>column-span主要用来定义一个分列元素中的子元素能跨列多少。column-width、column-count等属性能让一元素分成多列，不管里面元素如何排放顺序，他们都是从左向右的放置内容，但有时我们需要基中一段内容或一个标题不进行分列，也就是横跨所有列，此时column-span就可以轻松实现，此属性的语法如下。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">column-span: none | all</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>属性值</strong></th>
+<th><strong>属性值说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>none</td>
+<td>此值为column-span的默认值，表示不跨越任何列。</td>
+</tr>
+<tr>
+<td>all</td>
+<td>这个值跟none值刚好相反，表示的是元素跨越所有列，并定位在列的Ｚ轴之上。</td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/03/01/css/css-%E4%B8%8B/">http://example.com/2022/03/01/css/css-%E4%B8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">yuchen blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/01/html/html5/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">html5</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/01/css/css/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description">偷偷摸鱼去</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E5%BD%A2"><span class="toc-text">变形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2d%E8%BD%AC%E6%8D%A2"><span class="toc-text">2d转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8translate%F0%9F%94%A5"><span class="toc-text">移动translate🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%8B%E8%BD%ACrotate%F0%9F%94%A5"><span class="toc-text">旋转rotate🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E4%B8%AD%E5%BF%83%E7%82%B9transform-origin%F0%9F%94%A5"><span class="toc-text">旋转中心点transform-origin🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%A9%E6%94%BEscale%F0%9F%94%A5"><span class="toc-text">缩放scale🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2D%E8%BD%AC%E6%8D%A2%E7%BB%BC%E5%90%88%E5%86%99%E6%B3%95%F0%9F%94%A5"><span class="toc-text">2D转换综合写法🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2D%E8%BD%AC%E6%8D%A2%E6%80%BB%E7%BB%93%F0%9F%94%A5"><span class="toc-text">2D转换总结🔥</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%F0%9F%94%A5"><span class="toc-text">动画🔥</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8keyframs%E5%AE%9A%E4%B9%89%E5%8A%A8%E7%94%BB%F0%9F%94%A5"><span class="toc-text">用keyframs定义动画🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7%F0%9F%94%A5"><span class="toc-text">动画常用属性🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB%E7%AE%80%E5%86%99%E5%B1%9E%E6%80%A7%F0%9F%94%A5"><span class="toc-text">动画简写属性🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9F%E5%BA%A6%E6%9B%B2%E7%BA%BF%E7%BB%86%E8%8A%82"><span class="toc-text">速度曲线细节</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D%E8%BD%AC%E6%8D%A2%F0%9F%94%A5"><span class="toc-text">3D转换🔥</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3D%E4%BD%8D%E7%A7%BBtranslate3d%F0%9F%94%A5"><span class="toc-text">3D位移translate3d🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%8F%E8%A7%86perspective%F0%9F%94%A5"><span class="toc-text">透视perspective🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#translateZ%F0%9F%94%A5"><span class="toc-text">translateZ🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3D%E6%97%8B%E8%BD%ACrotate3d%F0%9F%94%A5"><span class="toc-text">3D旋转rotate3d🔥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3D%E5%91%88%E7%8E%B0transform-style%F0%9F%94%A5"><span class="toc-text">3D呈现transform-style🔥</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B8%90%E5%8F%98%E8%89%B2"><span class="toc-text">1.渐变色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%BC%A0%E6%A0%87%E6%A0%B7%E5%BC%8F"><span class="toc-text">2.鼠标样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BD%AE%E5%BB%93%E7%BA%BFoutline"><span class="toc-text">3.轮廓线outline</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%87%AA%E7%94%B1%E7%BC%A9%E6%94%BE%E5%B1%9E%E6%80%A7resize"><span class="toc-text">4.自由缩放属性resize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A4%9A%E5%88%97%E5%B8%83%E5%B1%80Columns"><span class="toc-text">5.多列布局Columns</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E8%BE%B9%E6%A1%86column-rule"><span class="toc-text">列表边框column-rule</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%A8%E5%88%97%E8%AE%BE%E7%BD%AEcolumn-span"><span class="toc-text">跨列设置column-span</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="node"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node">node</a><time datetime="2022-04-08T08:35:38.000Z" title="发表于 2022-04-08 16:35:38">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="express"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express">express</a><time datetime="2022-04-08T08:34:50.000Z" title="发表于 2022-04-08 16:34:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ajax"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax">Ajax</a><time datetime="2022-04-08T08:34:08.000Z" title="发表于 2022-04-08 16:34:08">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="webpack"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack">webpack</a><time datetime="2022-04-08T08:32:50.000Z" title="发表于 2022-04-08 16:32:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/vue/Vuex/" title="Vuex"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vuex"/></a><div class="content"><a class="title" href="/2022/04/08/vue/Vuex/" title="Vuex">Vuex</a><time datetime="2022-04-08T08:30:09.000Z" title="发表于 2022-04-08 16:30:09">2022-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'cLTwM1vzhNlDpO0udsxdoQuA-gzGzoHsz',
+      appKey: 'E4Vt4VAGgVURyaI8esNftO1Y',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: 
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>ES6 | yuchen blog</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="ES61、严格模式 JavaScript 除了提供正常模式外，还提供了严格模式 ES5 的严格模式是采用具有限制性 JavaScript 变体的一种方式，即在严格的条件下运行 JS 代码 严格模式在IE10 以上版本的浏览器才会被支持，旧版本浏览器会被忽略 严格模式对正常的JavaScript语义做了一些更改：   消除了Javascript 语法的一些不合理、不严谨之处，减少了一些怪异行为 消除">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6">
+<meta property="og:url" content="http://example.com/2022/03/01/js/ES6/index.html">
+<meta property="og:site_name" content="yuchen blog">
+<meta property="og:description" content="ES61、严格模式 JavaScript 除了提供正常模式外，还提供了严格模式 ES5 的严格模式是采用具有限制性 JavaScript 变体的一种方式，即在严格的条件下运行 JS 代码 严格模式在IE10 以上版本的浏览器才会被支持，旧版本浏览器会被忽略 严格模式对正常的JavaScript语义做了一些更改：   消除了Javascript 语法的一些不合理、不严谨之处，减少了一些怪异行为 消除">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-03-01T10:07:25.000Z">
+<meta property="article:modified_time" content="2022-03-01T10:12:05.266Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/03/01/js/ES6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ES6',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-01 18:12:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">ES6</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-01T10:07:25.000Z" title="发表于 2022-03-01 18:07:25">2022-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-01T10:12:05.266Z" title="更新于 2022-03-01 18:12:05">2022-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ES6"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h1><h1 id="1、严格模式"><a href="#1、严格模式" class="headerlink" title="1、严格模式"></a>1、严格模式</h1><ol>
+<li>JavaScript 除了提供正常模式外，还提供了严格模式</li>
+<li>ES5 的严格模式是采用具有限制性 JavaScript 变体的一种方式，即在严格的条件下运行 JS 代码</li>
+<li>严格模式在IE10 以上版本的浏览器才会被支持，旧版本浏览器会被忽略</li>
+<li>严格模式对正常的JavaScript语义做了一些更改：</li>
+</ol>
+<ul>
+<li>消除了Javascript 语法的一些不合理、不严谨之处，减少了一些怪异行为</li>
+<li>消除代码运行的一些不安全之处，保证代码运行的安全</li>
+<li>提高编译器效率，增加运行速度</li>
+<li>禁用了在 ECMAScript 的未来版本中可能会定义的一些语法，为未来新版本的 Javascript 做好铺垫。比如一些保留字如：class, enum, export, extends, import, super 不能做变量名</li>
+</ul>
+<h2 id="1、开启严格模式"><a href="#1、开启严格模式" class="headerlink" title="1、开启严格模式"></a>1、开启严格模式</h2><ul>
+<li>严格模式可以应用到<code>整个脚本</code>或<code>个别函数</code>中。</li>
+<li>因此在使用时，我们可以将严格模式分为为<code>脚本开启严格模式</code>和为<code>函数开启严格模式</code>两种情况</li>
+</ul>
+<h3 id="1、为脚本开启严格模式"><a href="#1、为脚本开启严格模式" class="headerlink" title="1、为脚本开启严格模式"></a>1、为脚本开启严格模式</h3><ul>
+<li>为整个脚本文件开启严格模式，需要在所有语句之前放一个特定语句</li>
+<li><code>&quot;use strict&quot;</code> 或<code>&#39;use strict&#39;</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="string">&#x27;user strict&#x27;</span>;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;这是严格模式。&quot;</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>因为”use strict”加了引号，所以老版本的浏览器会把它当作一行普通字符串而忽略。</p>
+<p>有的 script 基本是严格模式，有的 script 脚本是正常模式，这样不利于文件合并，所以可以将整个脚本文件放在一个立即执行的匿名函数之中。这样独立创建一个作用域而不影响其他 script 脚本文件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	(<span class="keyword">function</span> (<span class="params"></span>)&#123;</span><br><span class="line">    	<span class="string">&#x27;use strict&#x27;</span>;</span><br><span class="line">    	 <span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">    	 <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">	&#125;)();   </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、为函数开启严格模式"><a href="#2、为函数开启严格模式" class="headerlink" title="2、为函数开启严格模式"></a>2、为函数开启严格模式</h3><p>若要给某个函数开启严格模式，需要把<code>&quot;use strict&quot;</code>或<code>&#39;use strict&#39;</code>声明放在函数体所有语句之前</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 为某个函数开启严格模式 --&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 此时只是给fn函数开启严格模式</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="string">&#x27;use strict&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// 下面的代码按照严格模式执行</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">fun</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// 里面的还是按照普通模式执行</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>将<code>&quot;use strict&quot;</code> 放在函数体的第一行，则整个函数以 “严格模式”运行。</p>
+<h2 id="2、严格模式中的变化"><a href="#2、严格模式中的变化" class="headerlink" title="2、严格模式中的变化"></a>2、严格模式中的变化</h2><h3 id="1、变量规定"><a href="#1、变量规定" class="headerlink" title="1、变量规定"></a>1、变量规定</h3><ul>
+<li>在正常模式中，如果一个变量没有声明就赋值，默认是全局变量</li>
+<li>严格模式禁止这种用法，变量都必须先用var 命令声明，然后再使用</li>
+<li>严禁删除已经声明变量，例如，``delete x` 语法是错误的</li>
+</ul>
+<h3 id="2、严格模式下this指向问题"><a href="#2、严格模式下this指向问题" class="headerlink" title="2、严格模式下this指向问题"></a>2、严格模式下this指向问题</h3><ol>
+<li>以前在全局作用域函数中的this指向window对象</li>
+<li>严格模式下全局作用域中函数中的this 是 <code>undefined</code></li>
+<li>以前构造函数时不加 new 也可以调用，当普通函数，this指向全局对象</li>
+<li>严格模式下，如果构造函数不加 new 调用，this指向的是 undefined ，如果给它赋值，会报错</li>
+<li>new 实例化的构造函数指向创建的对象实例</li>
+<li>定时器this 还是指向window</li>
+<li>事件、对象还是指向调用者</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="meta"></span></span></span></span><br><span class="line"><span class="meta"><span class="language-javascript"><span class="language-xml">        &#x27;use strict&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">		<span class="comment">//3. 严格模式下全局作用域中函数中的 this 是 undefined。</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// undefined。</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">fn</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">//4. 严格模式下,如果 构造函数不加new调用, this 指向的是undefined 如果给他赋值则 会报错.</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">Star</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">this</span>.<span class="property">sex</span> = <span class="string">&#x27;男&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// Star();</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> ldh = <span class="keyword">new</span> <span class="title class_">Star</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(ldh.<span class="property">sex</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">//5. 定时器 this 还是指向 window </span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;, <span class="number">2000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3、函数变化</p>
+<ol>
+<li>函数不能有重名的<strong>参数</strong></li>
+<li>函数必须声明在顶层，新版本的JavaScript会引入“块级作用域”（ES6中已引入）。为了与新版本接轨，<strong>不允许在非函数的代码块内声明函数</strong></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="string">&#x27;use strict&#x27;</span>;</span><br><span class="line">    <span class="comment">// 6. 严格模式下函数里面的参数不允许有重名</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a, a</span>) &#123;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(a + a);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// fn(1, 2);</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2、闭包"><a href="#2、闭包" class="headerlink" title="2、闭包"></a>2、闭包</h1><h2 id="1、变量作用域"><a href="#1、变量作用域" class="headerlink" title="1、变量作用域"></a>1、变量作用域</h2><p>变量根据作用域的不同分为两种：全局变量和局部变量</p>
+<ol>
+<li>函数内部可以使用全局变量</li>
+<li>函数外部不可以使用局部变量</li>
+<li>当函数执行完毕，本作用域内的局部变量会销毁。</li>
+</ol>
+<h2 id="2、什么是闭包"><a href="#2、什么是闭包" class="headerlink" title="2、什么是闭包"></a>2、什么是闭包</h2><p>闭包指有权访问另一个函数作用域中的变量的函数</p>
+<p><code>简单理解：一个作用域可以访问另外一个函数内部的局部变量</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">       <span class="comment">// 闭包（closure）指有权访问另一个函数作用域中变量的函数。</span></span><br><span class="line">       <span class="comment">// 闭包: 我们fn2 这个函数作用域 访问了另外一个函数 fn1 里面的局部变量 num</span></span><br><span class="line">       <span class="keyword">function</span> <span class="title function_">fn1</span>(<span class="params"></span>) &#123;		<span class="comment">// fn1就是闭包函数</span></span><br><span class="line">           <span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">           <span class="keyword">function</span> <span class="title function_">fn2</span>(<span class="params"></span>) &#123;</span><br><span class="line">               <span class="variable language_">console</span>.<span class="title function_">log</span>(num); 	<span class="comment">//10</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="title function_">fn2</span>();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="title function_">fn1</span>();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、闭包的作用"><a href="#3、闭包的作用" class="headerlink" title="3、闭包的作用"></a>3、闭包的作用</h2><p><code>延伸变量的作用范围</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">        <span class="comment">// 闭包（closure）指有权访问另一个函数作用域中变量的函数。</span></span><br><span class="line">        <span class="comment">// 一个作用域可以访问另外一个函数的局部变量 </span></span><br><span class="line">        <span class="comment">// 我们fn 外面的作用域可以访问fn 内部的局部变量</span></span><br><span class="line">        <span class="comment">// 闭包的主要作用: 延伸了变量的作用范围</span></span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> f = <span class="title function_">fn</span>();</span><br><span class="line">        <span class="title function_">f</span>();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、闭包练习"><a href="#4、闭包练习" class="headerlink" title="4、闭包练习"></a>4、闭包练习</h2><h3 id="1、点击li输出索引号"><a href="#1、点击li输出索引号" class="headerlink" title="1、点击li输出索引号"></a>1、点击li输出索引号</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="keyword">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>榴莲<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>臭豆腐<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>鲱鱼罐头<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>大猪蹄子<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">   &lt;/ul&gt;</span><br><span class="line">   <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="comment">// 闭包应用-点击li输出当前li的索引号</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="comment">// 1. 我们可以利用动态添加属性的方式</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="keyword">var</span> lis = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.nav&#x27;</span>).<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;li&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.<span class="property">length</span>; i++) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           lis[i].<span class="property">index</span> = i;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           lis[i].<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">               <span class="comment">// console.log(i);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">               <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">index</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="comment">// 2. 利用闭包的方式得到当前小li 的索引号</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.<span class="property">length</span>; i++) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           <span class="comment">// 利用for循环创建了4个立即执行函数</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           <span class="comment">// 立即执行函数也成为小闭包因为立即执行函数里面的任何一个函数都可以使用它的i这变量</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           (<span class="keyword">function</span>(<span class="params">i</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">               <span class="comment">// console.log(i);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">               lis[i].<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                   <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">               &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">           &#125;)(i);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">       &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">   </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、定时器中的闭包"><a href="#2、定时器中的闭包" class="headerlink" title="2、定时器中的闭包"></a>2、定时器中的闭包</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="keyword">class</span>=<span class="string">&quot;nav&quot;</span>&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>榴莲<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>臭豆腐<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>鲱鱼罐头<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>大猪蹄子<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="comment">// 闭包应用-3秒钟之后,打印所有li元素的内容</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">var</span> lis = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.nav&#x27;</span>).<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;li&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; lis.<span class="property">length</span>; i++) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        (<span class="keyword">function</span>(<span class="params">i</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(lis[i].<span class="property">innerHTML</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;, <span class="number">3000</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)(i);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="3、浅拷贝和深拷贝"><a href="#3、浅拷贝和深拷贝" class="headerlink" title="3、浅拷贝和深拷贝"></a>3、浅拷贝和深拷贝</h1><ol>
+<li>浅拷贝只是拷贝一层，更深层次对象级别的只<code>拷贝引用</code></li>
+<li>深拷贝拷贝多层，每一级别的数据都会拷贝</li>
+<li><code>Object.assign(target,....sources)</code> ES6新增方法可以<code>浅拷贝</code></li>
+</ol>
+<h2 id="1、浅拷贝"><a href="#1、浅拷贝" class="headerlink" title="1、浅拷贝"></a>1、浅拷贝</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浅拷贝只是拷贝一层，更深层次对象级别的只拷贝引用</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;andy&#x27;</span>,</span><br><span class="line">    <span class="attr">msg</span>: &#123;</span><br><span class="line">        <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> obj)&#123;</span><br><span class="line">    <span class="comment">// k是属性名，obj[k]是属性值</span></span><br><span class="line">    o[k] = obj[k];</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o);</span><br><span class="line"><span class="comment">// 浅拷贝语法糖</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">assign</span>(o,obj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、深拷贝"><a href="#2、深拷贝" class="headerlink" title="2、深拷贝"></a>2、深拷贝</h2><ul>
+<li>深拷贝会把数组和对象的所有元素也拷贝进去</li>
+<li>浅拷贝只把数组和对象拷贝进去</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 深拷贝拷贝多层，每一级别的数据都会拷贝</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;andy&#x27;</span>,</span><br><span class="line">    <span class="attr">msg</span>: &#123;</span><br><span class="line">        <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attr">color</span>: [<span class="string">&#x27;pink&#x27;</span>,<span class="string">&#x27;red&#x27;</span>]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line"><span class="comment">// 封装函数</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">deepCopy</span>(<span class="params">newobj,oldobj</span>)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> oldobj)&#123;</span><br><span class="line">        <span class="comment">// 判断属性值属于简单数据类型还是复杂数据类型</span></span><br><span class="line">        <span class="comment">// 1.获取属性值   oldobj[k]</span></span><br><span class="line">        <span class="keyword">var</span> item = obldobj[k];</span><br><span class="line">        <span class="comment">// 2.判断这个值是否是数组</span></span><br><span class="line">        <span class="keyword">if</span>(item <span class="keyword">instanceof</span> <span class="title class_">Array</span>)&#123;</span><br><span class="line">            newobj[k] = [];</span><br><span class="line">            <span class="title function_">deepCopy</span>(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (item <span class="keyword">instanceof</span> <span class="title class_">Object</span>)&#123;</span><br><span class="line">              <span class="comment">// 3.判断这个值是否是对象</span></span><br><span class="line">            newobj[k] = &#123;&#125;;</span><br><span class="line">            <span class="title function_">deepCopy</span>(newobj[k],item)</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 4.属于简单数据类型</span></span><br><span class="line">            newobj[k] = item;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">deepCopy</span>(o,obj);</span><br></pre></td></tr></table></figure>
+
+<h1 id="4、正则表达式"><a href="#4、正则表达式" class="headerlink" title="4、正则表达式"></a>4、正则表达式</h1><p>正则表达式是用于<strong>匹配字符串中字符组合</strong>的模式。<code>在JavaScript中，正则表达式也是对象。</code></p>
+<p>正则表通常被用来<strong>检索、替换</strong>那些符合某个模式（规则）的文本。</p>
+<p>例如验证表单：用户名表单只能输入英文字母、数字或者下划线，昵称输入框中可以输入中文(匹配)。此外，正则表达式还常用于过滤掉页面内容中的一些敏感词(替换)，或从字符串中获取我们想要的特定部分(提取)等 。</p>
+<h2 id="1、创建正则表达式"><a href="#1、创建正则表达式" class="headerlink" title="1、创建正则表达式"></a>1、创建正则表达式</h2><p>在JavaScript中，可以通过两种方式创建正则表达式</p>
+<ol>
+<li>通过调用 RegExp 对象的构造函数创建</li>
+<li>通过字面量创建</li>
+</ol>
+<h3 id="1、通过调用-RegExp-对象的构造函数创建"><a href="#1、通过调用-RegExp-对象的构造函数创建" class="headerlink" title="1、通过调用 RegExp 对象的构造函数创建"></a>1、通过调用 RegExp 对象的构造函数创建</h3><p>通过调用 RegExp 对象的构造函数创建</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/表达式/</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、通过字面量创建"><a href="#2、通过字面量创建" class="headerlink" title="2、通过字面量创建"></a>2、通过字面量创建</h3><p>通过字面量创建</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = <span class="regexp">/表达式/</span>;</span><br></pre></td></tr></table></figure>
+
+<p>注释中间放表达式就是正则字面量</p>
+<h3 id="3、测试正则表达式-test"><a href="#3、测试正则表达式-test" class="headerlink" title="3、测试正则表达式 test"></a>3、测试正则表达式 test</h3><p><code>test()</code>正则对象方法，用于检测字符串是否符合该规则，该对象会返回<code>true</code>或<code>false</code>,其参数是测试字符串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regexObj.<span class="title function_">test</span>(str)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>regexObj</code> 写的是正则表达式</li>
+<li><code>str</code> 我们要测试的文本</li>
+<li>就是检测<code>str</code>文本是否符合我们写的正则表达式规范</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 利用 RegExp对象来创建 正则表达式</span></span><br><span class="line"><span class="keyword">var</span> regexp = <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="regexp">/123/</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(regexp);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 利用字面量创建 正则表达式</span></span><br><span class="line"><span class="keyword">var</span> rg = <span class="regexp">/123/</span>;</span><br><span class="line"><span class="comment">// 3.test 方法用来检测字符串是否符合正则表达式要求的规范</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rg.<span class="title function_">test</span>(<span class="number">123</span>));<span class="comment">//ture</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rg.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>));<span class="comment">//flase</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-match提取实际匹配项"><a href="#4-match提取实际匹配项" class="headerlink" title="4. match提取实际匹配项"></a>4. match提取实际匹配项</h3><p><code>.match()</code> 方法提取找到的实际匹配项。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Hello, World!&quot;</span>.<span class="title function_">match</span>(<span class="regexp">/Hello/</span>);</span><br><span class="line"><span class="keyword">let</span> ourStr = <span class="string">&quot;Regular expressions&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> ourRegex = <span class="regexp">/expressions/</span>;</span><br><span class="line">ourStr.<span class="title function_">match</span>(ourRegex);</span><br></pre></td></tr></table></figure>
+
+<p>这里第一个 <code>match</code> 将返回 <code>[&quot;Hello&quot;]</code> 第二个将返回 <code>[&quot;expressions&quot;]</code>。</p>
+<p>请注意， <code>.match</code> 语法是目前为止一直使用的 <code>.test</code> 方法中的“反向”：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;string&#x27;</span>.<span class="title function_">match</span>(<span class="regexp">/regex/</span>);</span><br><span class="line"><span class="regexp">/regex/</span>.<span class="title function_">test</span>(<span class="string">&#x27;string&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、正则表达式中的特殊字符"><a href="#2、正则表达式中的特殊字符" class="headerlink" title="2、正则表达式中的特殊字符"></a>2、正则表达式中的特殊字符</h2><h3 id="1、边界符"><a href="#1、边界符" class="headerlink" title="1、边界符"></a>1、边界符</h3><p>正则表达式中的边界符(位置符)用来提示字符所处的位置，主要有两个字符</p>
+<table>
+<thead>
+<tr>
+<th align="center">边界符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">^</td>
+<td align="center">表示匹配行首的文本(以谁开始)</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">表示匹配行尾的文本(以谁结束)</td>
+</tr>
+</tbody></table>
+<p><code>如果^ 和 $ 在一起，表示必须是精确匹配</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 边界符 ^ $</span></span><br><span class="line"><span class="keyword">var</span> rg = <span class="regexp">/abc/</span>;   <span class="comment">//正则表达式里面不需要加引号，不管是数字型还是字符串型</span></span><br><span class="line"><span class="comment">// /abc/只要包含有abc这个字符串返回的都是true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rg.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rg.<span class="title function_">test</span>(<span class="string">&#x27;abcd&#x27;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(rg.<span class="title function_">test</span>(<span class="string">&#x27;aabcd&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^abc/</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;abc&#x27;</span>));   <span class="comment">//true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;abcd&#x27;</span>));	<span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;aabcd&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/^abc$/</span></span><br><span class="line"><span class="comment">// 以abc开头，以abc结尾，必须是abc</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、字符类"><a href="#3、字符类" class="headerlink" title="3、字符类"></a>3、字符类</h2><ul>
+<li>字符类表示有一系列字符可供选择，只要匹配其中一个就可以了</li>
+<li>所有可供选择的字符都放在方括号内</li>
+</ul>
+<h4 id="1-方括号"><a href="#1-方括号" class="headerlink" title="1.[] 方括号"></a>1.[] 方括号</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[abc]/.<span class="title function_">test</span>(<span class="string">&#x27;andy&#x27;</span>);     <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-方括号内部-范围符"><a href="#2-方括号内部-范围符" class="headerlink" title="2.[-]方括号内部 范围符"></a>2.[-]方括号内部 范围符</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^[a-z]$/.<span class="title function_">test</span>()</span><br></pre></td></tr></table></figure>
+
+<p>方括号内部加上 <code>-</code> 表示范围，这里表示 <code>a - z</code> 26个英文字母都可以</p>
+<h4 id="3-方括号内部-取反符"><a href="#3-方括号内部-取反符" class="headerlink" title="3.[^] 方括号内部 取反符"></a>3.[^] 方括号内部 取反符</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[^abc]/.<span class="title function_">test</span>(<span class="string">&#x27;andy&#x27;</span>)   <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>方括号内部加上 <code>^</code> 表示取反，只要包含方括号内的字符，都返回 <code>false</code></p>
+<p><code>注意和边界符 ^ 区别，边界符写到方括号外面</code></p>
+<h4 id="4-字符组合"><a href="#4-字符组合" class="headerlink" title="4.字符组合"></a>4.字符组合</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[a-z1-<span class="number">9</span>]/.<span class="title function_">test</span>(<span class="string">&#x27;andy&#x27;</span>)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>方括号内部可以使用字符组合，这里表示包含 <code>a 到 z的26个英文字母和1到9的数字都可以</code></p>
+<h2 id="4、量词符"><a href="#4、量词符" class="headerlink" title="4、量词符"></a>4、量词符</h2><p>量词符用来设定某个模式出现的<code>次数</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">量词</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">重复零次或更多次</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">重复一次或更多次</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="center">重复零次或一次</td>
+</tr>
+<tr>
+<td align="center">{n}</td>
+<td align="center">重复n次</td>
+</tr>
+<tr>
+<td align="center">{n,}</td>
+<td align="center">重复n次或更多次</td>
+</tr>
+<tr>
+<td align="center">{n,m}</td>
+<td align="center">重复n到m次</td>
+</tr>
+</tbody></table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^a&#123;3,&#125;$/</span>;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;aaaa&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;aaa&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line">       <span class="comment">//  &#123;3,16&#125;  大于等于3 并且 小于等于16</span></span><br><span class="line">       <span class="keyword">var</span> reg = <span class="regexp">/^a&#123;3,6&#125;$/</span>;</span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;a&#x27;</span>)); <span class="comment">// false</span></span><br><span class="line">       <span class="variable language_">console</span>.<span class="title function_">log</span>(reg.<span class="title function_">test</span>(<span class="string">&#x27;aaaa&#x27;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5、用户名验证"><a href="#5、用户名验证" class="headerlink" title="5、用户名验证"></a>5、用户名验证</h2><p>功能需求：</p>
+<ol>
+<li><p>如果用户名输入合法, 则后面提示信息为 : 用户名合法,并且颜色为绿色</p>
+</li>
+<li><p>如果用户名输入不合法, 则后面提示信息为: 用户名不符合规范, 并且颜色为绿色</p>
+</li>
+</ol>
+<p>分析：</p>
+<ol>
+<li><p>用户名只能为英文字母,数字,下划线或者短横线组成, 并且用户名长度为 6~16位.</p>
+</li>
+<li><p>首先准备好这种正则表达式模式 /$[a-zA-Z0-9-_]{6,16}^/</p>
+</li>
+<li><p>当表单失去焦点就开始验证.</p>
+</li>
+<li><p>如果符合正则规范, 则让后面的span标签添加 right 类.</p>
+</li>
+<li><p>如果不符合正则规范, 则让后面的span标签添加 wrong 类.</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;uname&quot;</span>&gt;</span> <span class="tag">&lt;<span class="name">span</span>&gt;</span>请输入用户名<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">//  量词是设定某个模式出现的次数</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> reg = <span class="regexp">/^[a-zA-Z0-9_-]&#123;6,16&#125;$/</span>; <span class="comment">// 这个模式用户只能输入英文字母 数字 下划线 短横线但是有边界符和[] 这就限定了只能多选1</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// &#123;6,16&#125;  中间不要有空格</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;a&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;8&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;18&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;aa&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(&#x27;-------------&#x27;);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;andy-red&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;andy_red&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;andy007&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// console.log(reg.test(&#x27;andy!007&#x27;));</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> uname = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.uname&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> span = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;span&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        uname.<span class="property">onblur</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="keyword">if</span> (reg.<span class="title function_">test</span>(<span class="variable language_">this</span>.<span class="property">value</span>)) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;正确的&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                span.<span class="property">className</span> = <span class="string">&#x27;right&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                span.<span class="property">innerHTML</span> = <span class="string">&#x27;用户名格式输入正确&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125; <span class="keyword">else</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;错误的&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                span.<span class="property">className</span> = <span class="string">&#x27;wrong&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                span.<span class="property">innerHTML</span> = <span class="string">&#x27;用户名格式输入不正确&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6、括号总结"><a href="#6、括号总结" class="headerlink" title="6、括号总结"></a>6、括号总结</h2><ol>
+<li><strong>大括号</strong> 量词符 里面面表示重复次数</li>
+<li><strong>中括号</strong> 字符集合 匹配方括号中的任意字符</li>
+<li><strong>小括号</strong> 表示优先级</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大括号 量词符 里面表示重复次数</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^abc&#123;3&#125;$/</span>;   <span class="comment">// 它只是让c 重复3次 abccc</span></span><br><span class="line"><span class="comment">// 中括号 字符集合 匹配方括号中的任意字符</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^[abc]$/</span>;</span><br><span class="line"><span class="comment">// a || b || c</span></span><br><span class="line"><span class="comment">// 小括号 表示优先级</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/^(abc)&#123;3&#125;$/</span>;  <span class="comment">//它是让 abc 重复3次</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7、预定义类"><a href="#7、预定义类" class="headerlink" title="7、预定义类"></a>7、预定义类</h2><p>预定义类指的是<code>某些常见模式的简写写法</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">预定类</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\d</td>
+<td align="center">匹配0-9之间的任一数字，相当于[0-9]</td>
+</tr>
+<tr>
+<td align="center">\D</td>
+<td align="center">匹配所有0-9以外的字符，相当于[ ^ 0-9]</td>
+</tr>
+<tr>
+<td align="center">\w</td>
+<td align="center">匹配任意的字母、数字和下划线,相当于[A-Za-z0-9_ ]</td>
+</tr>
+<tr>
+<td align="center">\W</td>
+<td align="center">除所有字母、数字、和下划线以外的字符，相当于[ ^A-Za-z0-9_ ]</td>
+</tr>
+<tr>
+<td align="center">\s</td>
+<td align="center">匹配空格（包括换行符，制表符，空格符等），相当于[\t\t\n\v\f]</td>
+</tr>
+<tr>
+<td align="center">\S</td>
+<td align="center">匹配非空格的字符，相当于[ ^ \t\r\n\v\f]</td>
+</tr>
+<tr>
+<td align="center">.</td>
+<td align="center">通配符 <code>.</code> 将匹配任何一个字符</td>
+</tr>
+</tbody></table>
+<p>分析：</p>
+<p>1.手机号码: <code>/^1[3|4|5|7|8][0-9]&#123;9&#125;$/</code></p>
+<p>2.QQ: <code>[1-9][0-9]&#123;4,&#125;</code> (腾讯QQ号从10000开始)</p>
+<p>3.昵称是中文: <code>^[\u4e00-\u9fa5]&#123;2,8&#125;$</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 座机号码验证:  全国座机号码  两种格式:   010-12345678  或者  0530-1234567</span></span><br><span class="line">  <span class="comment">// 正则里面的或者 符号  |  </span></span><br><span class="line">  <span class="comment">// var reg = /^\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;$/;</span></span><br><span class="line">  <span class="keyword">var</span> reg = <span class="regexp">/^\d&#123;3,4&#125;-\d&#123;7,8&#125;$/</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、正则表达式中的替换"><a href="#8、正则表达式中的替换" class="headerlink" title="8、正则表达式中的替换"></a>8、正则表达式中的替换</h2><h3 id="1、replace-替换"><a href="#1、replace-替换" class="headerlink" title="1、replace 替换"></a>1、replace 替换</h3><p><code>replace()</code>方法可以实现替换字符串操作，用来替换的参数可以是一个字符串或是一个正则表达式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.<span class="title function_">replace</span>(regexp/substr,replacement)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>第一个参数: 被替换的字符串或者正则表达式</li>
+<li>第二个参数：替换为的字符串</li>
+<li>返回值是一个替换完毕的新字符串</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 替换 replace</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">&#x27;andy和red&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> newStr = str.<span class="title function_">replace</span>(<span class="string">&#x27;andy&#x27;</span>,<span class="string">&#x27;baby&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newStr);<span class="comment">//baby和red</span></span><br><span class="line"><span class="keyword">var</span> newStr = str.<span class="title function_">replace</span>(<span class="regexp">/a*/</span>,<span class="string">&#x27;baby&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newStr);<span class="comment">//babyndy和red</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、正则表达式参数"><a href="#2、正则表达式参数" class="headerlink" title="2、正则表达式参数"></a>2、正则表达式参数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/表达式/[<span class="keyword">switch</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>switch</code>按照什么样的模式来匹配，有三种</p>
+<ul>
+<li><code>g</code>: 全局匹配</li>
+<li><code>i</code>:忽略大小写</li>
+<li><code>gi</code>: 全局匹配 + 忽略大小写</li>
+</ul>
+<p>9.<strong>正向先行断言和负向先行断言</strong></p>
+<p>正向先行断言会查看并确保搜索匹配模式中的元素存在，但实际上并不匹配。 正向先行断言的用法是 <code>(?=...)</code>，其中 <code>...</code> 就是需要存在但不会被匹配的部分。</p>
+<p>另一方面，负向先行断言会查看并确保搜索匹配模式中的元素不存在。 负向先行断言的用法是 <code>(?!...)</code>，其中 <code>...</code> 是希望不存在的匹配模式。 如果负向先行断言部分不存在，将返回匹配模式的其余部分。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> quit = <span class="string">&quot;qu&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> noquit = <span class="string">&quot;qt&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> quRegex= <span class="regexp">/q(?=u)/</span>;</span><br><span class="line"><span class="keyword">let</span> qRegex = <span class="regexp">/q(?!u)/</span>;</span><br><span class="line">quit.<span class="title function_">match</span>(quRegex);</span><br><span class="line">noquit.<span class="title function_">match</span>(qRegex);</span><br></pre></td></tr></table></figure>
+
+<p>这两次 <code>match</code> 调用都将返回 <code>[&quot;q&quot;]</code>。</p>
+<p>先行断言的更实际用途是检查一个字符串中的两个或更多匹配模式。 这里有一个简单的密码检查器，密码规则是 3 到 6 个字符且至少包含一个数字：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> password = <span class="string">&quot;abc123&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> checkPass = <span class="regexp">/(?=\w&#123;3,6&#125;)(?=\D*\d)/</span>;</span><br><span class="line">checkPass.<span class="title function_">test</span>(password);</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-解构赋值"><a href="#5-解构赋值" class="headerlink" title="5.解构赋值"></a>5.解构赋值</h1><p>解构赋值是 ES6 引入的新语法，用来从<code>数组和对象</code>中提取值，并优雅地对变量进行<code>赋值</code></p>
+<h2 id="1-解构对象"><a href="#1-解构对象" class="headerlink" title="1.解构对象"></a>1.解构对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = user.<span class="property">name</span>;</span><br><span class="line"><span class="keyword">const</span> age = user.<span class="property">age</span>;</span><br><span class="line"><span class="comment">//ES6</span></span><br><span class="line"><span class="keyword">const</span> &#123; name, age &#125; = user;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用解构赋值从嵌套对象中分配变量</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  <span class="attr">johnDoe</span>: &#123; </span><br><span class="line">    <span class="attr">age</span>: <span class="number">34</span>,</span><br><span class="line">    <span class="attr">email</span>: <span class="string">&#x27;johnDoe@freeCodeCamp.com&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这是解构对象的属性值赋值给具有相同名字的变量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="attr">johnDoe</span>: &#123; age, email &#125;&#125; = user;</span><br><span class="line"><span class="comment">//age: 34</span></span><br><span class="line"><span class="comment">//email: &#x27;johnDoe@freeCodeCamp.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是将对象的属性值赋值给具有不同名字的变量：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="attr">johnDoe</span>: &#123; <span class="attr">age</span>: userAge, <span class="attr">email</span>: userEmail &#125;&#125; = user;</span><br><span class="line"><span class="comment">//userAge: 34</span></span><br><span class="line"><span class="comment">//userEmail: &#x27;johnDoe@freeCodeCamp.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-解构数组"><a href="#2-解构数组" class="headerlink" title="2.解构数组"></a>2.解构数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, b] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br></pre></td></tr></table></figure>
+
+<p>控制台将显示 <code>a</code> 和 <code>b</code> 的值为 <code>1, 2</code>。数组的第一个值被赋值给变量 <code>a</code>，数组的第二个值被赋值给变量 <code>b</code>。 我们甚至能在数组解构中使用逗号分隔符，来获取任意一个想要的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [a, b,,, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br></pre></td></tr></table></figure>
+
+<p>控制台将显示 <code>a</code>、<code>b</code> 和 <code>c</code> 的值为 <code>1, 2, 5</code>。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/03/01/js/ES6/">http://example.com/2022/03/01/js/ES6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">yuchen blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/06/vue/vue%E5%9F%BA%E7%A1%80/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">vue基础</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/01/js/ES5/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ES5</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description">偷偷摸鱼去</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6"><span class="toc-text">ES6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">1、严格模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%BC%80%E5%90%AF%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">1、开启严格模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%B8%BA%E8%84%9A%E6%9C%AC%E5%BC%80%E5%90%AF%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">1、为脚本开启严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E4%B8%BA%E5%87%BD%E6%95%B0%E5%BC%80%E5%90%AF%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">2、为函数开启严格模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-text">2、严格模式中的变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%8F%98%E9%87%8F%E8%A7%84%E5%AE%9A"><span class="toc-text">1、变量规定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F%E4%B8%8Bthis%E6%8C%87%E5%90%91%E9%97%AE%E9%A2%98"><span class="toc-text">2、严格模式下this指向问题</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81%E9%97%AD%E5%8C%85"><span class="toc-text">2、闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">1、变量作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E9%97%AD%E5%8C%85"><span class="toc-text">2、什么是闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E9%97%AD%E5%8C%85%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">3、闭包的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E9%97%AD%E5%8C%85%E7%BB%83%E4%B9%A0"><span class="toc-text">4、闭包练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E7%82%B9%E5%87%BBli%E8%BE%93%E5%87%BA%E7%B4%A2%E5%BC%95%E5%8F%B7"><span class="toc-text">1、点击li输出索引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85"><span class="toc-text">2、定时器中的闭包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">3、浅拷贝和深拷贝</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%B5%85%E6%8B%B7%E8%B4%9D"><span class="toc-text">1、浅拷贝</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="toc-text">2、深拷贝</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">4、正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">1、创建正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E8%BF%87%E8%B0%83%E7%94%A8-RegExp-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9B%E5%BB%BA"><span class="toc-text">1、通过调用 RegExp 对象的构造函数创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E9%80%9A%E8%BF%87%E5%AD%97%E9%9D%A2%E9%87%8F%E5%88%9B%E5%BB%BA"><span class="toc-text">2、通过字面量创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F-test"><span class="toc-text">3、测试正则表达式 test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-match%E6%8F%90%E5%8F%96%E5%AE%9E%E9%99%85%E5%8C%B9%E9%85%8D%E9%A1%B9"><span class="toc-text">4. match提取实际匹配项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6"><span class="toc-text">2、正则表达式中的特殊字符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E8%BE%B9%E7%95%8C%E7%AC%A6"><span class="toc-text">1、边界符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%AD%97%E7%AC%A6%E7%B1%BB"><span class="toc-text">3、字符类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B9%E6%8B%AC%E5%8F%B7"><span class="toc-text">1.[] 方括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%86%85%E9%83%A8-%E8%8C%83%E5%9B%B4%E7%AC%A6"><span class="toc-text">2.[-]方括号内部 范围符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%B9%E6%8B%AC%E5%8F%B7%E5%86%85%E9%83%A8-%E5%8F%96%E5%8F%8D%E7%AC%A6"><span class="toc-text">3.[^] 方括号内部 取反符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AD%97%E7%AC%A6%E7%BB%84%E5%90%88"><span class="toc-text">4.字符组合</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E9%87%8F%E8%AF%8D%E7%AC%A6"><span class="toc-text">4、量词符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E7%94%A8%E6%88%B7%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="toc-text">5、用户名验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%8B%AC%E5%8F%B7%E6%80%BB%E7%BB%93"><span class="toc-text">6、括号总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E9%A2%84%E5%AE%9A%E4%B9%89%E7%B1%BB"><span class="toc-text">7、预定义类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E6%9B%BF%E6%8D%A2"><span class="toc-text">8、正则表达式中的替换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81replace-%E6%9B%BF%E6%8D%A2"><span class="toc-text">1、replace 替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%82%E6%95%B0"><span class="toc-text">2、正则表达式参数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="toc-text">5.解构赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%A7%A3%E6%9E%84%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.解构对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%A7%A3%E6%9E%84%E6%95%B0%E7%BB%84"><span class="toc-text">2.解构数组</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="node"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node">node</a><time datetime="2022-04-08T08:35:38.000Z" title="发表于 2022-04-08 16:35:38">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="express"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express">express</a><time datetime="2022-04-08T08:34:50.000Z" title="发表于 2022-04-08 16:34:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ajax"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax">Ajax</a><time datetime="2022-04-08T08:34:08.000Z" title="发表于 2022-04-08 16:34:08">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="webpack"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack">webpack</a><time datetime="2022-04-08T08:32:50.000Z" title="发表于 2022-04-08 16:32:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/vue/Vuex/" title="Vuex"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vuex"/></a><div class="content"><a class="title" href="/2022/04/08/vue/Vuex/" title="Vuex">Vuex</a><time datetime="2022-04-08T08:30:09.000Z" title="发表于 2022-04-08 16:30:09">2022-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'cLTwM1vzhNlDpO0udsxdoQuA-gzGzoHsz',
+      appKey: 'E4Vt4VAGgVURyaI8esNftO1Y',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: 
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

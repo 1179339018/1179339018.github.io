@@ -1,0 +1,467 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Bom树 | yuchen blog</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="JavaScript Bom树 1、BOM概述 BOM &#x3D; Browser Object Model 👉浏览器对象模型 它提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是 window BOM 由一系列相关的对象构成，并且每个对象都提供了很多方法与属性 BOM 缺乏标准，JavaScript 语法的标准化组织是 ECMA, DOM 的标准化组织是 W3C, BOM最初是Netscape">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Bom树">
+<meta property="og:url" content="http://example.com/2022/03/01/js/Bom%E6%A0%91/index.html">
+<meta property="og:site_name" content="yuchen blog">
+<meta property="og:description" content="JavaScript Bom树 1、BOM概述 BOM &#x3D; Browser Object Model 👉浏览器对象模型 它提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是 window BOM 由一系列相关的对象构成，并且每个对象都提供了很多方法与属性 BOM 缺乏标准，JavaScript 语法的标准化组织是 ECMA, DOM 的标准化组织是 W3C, BOM最初是Netscape">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-03-01T10:06:29.000Z">
+<meta property="article:modified_time" content="2022-03-01T10:12:22.344Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/03/01/js/Bom%E6%A0%91/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Bom树',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-01 18:12:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Bom树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-01T10:06:29.000Z" title="发表于 2022-03-01 18:06:29">2022-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-01T10:12:22.344Z" title="更新于 2022-03-01 18:12:22">2022-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/JavaScript/">JavaScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Bom树"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="JavaScript-Bom树"><a href="#JavaScript-Bom树" class="headerlink" title="JavaScript Bom树"></a>JavaScript Bom树</h1><p><img src="https://img-blog.csdnimg.cn/0f44250c831e4579aa3599072c855aeb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F1Z2Vuc3Rlcm5fUVhM,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h1 id="1、BOM概述"><a href="#1、BOM概述" class="headerlink" title="1、BOM概述"></a>1、BOM概述</h1><ul>
+<li>BOM = Browser Object Model 👉浏览器对象模型</li>
+<li>它提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是 window</li>
+<li>BOM 由一系列相关的对象构成，并且每个对象都提供了很多方法与属性</li>
+<li>BOM 缺乏标准，JavaScript 语法的标准化组织是 ECMA, DOM 的标准化组织是 W3C, BOM最初是Netscape 浏览器标准的一部分</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">DOM</th>
+<th align="center">BOM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">文档对象模型</td>
+<td align="center">浏览器对象模型</td>
+</tr>
+<tr>
+<td align="center">DOM 就是把<code>文档</code>当作一个对象来看待</td>
+<td align="center">把<code>浏览器</code>当作一个对象来看待</td>
+</tr>
+<tr>
+<td align="center">DOM 的顶级对象是 document</td>
+<td align="center">BOM 的顶级对象是 window</td>
+</tr>
+<tr>
+<td align="center">DOM 主要学习的是操作页面元素</td>
+<td align="center">BOM 学习的是浏览器窗口交互的一些对象</td>
+</tr>
+<tr>
+<td align="center">DOM 是 W3C 标准规范</td>
+<td align="center">BOM 是浏览器厂商在各自浏览器上定义的，兼容性较差</td>
+</tr>
+</tbody></table>
+<h2 id="1、BOM的构成"><a href="#1、BOM的构成" class="headerlink" title="1、BOM的构成"></a>1、BOM的构成</h2><p><img src="https://img-blog.csdnimg.cn/5c83bf307ec9486687a5f52312943ecb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F1Z2Vuc3Rlcm5fUVhM,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<ul>
+<li>BOM 比 DOM 更大。它包含 DOM。</li>
+<li>window 对象是浏览器的顶级对象，它具有双重角色</li>
+<li>它是 JS 访问浏览器窗口的一个接口</li>
+<li>它是一个全局对象。定义在全局作用域中的变量、函数都会变成 window 对象的属性和方法</li>
+<li>在调用的时候可以省略 window，前面学习的对话框都属于 window 对象方法，如 alert()、prompt()等。</li>
+<li>注意：window下的一个特殊属性 window.name</li>
+</ul>
+<h1 id="2、window-对象的常见事件"><a href="#2、window-对象的常见事件" class="headerlink" title="2、window 对象的常见事件"></a>2、window 对象的常见事件</h1><h2 id="1、窗口加载事件"><a href="#1、窗口加载事件" class="headerlink" title="1、窗口加载事件"></a>1、窗口加载事件</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">window<span class="selector-class">.onload</span> = function()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 或者</span><br><span class="line">window<span class="selector-class">.addEventListener</span>(&quot;load&quot;,function()&#123;&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>window.onload</code>是窗口（页面）加载事件，当文档内容完全加载完成会触发该事件（包括图像，脚本文件，CSS文件等），就调用的处理函数</p>
+<p>注意：</p>
+<ul>
+<li>有了window.onload就可以把JS代码写到页面元素的上方</li>
+<li>因为onload是等页面内容全部加载完毕，再去执行处理函数</li>
+<li>window.onload 传统注册事件方式，只能写一次</li>
+<li>如果有多个，会以最后一个window.onload为准</li>
+<li>如果使用addEventListener 则没有限制</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>接收两个参数：</p>
+<ul>
+<li>DOMCountentLoaded事件触发时，仅当DOM加载完成，不包括样式表，图片，flash等等</li>
+<li>如果页面的图片很多的话, 从用户访问到onload触发可能需要较长的时间</li>
+<li>交互效果就不能实现，必然影响用户的体验，此时用 DOMContentLoaded事件比较合适。</li>
+</ul>
+<h2 id="2、区别"><a href="#2、区别" class="headerlink" title="2、区别"></a>2、区别</h2><ul>
+<li><code>load</code>等页面内容全部加载完毕，包括页面dom元素，图片，flash，css等</li>
+<li><code>DOMContentLoaded</code> 是DOM加载完毕，不包含图片 flash css 等就可以执行，加载速度比load更快一些</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="comment">// window.onload = function() &#123;</span></span><br><span class="line">    <span class="comment">//     var btn = document.querySelector(&#x27;button&#x27;);</span></span><br><span class="line">    <span class="comment">//     btn.addEventListener(&#x27;click&#x27;, function() &#123;</span></span><br><span class="line">    <span class="comment">//         alert(&#x27;点击我&#x27;);</span></span><br><span class="line">    <span class="comment">//     &#125;)</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// window.onload = function() &#123;</span></span><br><span class="line">    <span class="comment">//     alert(22);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span><br><span class="line">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;点击我&#x27;</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="title function_">alert</span>(<span class="number">22</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="title function_">alert</span>(<span class="number">33</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// load 等页面内容全部加载完毕，包含页面dom元素 图片 flash  css 等等</span></span><br><span class="line">        <span class="comment">// DOMContentLoaded 是DOM 加载完毕，不包含图片 falsh css 等就可以执行 加载速度比 load更快一些</span></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、调整窗口大小事件"><a href="#3、调整窗口大小事件" class="headerlink" title="3、调整窗口大小事件"></a>3、调整窗口大小事件</h2><p><code>window.onresize</code> 是调整窗口大小加载事件，当触发时就调用的处理函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">onresize</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;resize&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只要窗口大小发生像素变化，就会触发这个事件</li>
+<li>我们经常利用这个事件完成响应式布局。<code>window.innerWidth</code> 当前屏幕的宽度</li>
+</ul>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h2><p>这个是一些比较简单的事件，我们现在都不怎么常用了，更细节的会在vue的生命周期里介绍。</p>
+<h1 id="3、定时器"><a href="#3、定时器" class="headerlink" title="3、定时器"></a>3、定时器</h1><p>window 对象给我们提供了两个定时器</p>
+<ul>
+<li><code>setTimeout()</code></li>
+<li><code>setInterval()</code></li>
+</ul>
+<h2 id="1、setTimeout-定时器"><a href="#1、setTimeout-定时器" class="headerlink" title="1、setTimeout()定时器"></a>1、setTimeout()定时器</h2><p>setTimeout()方法用于设置一个定时器，该定时器在定时器到期后执行调用函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="built_in">setTimeout</span>(调用函数,[延迟的毫秒数]);</span><br></pre></td></tr></table></figure>
+
+<p>注意：c</p>
+<ul>
+<li>window可以省略</li>
+<li>这个调用函数</li>
+<li><ul>
+<li>可以直接写函数</li>
+<li>或者写函数名</li>
+<li>或者采取字符串 ‘函数名()’ （不推荐）</li>
+</ul>
+</li>
+<li>延迟的毫秒数省略默认是0，如果写，必须是毫秒</li>
+<li>因为定时器可能有很多，所以我们经常给定时器赋值一个标识符</li>
+<li>setTimeout() 这个调用函数我们也称为回调函数 callback</li>
+<li>普通函数是按照代码顺序直接调用，而这个函数，需要等待事件，事件到了才会去调用这个函数，因此称为回调函数。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        // <span class="number">1</span>. setTimeout </span><br><span class="line">        // 语法规范：  window<span class="selector-class">.setTimeout</span>(调用函数, 延时时间);</span><br><span class="line">        // <span class="number">1</span>. 这个window在调用的时候可以省略</span><br><span class="line">        // <span class="number">2</span>. 这个延时时间单位是毫秒 但是可以省略，如果省略默认的是<span class="number">0</span></span><br><span class="line">        // <span class="number">3</span>. 这个调用函数可以直接写函数 还可以写 函数名 还有一个写法 &#x27;函数名()&#x27;</span><br><span class="line">        // <span class="number">4</span>. 页面中可能有很多的定时器，我们经常给定时器加标识符 （名字)</span><br><span class="line">        // setTimeout(function() &#123;</span><br><span class="line">        //     console<span class="selector-class">.log</span>(&#x27;时间到了&#x27;);</span><br><span class="line"></span><br><span class="line">        // &#125;, <span class="number">2000</span>);</span><br><span class="line">        function callback() &#123;</span><br><span class="line">            console<span class="selector-class">.log</span>(&#x27;爆炸了&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="selector-tag">var</span> timer1 = setTimeout(callback, <span class="number">3000</span>);</span><br><span class="line">        <span class="selector-tag">var</span> timer2 = setTimeout(callback, <span class="number">5000</span>);</span><br><span class="line">        // setTimeout(&#x27;callback()&#x27;, <span class="number">3000</span>); // 我们不提倡这个写法</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/<span class="selector-tag">body</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、clearTimeout-停止定时器"><a href="#2、clearTimeout-停止定时器" class="headerlink" title="2、clearTimeout()停止定时器"></a>2、clearTimeout()停止定时器</h2><ul>
+<li><code>clearTimeout()</code>方法取消了先前通过调用 <code>setTimeout()</code>建立的定时器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.clearTimeout(timeoutID)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li><code>window</code>可以省略</li>
+<li>里面的参数就是定时器的标识符</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">     <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>点击停止定时器<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> timer = <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;爆炸了&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;, <span class="number">5000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="built_in">clearTimeout</span>(timer);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、setInterval-定时器"><a href="#3、setInterval-定时器" class="headerlink" title="3、setInterval()定时器"></a>3、setInterval()定时器</h2><ul>
+<li><code>setInterval()</code>方法重复调用一个函数，每隔这个时间，就去调用一次回调函数</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 1. setInterval </span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 语法规范：  window.setInterval(调用函数, 延时时间);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;继续输出&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;, <span class="number">1000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 2. setTimeout  延时时间到了，就去调用这个回调函数，只调用一次 就结束了这个定时器</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 3. setInterval  每隔这个延时时间，就去调用这个回调函数，会调用很多次，重复调用这个函数</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、clearInterval-停止定时器"><a href="#4、clearInterval-停止定时器" class="headerlink" title="4、clearInterval()停止定时器"></a>4、clearInterval()停止定时器</h2><p>这个和clearTimeout一样</p>
+<h2 id="5、this指向"><a href="#5、this指向" class="headerlink" title="5、this指向"></a>5、this指向</h2><p>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁<br>现阶段，我们先了解一下几个this指向</p>
+<p>全局作用域或者普通函数中this指向全局对象window(注意定时器里面的this指向window)<br>方法调用中谁调用this指向谁<br>构造函数中this指向构造函数实例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// this 指向问题 一般情况下this的最终指向的是那个调用它的对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 1. 全局作用域或者普通函数中this指向全局对象window（ 注意定时器里面的this指向window）</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">window</span>.<span class="title function_">fn</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="variable language_">window</span>.<span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;, <span class="number">1000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// 2. 方法调用中谁调用this指向谁</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> o = &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">sayHi</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// this指向的是 o 这个对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        o.<span class="title function_">sayHi</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// btn.onclick = function() &#123;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">//     console.log(this); // this指向的是btn这个按钮对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="comment">// &#125;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// this指向的是btn这个按钮对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// 3. 构造函数中this指向构造函数的实例</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">Fun</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// this 指向的是fun 实例对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> fun = <span class="keyword">new</span> <span class="title class_">Fun</span>();</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="4、JS执行机制"><a href="#4、JS执行机制" class="headerlink" title="4、JS执行机制"></a>4、JS执行机制</h1><h2 id="1、JS是单线程"><a href="#1、JS是单线程" class="headerlink" title="1、JS是单线程"></a>1、JS是单线程</h2><ul>
+<li><p>JavaScript 语言的一大特点就是单线程，也就是说，同一个时间只能做一件事。这是因为 Javascript 这门脚本语言诞生的使命所致——JavaScript 是为处理页面中用户的交互，以及操作 DOM 而诞生的。比如我们对某个 DOM 元素进行添加和删除操作，不能同时进行。 应该先进行添加，之后再删除。</p>
+</li>
+<li><p>单线程就意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。这样所导致的问题是： 如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞的感觉。</p>
+</li>
+</ul>
+<h2 id="2-同步和异步"><a href="#2-同步和异步" class="headerlink" title="2.同步和异步"></a>2.同步和异步</h2><ul>
+<li><p>同步:</p>
+<ul>
+<li>前一个任务结束后再执行后一个任务</li>
+</ul>
+</li>
+<li><p>异步：</p>
+<ul>
+<li>在做这件事的同时，你还可以去处理其他事情</li>
+</ul>
+</li>
+<li><p>同步任务都在主线程上执行，形成一个 <code>执行栈</code></p>
+</li>
+<li><p>JS中的异步是通过回调函数实现的</p>
+</li>
+<li><p>异步任务有以下三种类型</p>
+<ul>
+<li>普通事件，如<code>click</code>,<code>resize</code>等</li>
+<li>资源加载，如<code>load</code>,<code>error</code>等</li>
+<li>定时器，包括<code>setInterval</code>,<code>setTimeout</code>等</li>
+</ul>
+</li>
+<li><p>异步任务相关回调函数添加到任务队列中</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/f0cc815b48574ce2bb068501a9394a5e.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F1Z2Vuc3Rlcm5fUVhM,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<ol>
+<li>先执行执行栈中的同步任务</li>
+<li>异步任务(回调函数)放入任务队列中</li>
+<li>一旦执行栈中的所有同步任务执行完毕，系统就会按次序读取任务队列中的异步任务，于是被读取的异步任务结束等待状态，进入执行栈，开始执行</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/d337ebf7ba2c40c7a768fd91f6bfbf56.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F1Z2Vuc3Rlcm5fUVhM,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/eaabe7880146428fb68e6e64f23db40c.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0F1Z2Vuc3Rlcm5fUVhM,size_16,color_FFFFFF,t_70#pic_center" alt="img"></p>
+<p>同步任务放在执行栈中执行，异步任务由异步进程处理放到任务队列中，执行栈中的任务执行完毕会去任务队列中查看是否有异步任务执行，由于主线程不断的重复获得任务、执行任务、再获取任务、再执行，所以这种机制被称为<code>事件循环</code>（ event loop）。</p>
+<h1 id="5、location对象"><a href="#5、location对象" class="headerlink" title="5、location对象"></a>5、location对象</h1><p>window 对象给我们提供了一个 <code>location</code>属性用于获取或者设置窗体的url，并且可以解析url。因为这个属性返回的是一个对象，所以我们将这个属性也称为 location 对象。</p>
+<h2 id="1、url"><a href="#1、url" class="headerlink" title="1、url"></a>1、url</h2><p>==统一资源定位符（uniform resouce locator）==是互联网上标准资源的地址。互联网上的每个文件都有一个唯一的 URL，它包含的信息指出文件的位置以及浏览器应该怎么处理它。</p>
+<p>url 的一般语法格式为：</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">protocol://host[:port]/path/[?query]#fragment</span><br><span class="line"></span><br><span class="line">http://www.itcast.cn/index.html?name=andy&amp;age=18#link</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">组成</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">protocol</td>
+<td align="center">通信协议 常用的http,ftp,maito等</td>
+</tr>
+<tr>
+<td align="center">host</td>
+<td align="center">主机(域名) <a target="_blank" rel="noopener" href="http://www.itheima.com/">www.itheima.com</a></td>
+</tr>
+<tr>
+<td align="center">port</td>
+<td align="center">端口号，可选</td>
+</tr>
+<tr>
+<td align="center">path</td>
+<td align="center">路径 由零或多个’/‘符号隔开的字符串</td>
+</tr>
+<tr>
+<td align="center">query</td>
+<td align="center">参数 以键值对的形式，通过&amp;符号分隔开来</td>
+</tr>
+<tr>
+<td align="center">fragment</td>
+<td align="center">片段 #后面内容 常见于链接 锚点</td>
+</tr>
+</tbody></table>
+<h2 id="2、location对象属性"><a href="#2、location对象属性" class="headerlink" title="2、location对象属性"></a>2、location对象属性</h2><table>
+<thead>
+<tr>
+<th align="center">location对象属性</th>
+<th align="center">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">location.href</td>
+<td align="center">获取或者设置整个URL</td>
+</tr>
+<tr>
+<td align="center">location.host</td>
+<td align="center">返回主机（域名）<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a></td>
+</tr>
+<tr>
+<td align="center">location.port</td>
+<td align="center">返回端口号，如果未写返回空字符串</td>
+</tr>
+<tr>
+<td align="center">location.pathname</td>
+<td align="center">返回路径</td>
+</tr>
+<tr>
+<td align="center">location.search</td>
+<td align="center">返回参数</td>
+</tr>
+<tr>
+<td align="center">location.hash</td>
+<td align="center">返回片段 #后面内容常见于链接 锚点</td>
+</tr>
+</tbody></table>
+<p>重点记住： <code>href</code>和<code>search</code></p>
+<p>我们可以去修改这些location属性</p>
+<p>需求：5s之后跳转页面</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">   &lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> div = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;div&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> timer = <span class="number">5</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="built_in">setInterval</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="keyword">if</span> (timer == <span class="number">0</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                location.<span class="property">href</span> = <span class="string">&#x27;http://www.itcast.cn&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125; <span class="keyword">else</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                div.<span class="property">innerHTML</span> = <span class="string">&#x27;您将在&#x27;</span> + timer + <span class="string">&#x27;秒钟之后跳转到首页&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">                timer--;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">   &#125;, <span class="number">1000</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3、location对象方法"><a href="#3、location对象方法" class="headerlink" title="3、location对象方法"></a>3、location对象方法</h2><table>
+<thead>
+<tr>
+<th align="center">location对象方法</th>
+<th align="center">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">location.assign()</td>
+<td align="center">跟href一样，可以跳转页面（也称为重定向页面）</td>
+</tr>
+<tr>
+<td align="center">location.replace()</td>
+<td align="center">替换当前页面，因为不记录历史，所以不能后退页面</td>
+</tr>
+<tr>
+<td align="center">location.reload()</td>
+<td align="center">重新加载页面，相当于刷新按钮或者 f5 ，如果参数为true 强制刷新 ctrl+f5</td>
+</tr>
+</tbody></table>
+<p>这些方法有些原始，不常用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// 记录浏览历史，所以可以实现后退功能</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// location.assign(&#x27;http://www.itcast.cn&#x27;);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// 不记录浏览历史，所以不可以实现后退功能</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// location.replace(&#x27;http://www.itcast.cn&#x27;);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            location.<span class="title function_">reload</span>(<span class="literal">true</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="6、navigator对象"><a href="#6、navigator对象" class="headerlink" title="6、navigator对象"></a>6、navigator对象</h1><ul>
+<li>navigator 对象包含有关浏览器的信息，它有很多属性</li>
+<li>我们常用的是userAgent,该属性可以返回由客户机发送服务器的user-agent头部的值<br>下面前端代码可以判断用户是用哪个终端打开页面的，如果是用 PC 打开的，我们就跳转到 PC 端的页面，如果是用手机打开的，就跳转到手机端页面</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((navigator.<span class="property">userAgent</span>.<span class="title function_">match</span>(<span class="regexp">/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i</span>))) &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;&quot;</span>;     <span class="comment">//手机</span></span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span> = <span class="string">&quot;&quot;</span>;     <span class="comment">//电脑</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7、history对象"><a href="#7、history对象" class="headerlink" title="7、history对象"></a>7、history对象</h1><ul>
+<li>window 对象给我们提供了一个 history 对象，与浏览器历史记录进行交互</li>
+<li>该对象包含用户（在浏览器窗口中）访问过的 URL。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">history对象方法</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">back()</td>
+<td align="center">可以后退功能</td>
+</tr>
+<tr>
+<td align="center">forward()</td>
+<td align="center">前进功能</td>
+</tr>
+<tr>
+<td align="center">go(参数)</td>
+<td align="center">前进后退功能，参数如果是 1 前进1个页面 如果是 -1 后退1个页面</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>这个属性是用来让页面前进后退的</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;list.html&quot;</span>&gt;</span>点击我去往列表页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>前进<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;button&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="comment">// history.forward();</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            history.<span class="title function_">go</span>(<span class="number">1</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/03/01/js/Bom%E6%A0%91/">http://example.com/2022/03/01/js/Bom%E6%A0%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">yuchen blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/01/js/JavaScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript面向对象</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/01/js/%E4%BA%8B%E4%BB%B6%E9%AB%98%E7%BA%A7/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">事件高级</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description">偷偷摸鱼去</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript-Bom%E6%A0%91"><span class="toc-text">JavaScript Bom树</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1%E3%80%81BOM%E6%A6%82%E8%BF%B0"><span class="toc-text">1、BOM概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81BOM%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-text">1、BOM的构成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2%E3%80%81window-%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B8%B8%E8%A7%81%E4%BA%8B%E4%BB%B6"><span class="toc-text">2、window 对象的常见事件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%AA%97%E5%8F%A3%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6"><span class="toc-text">1、窗口加载事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%8C%BA%E5%88%AB"><span class="toc-text">2、区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%B0%83%E6%95%B4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%E4%BA%8B%E4%BB%B6"><span class="toc-text">3、调整窗口大小事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93"><span class="toc-text">4.总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3%E3%80%81%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">3、定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81setTimeout-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">1、setTimeout()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81clearTimeout-%E5%81%9C%E6%AD%A2%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">2、clearTimeout()停止定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81setInterval-%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">3、setInterval()定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81clearInterval-%E5%81%9C%E6%AD%A2%E5%AE%9A%E6%97%B6%E5%99%A8"><span class="toc-text">4、clearInterval()停止定时器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81this%E6%8C%87%E5%90%91"><span class="toc-text">5、this指向</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4%E3%80%81JS%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">4、JS执行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81JS%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B"><span class="toc-text">1、JS是单线程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5"><span class="toc-text">2.同步和异步</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5%E3%80%81location%E5%AF%B9%E8%B1%A1"><span class="toc-text">5、location对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81url"><span class="toc-text">1、url</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81location%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="toc-text">2、location对象属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81location%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="toc-text">3、location对象方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E3%80%81navigator%E5%AF%B9%E8%B1%A1"><span class="toc-text">6、navigator对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7%E3%80%81history%E5%AF%B9%E8%B1%A1"><span class="toc-text">7、history对象</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="node"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/node/" title="node">node</a><time datetime="2022-04-08T08:35:38.000Z" title="发表于 2022-04-08 16:35:38">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="express"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/express/" title="express">express</a><time datetime="2022-04-08T08:34:50.000Z" title="发表于 2022-04-08 16:34:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ajax"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/Ajax/" title="Ajax">Ajax</a><time datetime="2022-04-08T08:34:08.000Z" title="发表于 2022-04-08 16:34:08">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="webpack"/></a><div class="content"><a class="title" href="/2022/04/08/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/webpack/" title="webpack">webpack</a><time datetime="2022-04-08T08:32:50.000Z" title="发表于 2022-04-08 16:32:50">2022-04-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/08/vue/Vuex/" title="Vuex"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vuex"/></a><div class="content"><a class="title" href="/2022/04/08/vue/Vuex/" title="Vuex">Vuex</a><time datetime="2022-04-08T08:30:09.000Z" title="发表于 2022-04-08 16:30:09">2022-04-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'cLTwM1vzhNlDpO0udsxdoQuA-gzGzoHsz',
+      appKey: 'E4Vt4VAGgVURyaI8esNftO1Y',
+      avatar: '',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: 
+    }, ))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
