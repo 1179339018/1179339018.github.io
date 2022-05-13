@@ -1,0 +1,32 @@
+@import "//at.alicdn.com/t/font_3393391_ctrks1mbnei.css";
+
+@font-face {
+  font-family: "fontStyle";
+  src: url("./霞鹜文楷\(LXGWWenKai-Medium\).ttf");
+}
+
+*{
+  font-family: "fontStyle";
+}
+
+#page-header:not(.not-top-img):before {
+    background-color: rgba(0,0,0,0);
+  }
+
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 1.2em;
+    /* 可以定义图标大小 */
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    }
+    /* 首页导航栏 */
+    #menus{
+
+      margin: 0 auto;
+    }
+
+#nav #blog_name{
+  flex: 0;
+}

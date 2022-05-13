@@ -1367,7 +1367,7 @@ body {
   background: var(--global-bg);
   color: var(--font-color);
   font-size: var(--global-font-size);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: YouYuan;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1393,7 +1393,11 @@ input::placeholder {
   z-index: -999;
   width: 100%;
   height: 100%;
-  background: url("https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/1600863005099.jpeg");
+  background: -webkit-linear-gradient(90deg, rgb(203, 179, 255), rgb(194, 244, 255));;
+  background: -moz-linear-gradient(90deg, rgb(203, 179, 255), rgb(194, 244, 255));;
+  background: -o-linear-gradient(90deg, rgb(203, 179, 255), rgb(194, 244, 255));;
+  background: -ms-linear-gradient(90deg, rgb(203, 179, 255), rgb(194, 244, 255));;
+  background: linear-gradient(0deg, rgb(203, 179, 255), rgb(194, 244, 255));;
   background-attachment: local;
   background-position: center;
   -webkit-background-size: cover;
@@ -3183,7 +3187,7 @@ li.categoryBar-list-item {
   }
 }
 .categoryBar-list {
-  max-height: 190px;
+  max-height: 570px;
   overflow: auto;
 }
 .categoryBar-list::-webkit-scrollbar {
@@ -3191,7 +3195,7 @@ li.categoryBar-list-item {
 }
 @media screen and (max-width: 650px) {
   .categoryBar-list {
-    max-height: 160px;
+    max-height: 480px;
   }
 }
 #post-comment .comment-head {
@@ -5795,7 +5799,7 @@ blockquote.pullquote.right {
 }
 /* 文章页面正文背景 */
 div#post{
-  opacity: 0.9;
+  opacity: 1;
 }
 /* 分页页面 */
 div#page{
@@ -5817,8 +5821,168 @@ div#category{
 
 
 /* 全局默认鼠标指针 */
+
+/* 全局默认鼠标指针 */
 body,
 html{
-  cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/Black/WP7Links.ani'),auto !important;
+  cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/arrow.cur'), auto !important;
+}
+/* 悬停图片时的鼠标指针 */
+img{
+  cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto !important;
+}
+/* 选择链接标签时的鼠标指针 */
+a:hover{
+    cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
+}
+/* 选中输入框时的鼠标指针 */
+input:hover{
+    cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor1/Comix_White_Text.cur'),auto;
+}
+/* 悬停按钮时的鼠标指针 */
+button:hover{
+    cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
+}
+/* 悬停列表标签时的鼠标指针 */
+i:hover{
+    cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
+}
+/* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */
+#footer-wrap a:hover{
+      cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
+}
+/* 悬停页码时的鼠标指针 */
+#pagination .page-number:hover{
+      cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
+}
+/* 悬停菜单栏时的鼠标指针 */
+#nav .site-page:hover{
+      cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
 }
 
+.search-dialog {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  z-index: 1001;
+  display: none;
+  margin-left: -300px;
+  padding: 20px;
+  width: 600px;
+  border-radius: 8px;
+  background: var(--search-bg);
+}
+@media screen and (max-width: 768px) {
+  .search-dialog {
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+.search-dialog hr {
+  margin: 20px auto;
+}
+.search-dialog .search-nav {
+  margin: 0 0 14px;
+  color: #49b1f5;
+  font-size: 1.4em;
+  line-height: 1;
+}
+.search-dialog .search-nav .search-dialog-title {
+  margin-right: 10px;
+}
+.search-dialog .search-nav .search-close-button {
+  float: right;
+  color: #858585;
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+.search-dialog .search-nav .search-close-button:hover {
+  color: #49b1f5;
+}
+#search-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  background: rgba(0,0,0,0.6);
+}
+#local-search .search-dialog .local-search-box {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+#local-search .search-dialog .local-search-box input {
+  padding: 5px 14px;
+  width: 100%;
+  outline: none;
+  border: 2px solid #49b1f5;
+  border-radius: 40px;
+  background: var(--search-bg);
+  color: var(--search-input-color);
+  -webkit-appearance: none;
+}
+#local-search .search-dialog .search-wrap {
+  display: none;
+}
+#local-search .search-dialog .local-search__hit-item {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.7;
+}
+#local-search .search-dialog .local-search__hit-item:hover:before {
+  border-color: var(--pseudo-hover);
+}
+#local-search .search-dialog .local-search__hit-item:before {
+  position: absolute;
+  top: 0.45em;
+  left: 0;
+  width: 0.5em;
+  height: 0.5em;
+  border: 3px solid #49b1f5;
+  border-radius: 0.5em;
+  background: transparent;
+  content: '';
+  line-height: 0.5em;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+#local-search .search-dialog .local-search__hit-item a {
+  display: block;
+  color: var(--search-result-title);
+  font-weight: 600;
+  cursor: pointer;
+}
+#local-search .search-dialog .local-search__hit-item a:hover {
+  color: #49b1f5;
+}
+#local-search .search-dialog .local-search__hit-item .search-result {
+  margin: 0 0 8px;
+  word-break: break-all;
+}
+#local-search .search-dialog .local-search__hit-item .search-keyword {
+  color: #f47466;
+  font-weight: bold;
+}
+#local-search .search-dialog .search-result-list {
+  overflow-y: auto;
+  max-height: 210px;
+}
+@media screen and (max-width: 768px) {
+  #local-search .search-dialog .search-result-list {
+    padding-bottom: 40px;
+    max-height: 75vh !important;
+  }
+}
