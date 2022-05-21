@@ -30,3 +30,10 @@
 #nav #blog_name{
   flex: 0;
 }
+
+#page-header #site-title{
+color: black;
+}
+#page-header #site-subtitle {
+  color: ;
+}
