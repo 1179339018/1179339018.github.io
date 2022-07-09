@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>树 | yuchen</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="树树的基本概念 树的属性  结点的层次(深度)：默认从 0 开始  深度为 0 是 A 结点 深度为 1 是 B、C、D结点  树的高度：默认从 1 开始  该树的高度为4  结点的度：有几个孩子(分支) 就有几个度  结点 B 有两个分支，结点 B 的度为 2 结点 C 有一个分支，结点 C 的度为 1  树的度：各结点的度的最大值。也就是树中分支数最多  结点 A 、D 的分支最多为 3 ，所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树">
+<meta property="og:url" content="http://example.com/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/index.html">
+<meta property="og:site_name" content="yuchen">
+<meta property="og:description" content="树树的基本概念 树的属性  结点的层次(深度)：默认从 0 开始  深度为 0 是 A 结点 深度为 1 是 B、C、D结点  树的高度：默认从 1 开始  该树的高度为4  结点的度：有几个孩子(分支) 就有几个度  结点 B 有两个分支，结点 B 的度为 2 结点 C 有一个分支，结点 C 的度为 1  树的度：各结点的度的最大值。也就是树中分支数最多  结点 A 、D 的分支最多为 3 ，所">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-05-27T03:07:30.000Z">
+<meta property="article:modified_time" content="2022-05-27T03:07:49.241Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/"><link rel="preconnect" href="//fastly.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '树',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-27 11:07:49'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/live/"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/live/"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">树</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-27T03:07:30.000Z" title="发表于 2022-05-27 11:07:30">2022-05-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-27T03:07:49.241Z" title="更新于 2022-05-27 11:07:49">2022-05-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="树"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="树的基本概念"><a href="#树的基本概念" class="headerlink" title="树的基本概念"></a>树的基本概念</h2><p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/b3f7147f34954012b4f8f693cce4dd9a.png" alt="img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/b9689d00d15347fea42ca70e5c6d78ce.png" alt="img"></p>
+<h2 id="树的属性"><a href="#树的属性" class="headerlink" title="树的属性"></a>树的属性</h2><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/0762c28e06834f54b5d2606d947ea0fc.png" alt="img" style="zoom:75%;" />
+
+<p>结点的层次(深度)：默认从 <code>0</code> 开始</p>
+<ul>
+<li>深度为 0 是 A 结点</li>
+<li>深度为 1 是 B、C、D结点</li>
+</ul>
+<p>树的高度：默认从 <code>1</code> 开始</p>
+<ul>
+<li>该树的高度为4</li>
+</ul>
+<p>结点的度：有几个孩子(分支) 就有几个度</p>
+<ul>
+<li>结点 B 有两个分支，结点 B 的度为 2</li>
+<li>结点 C 有一个分支，结点 C 的度为 1</li>
+</ul>
+<p>树的度：各结点的度的最大值。也就是树中分支数最多</p>
+<ul>
+<li>结点 A 、D 的分支最多为 3 ，所以树的度为 3</li>
+</ul>
+<blockquote>
+<p>注意：叶子结点的度 = 0，非叶子结点的度 &gt; 0</p>
+</blockquote>
+<h2 id="树的常考性质"><a href="#树的常考性质" class="headerlink" title="树的常考性质"></a>树的常考性质</h2><p>1.<strong>结点数 = 分支数 + 1</strong></p>
+<p>结点的度 = 结点有几个孩子(分支)</p>
+<img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/c8a5bce304a34d049a2a209bf60555b1.png" alt="img" style="zoom:50%;" />
+
+<p>2.<strong>度为 m 的树和 m 叉树</strong></p>
+<ul>
+<li>度为 m 的树：各结点的度的最大值为 m</li>
+<li>m 叉树：每个结点最多只能有 m 个孩子的树</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">度为 m 的树</th>
+<th align="center">m 叉树</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">任意结点的度 ≤ m(最多m个孩子)</td>
+<td align="center">任意结点的度 ≤ m(最多 m 个孩子)</td>
+</tr>
+<tr>
+<td align="center">至少有一个结点度 = m (有m个孩子)</td>
+<td align="center">允许所有结点的度都 &lt; m</td>
+</tr>
+<tr>
+<td align="center">一定是非空树，至少有 m+1 个结点</td>
+<td align="center">可以是空树</td>
+</tr>
+</tbody></table>
+<p>3.<strong>度为 m 的树第 i 层至多有 mi-1 个结点( i ≥ 1)</strong></p>
+<p><strong>m 叉树第 i 层至多有 mi-1 个结点( i≥1)</strong></p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/45d50ce039dd4f869c325b84e6a689ec.png" alt="img"></p>
+<p>4.<strong>高度为 h 的 m 叉树至多有 (mh -1)/(m-1) 个结点</strong></p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/063a1042df1b4b4f899b0196a6833436.png" alt="img"></p>
+<p>5.<strong>高度为 h 的 m 叉树至少有 h 个结点</strong></p>
+<p><strong>高度为 h、度为 m 的树至少有 h+m-1 个结点</strong></p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/6f49b7774fad492cb60171fbaa60dcde.png" alt="img"></p>
+<p>6.</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/832397f4b11743af9a84078dbad4f424.png" alt="![img](https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/832397f4b11743af9a84078dbad4f424.png)"></p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/2521da65e14d4ceea18d2f3a7de12ede.png" alt="img"></p>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/62e5cc02d12a459397c45e5bf0009a35.png" alt="img"></p>
+<h2 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a>满二叉树</h2><p>满二叉树：<strong>一棵高度为 h，且含有 2的h次方 -1 个结点的二叉树</strong></p>
+<p>所有结点都填满</p>
+<p><code>按层序从 1 开始编号，结点 i 的左孩子为 2i，右孩子为 2i+1，结点 i 的父节点为 [ i / 2] (如果有的话) [ i / 2 ]向下取整</code></p>
+<h2 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a>完全二叉树</h2><p>完全二叉树：只有最后一层的叶节点没有满，其他节点都是满的。</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/80ce4e2c769f43c6a107f4894e5db6f9.png" alt="img"></p>
+<ol>
+<li>只有一个度为 1 的结点</li>
+<li>按层序从 1 开始编号，结点 i 的左孩子为 2i，右孩子为 2i+1，结点 i 的父节点为 [ i / 2] (如果有的话) <strong>[ i / 2 ]向下取整</strong></li>
+<li>i ≤ [ n / 2] 为分支结点, i &gt; [n / 2] 为叶子结点 <strong>[n / 2 ] 向下取整</strong></li>
+<li>在完全二叉树中,如果某结点只有一个孩子,那么一定是左孩子</li>
+</ol>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/bda57f091a6c4d2a9444574bb649b9d6.png" alt="img"></p>
+<h2 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h2><ul>
+<li>左子树上所有结点的关键字均<strong>小于根结点</strong>的关键字</li>
+<li>右子树上所有结点的关键字均<strong>大于根节点</strong>的关键字</li>
+</ul>
+<h2 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h2><p>平衡二叉树：树上任一结点的<strong>左子树</strong>和<strong>右子树</strong>的<strong>深度之差不超过 1</strong></p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/94d16352f2f2478f84bdf5d3f5589a72.png" alt="img"></p>
+<h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">     <span class="type">int</span> val;</span><br><span class="line">     TreeNode *left;</span><br><span class="line">     TreeNode *right;</span><br><span class="line">     TreeNode(<span class="type">int</span> x) : val(x), left(<span class="literal">NULL</span>), right(<span class="literal">NULL</span>) &#123;&#125;</span><br><span class="line"> &#125;;</span><br><span class="line">TreeNode* root = new TreeNode(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span>&#123;</span></span><br><span class="line">    ElemType data;					<span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span> <span class="comment">// 左、右孩子指针</span></span><br><span class="line">&#125;TreeNode；</span><br><span class="line">   <span class="comment">// 定义一棵空树</span></span><br><span class="line">BiTree root = <span class="literal">NULL</span>;</span><br><span class="line"><span class="comment">// 插入根节点</span></span><br><span class="line">root = (BiTree) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(BiTNode));</span><br><span class="line">root-&gt;data = &#123;<span class="number">1</span>&#125;;							<span class="comment">// 根节点数据域为 1</span></span><br><span class="line">root-&gt;lchild = <span class="literal">NULL</span>;						<span class="comment">// 根节点左孩子指向NULL</span></span><br><span class="line">root-&gt;rchild = <span class="literal">NULL</span>;						<span class="comment">// 根节点右孩子指向NULL</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="二叉树的遍历算法"><a href="#二叉树的遍历算法" class="headerlink" title="二叉树的遍历算法"></a>二叉树的遍历算法</h1><h2 id="先序遍历"><a href="#先序遍历" class="headerlink" title="先序遍历"></a>先序遍历</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 访问一个结点:打印字符</span></span><br><span class="line">Void <span class="title function_">visit</span><span class="params">(BiTNode *p)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,p-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 先序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">PreOrder</span><span class="params">(BiTree T)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        visit(T);				<span class="comment">// 访问根结点</span></span><br><span class="line">        PreOrder(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        PreOrder(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>中序遍历</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中序遍历</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">InOrder</span><span class="params">(BiTree T)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        InOrder(T -&gt; lchild);		<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        visit(T);					<span class="comment">// 访问根节点</span></span><br><span class="line">        InOrder(T -&gt; rchild);		<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后序遍历</span></span><br><span class="line">Void <span class="title function_">PostOrder</span><span class="params">(BiTree T)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        PostOrder(T-&gt;lchild);			<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        PostOrder(T-&gt;rchild);			<span class="comment">// 递归遍历右子树</span></span><br><span class="line">        visit(T);						<span class="comment">// 访问根节点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="求树的深度"><a href="#求树的深度" class="headerlink" title="求树的深度"></a>求树的深度</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求树的深度</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">treeDepth</span><span class="params">(BiTree T)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">NULL</span>)&#123;								<span class="comment">// 树是空树</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;								<span class="comment">// 深度为0</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="type">int</span> l = treeDepth(T-&gt;lchild);			<span class="comment">// 求左子树的深度</span></span><br><span class="line">        <span class="type">int</span> r = treeDepth(T-&gt;rchild);			<span class="comment">// 求右子树的深度</span></span><br><span class="line">        <span class="comment">// 树的深度 = Max(左子树深度,右子树深度)+1</span></span><br><span class="line">        <span class="keyword">return</span> l&gt;r ? l+<span class="number">1</span> : r+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="type">void</span> <span class="title function_">LevelOrder</span><span class="params">(BiTree T)</span>&#123;</span><br><span class="line">    <span class="comment">//用一个辅助队列</span></span><br><span class="line">    <span class="built_in">queue</span>&lt;BiTree&gt;arr;</span><br><span class="line">     <span class="comment">//这个用来记录结果</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;res;</span><br><span class="line">    arr.push(T);</span><br><span class="line">     res.push(T.val)</span><br><span class="line">        <span class="keyword">while</span>(!arr.empty())&#123;</span><br><span class="line">            BiTree tmp = arr.top();</span><br><span class="line">            arr.pop();</span><br><span class="line">            <span class="keyword">if</span>(tmp-&gt;left!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">                arr.push(tmp-&gt;left);</span><br><span class="line">                 res.push(tmp-&gt;left-&gt;val);</span><br><span class="line">            &#125;</span><br><span class="line">               <span class="keyword">if</span>(tmp-&gt;right!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">                arr.push(tmp-&gt;right);</span><br><span class="line">                 res.push(tmp-&gt;right-&gt;val);</span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h1><h2 id="前序-中序遍历序列"><a href="#前序-中序遍历序列" class="headerlink" title="前序+中序遍历序列"></a>前序+中序遍历序列</h2><ul>
+<li>已知前序遍历序列为：A D B C E</li>
+<li>已知中序遍历序列为：B D C A E</li>
+</ul>
+<p>由中序遍历序列首先推出根节点为 A ，(B D C) 均为左子树，E 为右子树。如下图</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/bbbe252d3a334dbb8f2adc863b746846.png" alt="img"></p>
+<p>由前序遍历序列推出左子树的根节点为 D，则由中序序列推出结点 D 的左子树为 B，右子树为 C</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/4b86cb69ef32431796d2802d358a2d65.png" alt="img"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> preorder = [<span class="number">3</span>,<span class="number">9</span>,<span class="number">20</span>,<span class="number">15</span>,<span class="number">7</span>], inorder = [<span class="number">9</span>,<span class="number">3</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">7</span>]</span><br><span class="line">     </span><br><span class="line">var buildTree = function (preorder, inorder) &#123; </span><br><span class="line">   <span class="keyword">if</span> (!preorder.length || !inorder.length) &#123;</span><br><span class="line">    <span class="keyword">return</span> null;</span><br><span class="line">  &#125;</span><br><span class="line"> <span class="comment">//首先找根节点</span></span><br><span class="line">     <span class="type">const</span> rootVal = preorder[<span class="number">0</span>];</span><br><span class="line"><span class="type">const</span> node = new TreeNode(rootVal);</span><br><span class="line">let i = <span class="number">0</span>; <span class="comment">// i有两个含义，一个是根节点在中序遍历结果中的下标，另一个是当前左子树的节点个数</span></span><br><span class="line"><span class="comment">//在中序遍历中找到根的下标</span></span><br><span class="line">  <span class="keyword">for</span> (; i &lt; inorder.length; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (inorder[i] === rootVal) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// slice方法是左闭右开的</span></span><br><span class="line">  node.left = buildTree(preorder.slice(<span class="number">1</span>, i + <span class="number">1</span>), inorder.slice(<span class="number">0</span>, i));</span><br><span class="line">  node.right = buildTree(preorder.slice(i + <span class="number">1</span>), inorder.slice(i + <span class="number">1</span>));</span><br><span class="line">  <span class="keyword">return</span> node;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="后序-中序遍历序列"><a href="#后序-中序遍历序列" class="headerlink" title="后序+中序遍历序列"></a>后序+中序遍历序列</h2><p>已知后序遍历序列：E F A H C I G B D (左 右 根)</p>
+<p>已知中序遍历序列：E A F D H C B G I (左 根 右)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> buildTree = <span class="keyword">function</span> (<span class="params">inorder, postorder</span>) &#123; </span><br><span class="line">   <span class="keyword">if</span> (!postorder.<span class="property">length</span> || !inorder.<span class="property">length</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="keyword">const</span> n = postorder.<span class="title function_">size</span>();</span><br><span class="line"> <span class="comment">//首先找根节点</span></span><br><span class="line">     <span class="keyword">const</span> rootVal = postorder[n-<span class="number">1</span>];</span><br><span class="line"><span class="keyword">const</span> node = <span class="keyword">new</span> <span class="title class_">TreeNode</span>(rootVal);</span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>; <span class="comment">// i有两个含义，一个是根节点在中序遍历结果中的下标，另一个是当前左子树的节点个数</span></span><br><span class="line"><span class="comment">//在中序遍历中找到根的下标</span></span><br><span class="line">  <span class="keyword">for</span> (; i &lt; inorder.<span class="property">length</span>; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (inorder[i] === rootVal) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// slice方法是左闭右开的</span></span><br><span class="line">  node.<span class="property">left</span> = <span class="title function_">buildTree</span>(inorder.<span class="title function_">slice</span>(<span class="number">0</span>, i), postorder.<span class="title function_">slice</span>(<span class="number">0</span>,i-<span class="number">1</span>));</span><br><span class="line">  node.<span class="property">right</span> = <span class="title function_">buildTree</span>(inorder.<span class="title function_">slice</span>(i + <span class="number">1</span>), postorder.<span class="title function_">slice</span>(i,n-<span class="number">1</span>));</span><br><span class="line">  <span class="keyword">return</span> node;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/">http://example.com/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">yuchen</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">栈</div></div></a></div><div class="next-post pull-right"><a href="/2022/05/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%80%A7%E8%A1%A8/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">线性表</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">28</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%91"><span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">树的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">树的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%B8%B8%E8%80%83%E6%80%A7%E8%B4%A8"><span class="toc-text">树的常考性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">满二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">完全二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91"><span class="toc-text">二叉排序树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">平衡二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">二叉树的定义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95"><span class="toc-text">二叉树的遍历算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-text">先序遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6"><span class="toc-text">求树的深度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-text">层序遍历</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">重建二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%BA%8F-%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97"><span class="toc-text">前序+中序遍历序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%BA%8F-%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97"><span class="toc-text">后序+中序遍历序列</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9uBlc4TiYDET6AInU3VDNmjM-9Nh9j0Va',
+      appKey: 'PHUY6kE6EGJG6Ax7hww6oI5d',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax defer src="/js/custom/fixed_card_widget.js"></script><script data-pjax defer src="/js/custom/custom.js"></script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><script async data-pjax src="/js/randombg.js"></script><script async src="/js/diytitle.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="fixedcard-dashboard"><button class="fixedcard-activebtn" type="button" title="用户信息" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-info&quot;,&quot;0&quot;)"><i class="fas fa-address-book"></i></button><button class="fixedcard-activebtn" type="button" title="电子钟" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-clock&quot;,&quot;0&quot;)"><i class="fas fa-cloud-sun"></i></button><button class="fixedcard-activebtn" type="button" title="相关推荐" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-recommend-post&quot;,&quot;0&quot;)"><i class="fas fa-dharmachakra"></i></button><div class="fixedcard-user-avatar fixedcard-activebtn" onclick="RemoveFixedCardWidget()"><img class="fixedcard-user-avatar-img" src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" title="Yu Chen"></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 570px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 480px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/bfd9032d1419bb81d204ef901cff16c.jpg);"> <a class="categoryBar-list-link" href="categories/react/">react</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">快乐css</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/06ec8662ee828eb9a78a68019aec54a.jpg);"> <a class="categoryBar-list-link" href="categories/数据结构/">数据结构</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">简单的html</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/2e421c1938b68ca339b960f7d748abc.jpg);"> <a class="categoryBar-list-link" href="categories/CSS-HTML/">CSS &amp; HTML</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">vue的学习</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/538921c5299ecdfba0521c4fdc66b48.jpg);"> <a class="categoryBar-list-link" href="categories/JavaScript/">JavaScript</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">摆烂JS</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/5afba8fed45650255f8ab4f85b6c9da.jpg);"> <a class="categoryBar-list-link" href="categories/Vue/">Vue</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">一些工具</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/前端工具/">前端工具</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">杂谈教程</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><!-- hexo injector body_end end --></body></html>

@@ -32,3 +32,11 @@ for (let i = 0; i < img.length; i++) {
   img[i].src = backimg[bgindex];
 }
 document.querySelector('#page-header').style.backgroundColor = 'rgba(0,0,0,0)';
+
+var a = document.querySelectorAll(".article-sort-item-img");
+for (let i = 0; i < a.length; i++) {
+  //获取背景图片总数，生成随机数
+  var bgindex1 = Math.floor(Math.random() * backimg.length);
+  a[i].children[0].src = backimg[bgindex1];
+}
+

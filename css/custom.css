@@ -32,8 +32,25 @@
 }
 
 #page-header #site-title{
-color: black;
+
+color: #FF5613;
 }
-#page-header #site-subtitle {
-  color: ;
+#subtitle{
+color: #FF5613;
+;
 }
+
+
+
+#recent-posts > .recent-post-item:not(:first-child) {
+  margin-top: 0px;
+}
+#recent-posts > .recent-post-item{
+  margin-bottom: 20px;
+}
+
+
+#footer {
+background: unset;
+}
+
