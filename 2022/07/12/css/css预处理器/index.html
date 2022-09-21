@@ -1,0 +1,341 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>css预处理器 | yuchen</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="css预处理器sass首先需要在vue中需要安装sass 1npm install node-sass sass-loader --save-dev  如果报错，在package.json检查下sass-loader版本，可能是版本太高了，可以进行安装低版本即可。 安装前，先卸载sass-loader 1npm uninstall sass-loader  卸载完成，从新安装下低版本的 npm i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css预处理器">
+<meta property="og:url" content="https://1179339018.github.io/2022/07/12/css/css%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/index.html">
+<meta property="og:site_name" content="yuchen">
+<meta property="og:description" content="css预处理器sass首先需要在vue中需要安装sass 1npm install node-sass sass-loader --save-dev  如果报错，在package.json检查下sass-loader版本，可能是版本太高了，可以进行安装低版本即可。 安装前，先卸载sass-loader 1npm uninstall sass-loader  卸载完成，从新安装下低版本的 npm i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-07-12T02:09:58.000Z">
+<meta property="article:modified_time" content="2022-07-20T08:13:42.960Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://1179339018.github.io/2022/07/12/css/css%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/"><link rel="preconnect" href="//fastly.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'css预处理器',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-20 16:13:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">css预处理器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-12T02:09:58.000Z" title="发表于 2022-07-12 10:09:58">2022-07-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-20T08:13:42.960Z" title="更新于 2022-07-20 16:13:42">2022-07-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CSS-HTML/">CSS &amp; HTML</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="css预处理器"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="css预处理器"><a href="#css预处理器" class="headerlink" title="css预处理器"></a>css预处理器</h1><h1 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h1><p>首先需要在vue中需要安装sass</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install node-sass sass-loader <span class="attr">--save-dev</span></span><br></pre></td></tr></table></figure>
+
+<p>如果报错，在package.json检查下sass-loader版本，可能是版本太高了，可以进行安装低版本即可。</p>
+<p>安装前，先卸载sass-loader</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall sass-loader</span><br></pre></td></tr></table></figure>
+
+<p>卸载完成，从新安装下低版本的</p>
+<p><code>npm install sass-loader@7.3.1</code></p>
+<h2 id="1-sass变量"><a href="#1-sass变量" class="headerlink" title="1.sass变量"></a>1.sass变量</h2><blockquote>
+<p>变量变量用于存储一些信息，它可以重复使用。</p>
+</blockquote>
+<p>Sass 变量可以存储以下信息：</p>
+<ul>
+<li>字符串</li>
+<li>数字</li>
+<li>颜色值</li>
+<li>布尔值</li>
+<li>列表</li>
+<li>null 值</li>
+</ul>
+<p>变量声明后我们就可以在代码中使用它：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$myFont</span>: Helvetica, sans-serif;</span><br><span class="line"><span class="variable">$myColor</span>: red;</span><br><span class="line"><span class="variable">$myFontSize</span>: <span class="number">18px</span>;</span><br><span class="line"><span class="variable">$myWidth</span>: <span class="number">680px</span>;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line"> <span class="attribute">font-family</span>: <span class="variable">$myFont</span>;</span><br><span class="line"> <span class="attribute">font-size</span>: <span class="variable">$myFontSize</span>;</span><br><span class="line"> <span class="attribute">color</span>: <span class="variable">$myColor</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#container</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="variable">$myWidth</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="sass作用域"><a href="#sass作用域" class="headerlink" title="sass作用域"></a>sass作用域</h2><blockquote>
+<p>Sass 变量的作用域只能在当前的层级上有效果，如下所示 h1 的样式为它内部定义的 green，p 标签则是为 red。</p>
+</blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$myColor</span>: red;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line"> <span class="variable">$myColor</span>: green;  *<span class="comment">// 只在 h1 里头有用，局部作用域*</span></span><br><span class="line"> <span class="attribute">color</span>: <span class="variable">$myColor</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">   <span class="variable">$myColor</span>: green !global;  <span class="comment">// 全局作用域</span></span><br><span class="line"> <span class="attribute">color</span>: <span class="variable">$myColor</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>global</strong></p>
+<p>当然 Sass 中我们可以使用 <strong>!global</strong> 关键词来设置变量是全局的。</p>
+<h2 id="2-Sass-嵌套规则与属性"><a href="#2-Sass-嵌套规则与属性" class="headerlink" title="2.Sass 嵌套规则与属性"></a>2.Sass 嵌套规则与属性</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> &#123;</span><br><span class="line"> <span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">font: &#123;</span><br><span class="line"> family: Helvetica, sans-serif;</span><br><span class="line"> size: 18px;</span><br><span class="line"> weight: bold;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">text: &#123;</span><br><span class="line"> align: center;</span><br><span class="line"> transform: lowercase;</span><br><span class="line"> overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>等于把外面的拼到嵌套里面的</p>
+</blockquote>
+<h2 id="3-import"><a href="#3-import" class="headerlink" title="3.@import"></a>3.@import</h2><blockquote>
+<p>可以把sass文件导入到css文件里</p>
+</blockquote>
+<p><strong>注意：</strong>包含文件时不需要指定文件后缀，Sass 会自动添加后缀 .scss。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;variables&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;colors&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;reset&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-mixin-与-include"><a href="#4-mixin-与-include" class="headerlink" title="4.@mixin 与 @include"></a>4.@mixin 与 @include</h2><blockquote>
+<p>@mixin 指令允许我们定义一个可以在整个样式表中重复使用的样式。</p>
+<p>@include 指令可以将混入（mixin）引入到文档中。</p>
+</blockquote>
+<p><strong>定义一个混入</strong></p>
+<p>混入(mixin)通过 @mixin 指令来定义。 @mixin name { property: value; property: value; … }</p>
+<p>以下实例创建一个名为 “important-text” 的混入：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> important-text &#123;</span><br><span class="line"> <span class="attribute">color</span>: red;</span><br><span class="line"> <span class="attribute">font-size</span>: <span class="number">25px</span>;</span><br><span class="line"> <span class="attribute">font-weight</span>: bold;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用混入</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector &#123;</span><br><span class="line"> @include important-text;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>混入中也可以包含混入，如下所示：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@mixin special-text &#123;</span><br><span class="line"> @include important-text;</span><br><span class="line"> @include link;</span><br><span class="line"> @include special-border;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>向混入传递变量</strong></p>
+<p>混入可以接收参数。</p>
+<p>我们可以向混入传递变量。</p>
+<p>定义可以接收参数的混入：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> bordered(<span class="variable">$color</span>, <span class="variable">$width</span>) &#123;</span><br><span class="line"> <span class="attribute">border</span>: <span class="variable">$width</span> solid <span class="variable">$color</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.myArticle</span> &#123;</span><br><span class="line"> <span class="keyword">@include</span> bordered(blue, <span class="number">1px</span>); *<span class="comment">// 调用混入，并传递两个参数*</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.myNotes</span> &#123;</span><br><span class="line"> <span class="keyword">@include</span> bordered(red, <span class="number">2px</span>); *<span class="comment">// 调用混入，并传递两个参数*</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>混入的参数也可以定义默认值，语法格式如下：</strong></p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> bordered(<span class="variable">$color</span>: blue, <span class="variable">$width</span>: <span class="number">1px</span>) &#123;</span><br><span class="line"> <span class="attribute">border</span>: <span class="variable">$width</span> solid <span class="variable">$color</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> sexy-border(<span class="variable">$color</span>, <span class="variable">$width</span>: <span class="number">1in</span>) &#123;</span><br><span class="line"> <span class="attribute">border</span>: &#123;</span><br><span class="line"> <span class="attribute">color</span>: <span class="variable">$color</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$width</span>;</span><br><span class="line">  style: dashed;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">p</span> &#123; <span class="keyword">@include</span> sexy-border(blue); &#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123; <span class="keyword">@include</span> sexy-border(blue, <span class="number">2in</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>可变参数</strong></p>
+<p>有时，不能确定一个混入（mixin）或者一个函数（function）使用多少个参数，这时我们就可以使用 <strong>…</strong> 来设置可变参数。</p>
+<p>例如，用于创建盒子阴影（box-shadow）的一个混入（mixin）可以采取任何数量的 box-shadow 作为参数。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> box-shadow(<span class="variable">$shadows</span>...) &#123;</span><br><span class="line">   <span class="attribute">box-shadow</span>: <span class="variable">$shadows</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.shadows</span> &#123;</span><br><span class="line"> <span class="keyword">@include</span> box-shadow(<span class="number">0px</span> <span class="number">4px</span> <span class="number">5px</span> <span class="number">#666</span>, <span class="number">2px</span> <span class="number">6px</span> <span class="number">10px</span> <span class="number">#999</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-extend-与-继承"><a href="#5-extend-与-继承" class="headerlink" title="5.@extend 与 继承"></a>5.@extend 与 继承</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.button-basic  &#123;</span><br><span class="line"> border: none;</span><br><span class="line"> padding: 15px 30px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.button-report  &#123;</span><br><span class="line"> @extend .button-basic;</span><br><span class="line"> background-color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.button-submit  &#123;</span><br><span class="line"> @extend .button-basic;</span><br><span class="line"> background-color: green;</span><br><span class="line"> color: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-sass选择器"><a href="#6-sass选择器" class="headerlink" title="6.sass选择器"></a>6.sass选择器</h2><h2 id="1-父选择器的标识符-amp"><a href="#1-父选择器的标识符-amp" class="headerlink" title="1.父选择器的标识符&amp;"></a>1.父选择器的标识符&amp;</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">article a &#123;</span><br><span class="line">  color: blue;</span><br><span class="line">  :hover &#123; color: red &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当a被hover时，所有的a都会变红，我们不是要这个效果，我们要被hover才变红</p>
+</blockquote>
+<p>解决之道为使用一个特殊的<code>sass</code>选择器，即父选择器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">article a &#123;</span><br><span class="line">  color: blue;</span><br><span class="line">  &amp;:hover &#123; color: red &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当包含父选择器标识符的嵌套规则被打开时，它不会像后代选择器那样进行拼接，而是<code>&amp;</code>被父选择器直接替换：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article a &#123; color: blue &#125;</span><br><span class="line">article a:hover &#123; color: red &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-子组合选择器和同层组合选择器：-gt-、-和"><a href="#2-子组合选择器和同层组合选择器：-gt-、-和" class="headerlink" title="2.子组合选择器和同层组合选择器：&gt;、+和~"></a>2.子组合选择器和同层组合选择器：&gt;、+和~</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article section &#123; margin: 5px &#125;</span><br><span class="line">article &gt; section &#123; border: 1px solid #ccc &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>你可以用子组合选择器&gt;选择一个元素的直接子元素。上例中，第一个选择器会选择article下的所有命中section选择器的元素。第二个选择器只会选择article下紧跟着的子元素中命中section选择器的元素。</p>
+</blockquote>
+<p>在下例中，你可以用同层相邻组合选择器<code>+</code>选择<code>header</code>元素后紧跟的<code>p</code>元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header + p &#123; font-size: 1.1em &#125;</span><br></pre></td></tr></table></figure>
+
+<p>你也可以用同层全体组合选择器<code>~</code>，选择所有跟在<code>article</code>后的同层<code>article</code>元素，不管它们之间隔了多少其他元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">article ~ article &#123; border-top: 1px dashed #ccc &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-sass函数（待完善）"><a href="#7-sass函数（待完善）" class="headerlink" title="7.sass函数（待完善）"></a>7.sass函数（待完善）</h2><h3 id="1-if-else-if-else示例："><a href="#1-if-else-if-else示例：" class="headerlink" title="1.if-else if-else示例："></a>1.if-else if-else示例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@mixin txt($weight) &#123; </span><br><span class="line">  color: white; </span><br><span class="line">  @if $weight == bold &#123; </span><br><span class="line">    font-weight: bold;</span><br><span class="line">  &#125; </span><br><span class="line">  @else if $weight == light &#123; </span><br><span class="line">    font-weight: 100;</span><br><span class="line">  &#125; </span><br><span class="line">  @else &#123; </span><br><span class="line">    font-weight: normal;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.txt1 &#123; </span><br><span class="line">  @include txt(bold); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.txt1 &#123;</span><br><span class="line">  color: white;</span><br><span class="line">  font-weight: bold; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-for示例："><a href="#2-for示例：" class="headerlink" title="2.for示例："></a>2.for示例：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@for $i from 1 to 10 &#123;</span><br><span class="line">  .border-#&#123;$i&#125; &#123;</span><br><span class="line">    border: #&#123;$i&#125;px solid blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">.border-1 &#123;</span><br><span class="line">  border: 1px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-2 &#123;</span><br><span class="line">  border: 2px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-3 &#123;</span><br><span class="line">  border: 3px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-4 &#123;</span><br><span class="line">  border: 4px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-5 &#123;</span><br><span class="line">  border: 5px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-6 &#123;</span><br><span class="line">  border: 6px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-7 &#123;</span><br><span class="line">  border: 7px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-8 &#123;</span><br><span class="line">  border: 8px solid blue; &#125;</span><br><span class="line"></span><br><span class="line">.border-9 &#123;</span><br><span class="line">  border: 9px solid blue; &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><blockquote>
+<p>less使用和sass大体相同，我说说区别</p>
+</blockquote>
+<h2 id="1-变量"><a href="#1-变量" class="headerlink" title="1.变量"></a>1.变量</h2><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@width:</span> <span class="number">10px</span>; </span><br><span class="line"></span><br><span class="line"><span class="variable">@height:</span> <span class="variable">@width</span> + <span class="number">10px</span>; </span><br><span class="line"></span><br><span class="line"><span class="selector-tag">header</span> &#123;  </span><br><span class="line"></span><br><span class="line"> <span class="attribute">width</span>: <span class="variable">@width</span>; </span><br><span class="line"></span><br><span class="line"> <span class="attribute">height</span>: <span class="variable">@height</span>; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>sass用$,less用@</p>
+<h2 id="2-混合（Mixins）"><a href="#2-混合（Mixins）" class="headerlink" title="2.混合（Mixins）"></a>2.混合（Mixins）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.bordered &#123; </span><br><span class="line">border-top: dotted 1px black;  </span><br><span class="line">border-bottom: solid 2px black; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.post a &#123;  </span><br><span class="line">color: red;  </span><br><span class="line">.bordered(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>sass</code>：</p>
+<ul>
+<li>定义@minxin</li>
+<li>调用@include</li>
+</ul>
+<p><code>less</code>：</p>
+<p>直接类名+（）</p>
+<h2 id="3-合并-merge-了解"><a href="#3-合并-merge-了解" class="headerlink" title="3.合并(merge)了解"></a>3.合并(merge)了解</h2><h2 id="1-逗号方式"><a href="#1-逗号方式" class="headerlink" title="1.逗号方式"></a>1.逗号方式</h2><p>less代码：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.mixin</span>() &#123;</span><br><span class="line">  <span class="selector-tag">box-shadow</span>+: <span class="selector-tag">inset</span> <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="selector-id">#555</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.myclass</span> &#123;</span><br><span class="line">  <span class="selector-class">.mixin</span>();</span><br><span class="line">  <span class="selector-tag">box-shadow</span>+: <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="selector-tag">black</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>编译后的CSS输出：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.myclass</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="number">#555</span>, <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> black;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-空格方式"><a href="#2-空格方式" class="headerlink" title="2.空格方式"></a>2.空格方式</h2><p>合并值用空格分隔。</p>
+<p>less代码：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.mixin</span>() &#123;</span><br><span class="line">  <span class="selector-tag">transform</span>+<span class="selector-tag">_</span>: <span class="selector-tag">scale</span>(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.myclass</span> &#123;</span><br><span class="line">  <span class="selector-class">.mixin</span>();</span><br><span class="line">  <span class="selector-tag">transform</span>+<span class="selector-tag">_</span>: <span class="selector-tag">rotate</span>(<span class="number">15deg</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>编译后的CSS输出：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.myclass</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>) <span class="built_in">rotate</span>(<span class="number">15deg</span>);</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>为了避免任何无意的连接，merge需要在每个连接点上使用显式的+或+_标志。</p>
+<p>#Stylus</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1179339018.github.io/2022/07/12/css/css%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/">https://1179339018.github.io/2022/07/12/css/css%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1179339018.github.io" target="_blank">yuchen</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/07/09/react%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">react的基础使用</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-text">css预处理器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sass"><span class="toc-text">sass</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-sass%E5%8F%98%E9%87%8F"><span class="toc-text">1.sass变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sass%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">sass作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Sass-%E5%B5%8C%E5%A5%97%E8%A7%84%E5%88%99%E4%B8%8E%E5%B1%9E%E6%80%A7"><span class="toc-text">2.Sass 嵌套规则与属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-import"><span class="toc-text">3.@import</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-mixin-%E4%B8%8E-include"><span class="toc-text">4.@mixin 与 @include</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-extend-%E4%B8%8E-%E7%BB%A7%E6%89%BF"><span class="toc-text">5.@extend 与 继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-sass%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">6.sass选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%88%B6%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E6%A0%87%E8%AF%86%E7%AC%A6-amp"><span class="toc-text">1.父选择器的标识符&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%90%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8%E5%92%8C%E5%90%8C%E5%B1%82%E7%BB%84%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8%EF%BC%9A-gt-%E3%80%81-%E5%92%8C"><span class="toc-text">2.子组合选择器和同层组合选择器：&gt;、+和~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-sass%E5%87%BD%E6%95%B0%EF%BC%88%E5%BE%85%E5%AE%8C%E5%96%84%EF%BC%89"><span class="toc-text">7.sass函数（待完善）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-if-else-if-else%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">1.if-else if-else示例：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-for%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-text">2.for示例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#less"><span class="toc-text">less</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8F%98%E9%87%8F"><span class="toc-text">1.变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B7%B7%E5%90%88%EF%BC%88Mixins%EF%BC%89"><span class="toc-text">2.混合（Mixins）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%90%88%E5%B9%B6-merge-%E4%BA%86%E8%A7%A3"><span class="toc-text">3.合并(merge)了解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%80%97%E5%8F%B7%E6%96%B9%E5%BC%8F"><span class="toc-text">1.逗号方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A9%BA%E6%A0%BC%E6%96%B9%E5%BC%8F"><span class="toc-text">2.空格方式</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9uBlc4TiYDET6AInU3VDNmjM-9Nh9j0Va',
+      appKey: 'PHUY6kE6EGJG6Ax7hww6oI5d',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax defer src="/js/custom/fixed_card_widget.js"></script><script data-pjax defer src="/js/custom/custom.js"></script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><script async data-pjax src="/js/randombg.js"></script><script async src="/js/diytitle.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="fixedcard-dashboard"><button class="fixedcard-activebtn" type="button" title="用户信息" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-info&quot;,&quot;0&quot;)"><i class="fas fa-address-book"></i></button><button class="fixedcard-activebtn" type="button" title="电子钟" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-clock&quot;,&quot;0&quot;)"><i class="fas fa-cloud-sun"></i></button><button class="fixedcard-activebtn" type="button" title="相关推荐" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-recommend-post&quot;,&quot;0&quot;)"><i class="fas fa-dharmachakra"></i></button><div class="fixedcard-user-avatar fixedcard-activebtn" onclick="RemoveFixedCardWidget()"><img class="fixedcard-user-avatar-img" src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" title="Yu Chen"></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 570px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 480px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/bfd9032d1419bb81d204ef901cff16c.jpg);"> <a class="categoryBar-list-link" href="categories/react/">react</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">快乐react</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/06ec8662ee828eb9a78a68019aec54a.jpg);"> <a class="categoryBar-list-link" href="categories/CSS-HTML/">CSS &amp; HTML</a><span class="categoryBar-list-count">7</span><span class="categoryBar-list-descr">emm</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/2e421c1938b68ca339b960f7d748abc.jpg);"> <a class="categoryBar-list-link" href="categories/Vue/">Vue</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">简单的html</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/538921c5299ecdfba0521c4fdc66b48.jpg);"> <a class="categoryBar-list-link" href="categories/JavaScript/">JavaScript</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">摆烂JS</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/5afba8fed45650255f8ab4f85b6c9da.jpg);"> <a class="categoryBar-list-link" href="categories/前端工具/">前端工具</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">vue的学习</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/数据结构/">数据结构</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">一些工具</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><!-- hexo injector body_end end --></body></html>

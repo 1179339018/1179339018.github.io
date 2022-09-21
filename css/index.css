@@ -5860,6 +5860,17 @@ i:hover{
       cursor: url('https://yuchenimage.oss-cn-shanghai.aliyuncs.com/cursor/hand1.cur'),auto;
 }
 
+
+/* 首页的顶部 */
+#page-header.not-top-img #nav{
+    background: rgba(255,255,255,1);
+}
+#page h1.page-title {
+    display: none;
+}
+#article-container h1 {
+margin-bottom: 40px;
+}
 .search-dialog {
   position: fixed;
   top: 100px;
