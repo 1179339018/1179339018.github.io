@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>面试</title>
+      <link href="/2023/03/16/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95/"/>
+      <url>/2023/03/16/%E9%9D%A2%E8%AF%95/%E9%9D%A2%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h1 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h1><h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><p>1.仿原神界面</p><p>使用<strong>Vue 3 + TypeScript + Vite + swiper</strong>开发，主要使用html，css写布局。项目地址：</p><p><a href="http://yucheng12345.gitee.io/yuanshen3.1">http://yucheng12345.gitee.io/yuanshen3.1</a></p><p>2.日程表，后台管理系统</p><p>使用v<strong>ue3、pinia、typescript、element-plus、axios、mockjs</strong>开发，该项目包括项目登录，背景主题设置，日历，每日完成统计，待办事件，已完成事件和对应的图表。项目地址：</p><p><a href="http://yucheng12345.gitee.io/calendar">http://yucheng12345.gitee.io/calendar</a></p><h2 id="面经"><a href="#面经" class="headerlink" title="面经"></a>面经</h2><p>html&amp;css</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/css%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/css%E9%9D%A2/</a></p><p>js</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/JS%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/JS%E9%9D%A2/</a></p><p>性能优化</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%9D%A2/</a></p><p>计网</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E9%9D%A2/</a></p><p>浏览器原理</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/</a></p><p>vue</p><p><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> work </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>性能优化面</title>
       <link href="/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%9D%A2/"/>
       <url>/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%9D%A2/</url>
