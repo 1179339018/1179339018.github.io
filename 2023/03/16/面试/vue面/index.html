@@ -1,0 +1,400 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>vue面 | yuchen</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="vue面vue 的基本vue的基本原理MVCview：视图 Controller:用户指令 Model:数据 用户与页面产生交互的时候，Controller 中的事件触发器就开始工作了，通过调用 Model 层，来完成对 Model 的修改，然后 Model 层再去通知 View 层更新。  MVVMvue中的数据都是响应式的，怎么实现的呢 如图 ViewModel负责监听Model中数据的改变并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue面">
+<meta property="og:url" content="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/index.html">
+<meta property="og:site_name" content="yuchen">
+<meta property="og:description" content="vue面vue 的基本vue的基本原理MVCview：视图 Controller:用户指令 Model:数据 用户与页面产生交互的时候，Controller 中的事件触发器就开始工作了，通过调用 Model 层，来完成对 Model 的修改，然后 Model 层再去通知 View 层更新。  MVVMvue中的数据都是响应式的，怎么实现的呢 如图 ViewModel负责监听Model中数据的改变并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-03-16T14:35:07.000Z">
+<meta property="article:modified_time" content="2023-03-16T14:39:47.522Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/"><link rel="preconnect" href="//fastly.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'vue面',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-16 22:39:47'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">vue面</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-16T14:35:07.000Z" title="发表于 2023-03-16 22:35:07">2023-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-16T14:39:47.522Z" title="更新于 2023-03-16 22:39:47">2023-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/work/">work</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="vue面"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="vue面"><a href="#vue面" class="headerlink" title="vue面"></a>vue面</h1><h1 id="vue-的基本"><a href="#vue-的基本" class="headerlink" title="vue 的基本"></a>vue 的基本</h1><h2 id="vue的基本原理"><a href="#vue的基本原理" class="headerlink" title="vue的基本原理"></a>vue的基本原理</h2><h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>view：视图</p>
+<p>Controller:用户指令</p>
+<p>Model:数据</p>
+<p>用户与页面产生交互的时候，Controller 中的事件触发器就开始工作了，通过调用 Model 层，来完成对 Model 的修改，然后 Model 层再去通知 View 层更新。</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/1664430951359474.png" alt="img"></p>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>vue中的数据都是响应式的，怎么实现的呢</p>
+<p>如图</p>
+<p><code>ViewModel负责监听Model中数据的改变并且控制视图的更新，处理用户交互操作；</code></p>
+<p>Model和View并无直接关联，而是通过ViewModel来进行联系的，</p>
+<p>Model和ViewModel之间有着双向数据绑定的联系。</p>
+<p>因此当Model中的数据改变时会触发View层的刷新，View中由于用户交互操作而改变的数据也会在Model中同步。</p>
+<p>这种模式实现了 Model和View的数据自动同步，因此开发者只需要专注于数据的维护操作即可，而不需要自己操作DOM。</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/1664431095994064.png" alt="img"></p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>vue 在实例化的时候，使用 Object.definePropety()（vue3用Proxy），对 data 进行 getter 和 setter  的处理。</p>
+<p>在组件渲染时，若用到 data 里的某个数据，这个数据就会被依赖收集进 watcher 里。</p>
+<p>当数据更新，如果这个数据在 watcher 里，就会收到通知并更新，否则不会更新——vue 采用“数据劫持”+“观察者模式（发布者-订阅者模式）”相结合的方式实现了双向绑定——vue 的响应式原理。</p>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/1664430790819020.png" alt="img"></p>
+<h2 id="vue生命周期"><a href="#vue生命周期" class="headerlink" title="vue生命周期"></a>vue生命周期</h2><ol>
+<li><p><code>create阶段</code>：vue实例被创建<br> <code>beforeCreate</code>: 创建前，此时data和methods中的数据都还没有初始化<br> <code>created</code>： 创建完毕，data中有值，未挂载</p>
+</li>
+<li><p><code>mount阶段</code>： vue实例被挂载到真实DOM节点<br> <code>beforeMount</code>：可以发起服务端请求，去数据<br> <code>mounted</code>: 此时可以操作DOM</p>
+</li>
+<li><p><code>update阶段</code>：当vue实例里面的data数据变化时，触发组件的重新渲染<br> <code>beforeUpdate</code> :更新前<br> <code>updated</code>：更新后</p>
+</li>
+<li><p><code>destroy阶段</code>：vue实例被销毁<br> <code>beforeDestroy</code>：实例被销毁前，此时可以手动销毁一些方法<br> <code>destroyed</code>:销毁后</p>
+<h3 id="created和mounted的区别"><a href="#created和mounted的区别" class="headerlink" title="created和mounted的区别"></a>created和mounted的区别</h3><ul>
+<li>created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。</li>
+<li>mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Vue-子组件和父组件执行顺序"><a href="#Vue-子组件和父组件执行顺序" class="headerlink" title="Vue 子组件和父组件执行顺序"></a>Vue 子组件和父组件执行顺序</h3><p><strong>加载渲染过程：</strong></p>
+<p>先是父组件到挂载前一步，子组件渲染，父子一起挂载</p>
+<p>1.父组件 beforeCreate</p>
+<p>2.父组件 created</p>
+<p>3.父组件 beforeMount</p>
+<p>4.子组件 beforeCreate</p>
+<p>5.子组件 created</p>
+<p>6.子组件 beforeMount</p>
+<p>7.子组件 mounted</p>
+<p>8.父组件 mounted</p>
+<p><strong>更新过程：</strong></p>
+<p>父组件收到更新，子组件开始更新，更新完父组件再更新</p>
+<ol>
+<li>父组件 beforeUpdate</li>
+</ol>
+<p>2.子组件 beforeUpdate</p>
+<p>3.子组件 updated</p>
+<p>4.父组件 updated</p>
+<p><strong>销毁过程：</strong></p>
+<p>父组件收到销毁，子组件开始销毁，更新完父组件再销毁</p>
+<ol>
+<li>父组件 beforeDestroy</li>
+</ol>
+<p>2.子组件 beforeDestroy</p>
+<p>3.子组件 destroyed</p>
+<p>4.父组件 destoryed</p>
+<h3 id="Computed-和-Watch-的区别"><a href="#Computed-和-Watch-的区别" class="headerlink" title="Computed 和 Watch 的区别"></a>Computed 和 Watch 的区别</h3><p><strong>对于Computed：</strong></p>
+<ul>
+<li>它支持缓存，只有依赖的数据发生了变化，才会重新计算</li>
+<li>不支持异步，当Computed中有异步操作时，无法监听数据的变化</li>
+<li>computed的值会默认走缓存，计算属性是基于它们的响应式依赖进行缓存的，也就是基于data声明过，或者父组件传递过来的props中的数据进行计算的。</li>
+<li>如果一个属性是由其他属性计算而来的，这个属性依赖其他的属性，一般会使用computed</li>
+<li>如果computed属性的属性值是函数，那么默认使用get方法，函数的返回值就是属性的属性值；在computed中，属性有一个get方法和一个set方法，当数据发生变化时，会调用set方法。</li>
+</ul>
+<p><strong>对于Watch：</strong></p>
+<ul>
+<li><p>它不支持缓存，数据变化时，它就会触发相应的操作</p>
+</li>
+<li><p>支持异步监听</p>
+</li>
+<li><p>监听的函数接收两个参数，第一个参数是最新的值，第二个是变化之前的值</p>
+</li>
+<li><p>当一个属性发生变化时，就需要执行相应的操作</p>
+</li>
+<li><ul>
+<li>监听数据必须是data中声明的或者父组件传递过来的props中的数据，当发生变化时，会触发其他操作，函数有两个的参数：</li>
+<li>immediate：组件加载立即触发回调函数deep：深度监听，发现数据内部的变化，在复杂数据类型中使用，例如数组中的对象发生变化。需要注意的是，deep无法监听到数组和对象内部的变化。</li>
+</ul>
+</li>
+</ul>
+<p>当想要执行异步或者昂贵的操作以响应不断的变化时，就需要使用watch。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>computed 计算属性 : 依赖其它属性值，并且 computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed 的值。</li>
+<li>watch 侦听器 : 更多的是<strong>观察</strong>的作用，<strong>无缓存性</strong>，类似于某些数据的监听回调，每当监听的数据变化时都会执行回调进行后续操作。</li>
+</ul>
+<p><strong>运用场景：</strong></p>
+<ul>
+<li><strong>使用场景</strong> <code>computed</code>：当一个属性受多个属性影响的时候使用，例：购物车商品结算功能</li>
+<li><code>watch</code>：当一条数据影响多条数据的时候使用，例：搜索数据</li>
+</ul>
+<h3 id="data为什么是一个函数而不是对象"><a href="#data为什么是一个函数而不是对象" class="headerlink" title="data为什么是一个函数而不是对象"></a>data为什么是一个函数而不是对象</h3><p>1.一个组件被复用多次的话，也就会创建多个实例。本质上，这些实例用的都是同一个构造函数。</p>
+<p>2.如果data是对象的话，对象属于引用类型，会影响到所有的实例。所以为了保证组件不同的实例之间data不冲突，data必须是一个函数。</p>
+<h2 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h2><p>渲染时，如果是DOM节点更新，那么整个DOM将重新渲染，然而DOM节点渲染是非常消耗性能的一件事</p>
+<p>虚拟DOM就是让更新的节点更新，不是DOM树更新</p>
+<p>虚拟DOM本质上是一个js对象，通过对象来表示真实的DOM结构。</p>
+<p>tag用来描述标签，props用来描述属性，children用来表示嵌套的层级关系。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;app&quot;</span>&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span>TXM to SFM<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>html-&gt;虚拟DOM</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">tag</span>: <span class="string">&#x27;div&#x27;</span>,</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;app&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">chidren</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">tag</span>: <span class="string">&#x27;p&#x27;</span>,</span><br><span class="line">      <span class="attr">props</span>: &#123;</span><br><span class="line">        <span class="attr">className</span>: <span class="string">&#x27;text&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">chidren</span>: [</span><br><span class="line">        <span class="string">&#x27;TXM to SFM&#x27;</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="React-Vue-项目中-key-的作用"><a href="#React-Vue-项目中-key-的作用" class="headerlink" title="React/Vue 项目中 key 的作用"></a>React/Vue 项目中 key 的作用</h3><p>1.key的作用是为了在diff算法执行时更快的找到对应的节点，<code>提高diff速度，更高效的更新虚拟DOM</code>;</p>
+<p>当状态中的数据发生变化时，react会根据【新数据】生成【新的虚拟DOM】, 随后React进行【新虚拟DOM】与【旧虚拟DOM】的diff比较，比较规则如下：</p>
+<p>a. 旧虚拟DOM中找到了与新虚拟DOM相同的key：</p>
+<p>​     (1).若虚拟DOM中内容没变, 直接使用之前的真实DOM</p>
+<p>​     (2).若虚拟DOM中内容变了, 则生成新的真实DOM，随后替换掉页面中之前的真实DOM</p>
+<p> b. 旧虚拟DOM中未找到与新虚拟DOM相同的key</p>
+<p>  根据数据创建新的真实DOM，随后渲染到到页面</p>
+<p>2.为了在数据变化时强制更新组件，以避免<code>“就地复用”</code>带来的副作用。</p>
+<p>不能使用index</p>
+<ol>
+<li>若对数据进行：逆序添加、逆序删除等破坏顺序操作:</li>
+</ol>
+<p>会产生没有必要的真实DOM更新 ==&gt; 界面效果没问题, 但效率低。</p>
+<ol start="2">
+<li>如果结构中还包含输入类的DOM：</li>
+</ol>
+<p>会产生错误DOM更新 ==&gt; 界面有问题。    </p>
+<h2 id="vue组件的通信方式"><a href="#vue组件的通信方式" class="headerlink" title="vue组件的通信方式"></a>vue组件的通信方式</h2><h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><p><code>props</code>/<code>$emit</code> 父子组件通信</p>
+<p>父-&gt;子<code>props</code></p>
+<p>子-&gt;父 <code>$on、$emit</code></p>
+<ul>
+<li>在子组件中，通过<code>$emit()</code> 来发射事件</li>
+<li>在父组件中，通过<code>v-on</code> 来监听子组件事件</li>
+</ul>
+<p>父访问子</p>
+<ul>
+<li><code>$refs</code> 和 ref 指令通常是一起使用的</li>
+<li>首先，我们通过 ref 给某一个子组件绑定一个特定的 ID</li>
+<li>其次，通过<code>this.$refs.ID</code>就可以访问到该组件了<ul>
+<li>接着使用 <code>this.$refs.ID.xx</code> 就可以拿到该组件里面的属性数据了</li>
+</ul>
+</li>
+</ul>
+<p>子访问父</p>
+<p> <code>$parent</code></p>
+<h3 id="兄弟组件通信"><a href="#兄弟组件通信" class="headerlink" title="兄弟组件通信"></a>兄弟组件通信</h3><p><strong>1.借助父组件传参</strong></p>
+<p>都传给父组件，在去访问父组件参数</p>
+<p>2.Event Bus</p>
+<p>已经有人写了Event Bus了，就是mitt</p>
+<p>A组件派发（emit）B组件监听（on）</p>
+<h3 id="跨级组件通信"><a href="#跨级组件通信" class="headerlink" title="跨级组件通信"></a>跨级组件通信</h3><p>vuex</p>
+<ul>
+<li><p>State：总的数据</p>
+</li>
+<li><p>Getters：有时候，我们需要从 store 中获取一些 state 变异后的状态，比如下面的 Store</p>
+</li>
+<li><p>```js</p>
+<pre><code>getters: &#123;
+   // 获取年龄大于20的学生对象
+   more20stu(state)&#123;
+       return state.students.filter(s =&gt; s.age &gt;20)
+   &#125; 
+&#125;,
+  //这样我们在其他 .vue 组件中就可以传入年龄数值筛选了  
+ &lt;div&gt;
+  &lt;h2&gt;&#123;&#123;$store.getters.more20stu&#125;&#125;&lt;/h2&gt;
+</code></pre>
+  </div>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- Mutation：Vuex的store状态的更新唯一方式：提交**Mutation**</span><br><span class="line"></span><br><span class="line">- ```js</span><br><span class="line">      mutations: &#123;</span><br><span class="line">          increment(state)&#123;</span><br><span class="line">              state.count++</span><br><span class="line">          &#125;,</span><br><span class="line">          decrement(state)&#123;</span><br><span class="line">              state.count--</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      //通过 mutation 更新</span><br><span class="line">      </span><br><span class="line">       &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;button @click=&quot;increment&quot;&gt;+1&lt;/button&gt;</span><br><span class="line">        &lt;button @click=&quot;decrement&quot;&gt;-1&lt;&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    //注意数据只能放在计算属性中</span><br><span class="line">          computed: &#123;</span><br><span class="line">          count: function() &#123;</span><br><span class="line">              return this.$store.state.count</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">          increment: function() &#123;</span><br><span class="line">              this.$store.commit(&#x27;increment&#x27;)</span><br><span class="line">          &#125;,</span><br><span class="line">          decrement: function() &#123;</span><br><span class="line">              this.$store.commit(&#x27;decrement&#x27;)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Action：我们强调，不要在 Mutation 中进行异步操作，但是某些情况，我们确实希望在 Vuex 中进行一些异步操作，比如网络请求，必然是异步的，Action 类似于 Mutation，但是是用来代替 Mutation 进行异步操作的。</p>
+</li>
+<li><p>Module：当应用变得非常复杂时， store 对象就有可能变得相当臃肿，</p>
+<p>为了解决这个问题，Vuex 允许我们将 store 分割成某块，而每个模块拥有自己的 state、mutations、action、getters等</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ModuleA</span> = &#123;</span><br><span class="line">    <span class="attr">state</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">mutations</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">actions</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">getters</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ModuleB</span> = &#123;</span><br><span class="line">    <span class="attr">state</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">mutations</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">actions</span>: &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">    <span class="attr">modules</span>: &#123;</span><br><span class="line">        <span class="attr">a</span>: moduleA,</span><br><span class="line">        <span class="attr">b</span>: moduleB</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">store.<span class="property">state</span>.<span class="property">a</span>		<span class="comment">// -&gt; moduleA 的状态</span></span><br><span class="line">store.<span class="property">state</span>.<span class="property">b</span>		<span class="comment">// -&gt; moduleB 的状态</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/5f4ea9e16eda6e37ab336075a788ae15.png" alt="img"></p>
+<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><h2 id="传递参数的方式"><a href="#传递参数的方式" class="headerlink" title="传递参数的方式"></a>传递参数的方式</h2><p>传递参数主要有两种类型: params 和 query</p>
+<h3 id="params的类型"><a href="#params的类型" class="headerlink" title="params的类型"></a>params的类型</h3><ul>
+<li>配置路由格式: <code>/router/:id</code></li>
+<li>传递的方式: 在path后面跟上对应的值</li>
+<li>传递后形成的路径: /router/123, /router/abc</li>
+</ul>
+<h3 id="query的类型"><a href="#query的类型" class="headerlink" title="query的类型"></a>query的类型</h3><ul>
+<li>配置路由格式: /router, 也就是普通配置</li>
+<li>传递的方式: 对象中使用query的key作为传递方式</li>
+<li>传递后形成的路径: /router?id=123, /router?id=abc</li>
+</ul>
+<h2 id="router-和-route的区别"><a href="#router-和-route的区别" class="headerlink" title="$ router 和$route的区别"></a>$ router 和$route的区别</h2><ul>
+<li><code>$router</code> 为VueRouter实例，想要导航到不同URL，则使用<code>$router.push</code>方法</li>
+<li><code>$route</code>为当前 router 跳转对象里面可以获取name、path、query、params等</li>
+</ul>
+<h2 id="HashRouter-和-HistoryRouter的区别和原理？"><a href="#HashRouter-和-HistoryRouter的区别和原理？" class="headerlink" title="HashRouter 和 HistoryRouter的区别和原理？"></a>HashRouter 和 HistoryRouter的区别和原理？</h2><p>1.history和hash都是利用浏览器的2种特性实现前端路由，history是利用浏览历史记录栈的API实现，hash是监听location hash值变化事件来实现 </p>
+<p>2.history的url没有#号，hash有#号</p>
+<p>3.相同的url,history会触发添加到浏览器历史记录栈中，hash不会触发，history需要后端配合，如果后端不配合刷新页面会出现404，hash不需要</p>
+<p>hashRouter原理：通过window.onhashchange获取url中hash值 </p>
+<p>historyRouter原理：通过history.pushState,使用它做页面跳转不会触发页面刷新，使用window.onpopstate监听浏览器的前进和后退</p>
+<h2 id="说一说-Vue-中-nextTick-作用与原理？"><a href="#说一说-Vue-中-nextTick-作用与原理？" class="headerlink" title="说一说 Vue 中 $nextTick 作用与原理？"></a>说一说 Vue 中 $nextTick 作用与原理？</h2><p>Vue在更新DOM时异步执行，在修改完数据以后，视图不会立刻更新，而是等同一事件循环中所有的数据更新之后再去更新视图。所以修改完数据，立即在方法中回去dom，获取的仍然是未修改的DOM。</p>
+<p>$nixtTick的作用是:将回调延迟到下次 DOM 更新循环之后执行，以便于我们在回调函数中获取到的是最新的DOM，$nextTick的原理本质上是返回一个Promise，进行异步执行</p>
+<h2 id="keep-alive的实现"><a href="#keep-alive的实现" class="headerlink" title="keep-alive的实现"></a>keep-alive的实现</h2><p>作用：实现组件缓存，保持这些组件的状态，切换时，不需要重复渲染</p>
+<p><code>Vue.js</code>内部将<code>DOM</code>节点抽象成了一个个的<code>VNode</code>节点，</p>
+<p>keep-alive将将满足条件的组件在<code>cache</code>对象中缓存起来，需要的时候在Node节点取出来</p>
+<h2 id="react"><a href="#react" class="headerlink" title="react"></a>react</h2><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8bae01e6eb804d849e5bb889f787707d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/vue%E9%9D%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1179339018.github.io" target="_blank">yuchen</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/16/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E9%9D%A2/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计网面</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/16/%E9%9D%A2%E8%AF%95/css%E9%9D%A2/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">css面</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vue%E9%9D%A2"><span class="toc-text">vue面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vue-%E7%9A%84%E5%9F%BA%E6%9C%AC"><span class="toc-text">vue 的基本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-text">vue的基本原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC"><span class="toc-text">MVC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">vue生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#created%E5%92%8Cmounted%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">created和mounted的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-%E5%AD%90%E7%BB%84%E4%BB%B6%E5%92%8C%E7%88%B6%E7%BB%84%E4%BB%B6%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">Vue 子组件和父组件执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Computed-%E5%92%8C-Watch-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Computed 和 Watch 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E8%80%8C%E4%B8%8D%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="toc-text">data为什么是一个函数而不是对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9FDOM"><span class="toc-text">虚拟DOM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-Vue-%E9%A1%B9%E7%9B%AE%E4%B8%AD-key-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">React&#x2F;Vue 项目中 key 的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue%E7%BB%84%E4%BB%B6%E7%9A%84%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F"><span class="toc-text">vue组件的通信方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">父子组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%84%E5%BC%9F%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">兄弟组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E7%BA%A7%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">跨级组件通信</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">传递参数的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#params%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">params的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#query%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">query的类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#router-%E5%92%8C-route%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">$ router 和$route的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashRouter-%E5%92%8C-HistoryRouter%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">HashRouter 和 HistoryRouter的区别和原理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B4%E4%B8%80%E8%AF%B4-Vue-%E4%B8%AD-nextTick-%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">说一说 Vue 中 $nextTick 作用与原理？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keep-alive%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">keep-alive的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react"><span class="toc-text">react</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9uBlc4TiYDET6AInU3VDNmjM-9Nh9j0Va',
+      appKey: 'PHUY6kE6EGJG6Ax7hww6oI5d',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax defer src="/js/custom/fixed_card_widget.js"></script><script data-pjax defer src="/js/custom/custom.js"></script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><script async data-pjax src="/js/randombg.js"></script><script async src="/js/diytitle.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="fixedcard-dashboard"><button class="fixedcard-activebtn" type="button" title="用户信息" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-info&quot;,&quot;0&quot;)"><i class="fas fa-address-book"></i></button><button class="fixedcard-activebtn" type="button" title="电子钟" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-clock&quot;,&quot;0&quot;)"><i class="fas fa-cloud-sun"></i></button><button class="fixedcard-activebtn" type="button" title="相关推荐" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-recommend-post&quot;,&quot;0&quot;)"><i class="fas fa-dharmachakra"></i></button><div class="fixedcard-user-avatar fixedcard-activebtn" onclick="RemoveFixedCardWidget()"><img class="fixedcard-user-avatar-img" src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" title="Yu Chen"></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 380px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 320px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/bfd9032d1419bb81d204ef901cff16c.jpg);"> <a class="categoryBar-list-link" href="categories/react-vite/">react &amp; vite</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">快乐react</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/06ec8662ee828eb9a78a68019aec54a.jpg);"> <a class="categoryBar-list-link" href="categories/CSS-HTML/">CSS &amp; HTML</a><span class="categoryBar-list-count">7</span><span class="categoryBar-list-descr">简单的html</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/2e421c1938b68ca339b960f7d748abc.jpg);"> <a class="categoryBar-list-link" href="categories/JavaScript/">JavaScript</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">vue的学习</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/538921c5299ecdfba0521c4fdc66b48.jpg);"> <a class="categoryBar-list-link" href="categories/three-git/">three &amp; git</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">摆烂JS</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/5afba8fed45650255f8ab4f85b6c9da.jpg);"> <a class="categoryBar-list-link" href="categories/Vue/">Vue</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">一些工具</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/前端工具/">前端工具</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">emm</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/数据结构/">数据结构</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">只想摆</span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/work/">work</a><span class="categoryBar-list-count">9</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><!-- hexo injector body_end end --></body></html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html><html class="hide-aside" lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>浏览器原理 | yuchen</title><meta name="keywords" content="yuchen,Hexo,博客"><meta name="author" content="Yu Chen,1179339018@qq.com"><meta name="copyright" content="Yu Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="浏览器原理浏览器安全XSSXSS攻击： 跨站脚本攻击。 攻击者脚本 嵌入 被攻击网站，获取用户cookie等隐私信息。 这些脚本包括js代码，HTML或flash XSS攻击可以分为3类：存储型（持久型）、反射型（非持久型）、基于DOM。 1.存储型 攻击者将一些script放上网页。这里面有src链接如  当你点开，就会把你的cookie信息传到黑客的服务器上，他就可以登录你的账户操作 2.反射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器原理">
+<meta property="og:url" content="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="yuchen">
+<meta property="og:description" content="浏览器原理浏览器安全XSSXSS攻击： 跨站脚本攻击。 攻击者脚本 嵌入 被攻击网站，获取用户cookie等隐私信息。 这些脚本包括js代码，HTML或flash XSS攻击可以分为3类：存储型（持久型）、反射型（非持久型）、基于DOM。 1.存储型 攻击者将一些script放上网页。这里面有src链接如  当你点开，就会把你的cookie信息传到黑客的服务器上，他就可以登录你的账户操作 2.反射">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2023-03-16T14:35:53.000Z">
+<meta property="article:modified_time" content="2023-03-16T14:37:52.839Z">
+<meta property="article:author" content="Yu Chen">
+<meta property="article:tag" content="yuchen,Hexo,博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/"><link rel="preconnect" href="//fastly.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://fastly.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '浏览器原理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-16 22:37:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">yuchen</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-jia"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-riji"></i><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-a-huojianqidongkaishiyunhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-bangbangtang"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/bangumis/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 追番</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw iconfont icon-hezhao"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw iconfont icon-hezhao"></i><span> 哔哔</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-aixin"></i><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/me/"><i class="fa-fw iconfont icon-jiweijiu"></i><span> 关于我</span></a></li><li><a class="site-page child" href="/web/"><i class="fa-fw iconfont icon-ganbei"></i><span> 关于本站</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">浏览器原理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-16T14:35:53.000Z" title="发表于 2023-03-16 22:35:53">2023-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-16T14:37:52.839Z" title="更新于 2023-03-16 22:37:52">2023-03-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/work/">work</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="浏览器原理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="浏览器原理"><a href="#浏览器原理" class="headerlink" title="浏览器原理"></a>浏览器原理</h1><h1 id="浏览器安全"><a href="#浏览器安全" class="headerlink" title="浏览器安全"></a>浏览器安全</h1><h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p><strong>XSS攻击：</strong> 跨站脚本攻击。</p>
+<p><code>攻击者脚本</code> 嵌入 <code>被攻击网站</code>，获取用户cookie等隐私信息。</p>
+<p>这些脚本包括js代码，HTML或flash</p>
+<p>XSS攻击可以分为3类：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6945277278347591688#%E5%AD%98%E5%82%A8%E5%9E%8B">存储型</a>（持久型）、<a target="_blank" rel="noopener" href="https://juejin.cn/post/6945277278347591688#%E5%8F%8D%E5%B0%84%E5%9E%8B">反射型</a>（非持久型）、<a target="_blank" rel="noopener" href="https://juejin.cn/post/6945277278347591688#%E5%9F%BA%E4%BA%8EDOM">基于DOM</a>。</p>
+<h3 id="1-存储型"><a href="#1-存储型" class="headerlink" title="1.存储型"></a>1.存储型</h3><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e9150820b8af465594cb32a445450044~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="img"></p>
+<p>攻击者将一些script放上网页。这里面有src链接如</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/448349874197408f9e7a11ab5122fc9e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="img"></p>
+<p>当你点开，就会把你的cookie信息传到黑客的服务器上，他就可以登录你的账户操作</p>
+<h3 id="2-反射型"><a href="#2-反射型" class="headerlink" title="2.反射型"></a>2.反射型</h3><p>用户将一段含有恶意代码的请求提交给 Web 服务器，Web 服务器接收到请求时，又将恶意代码反射给了浏览器端，这就是反射型 XSS 攻击。你去点链接时，就会被攻击</p>
+<h3 id="3-基于-DOM-的-XSS-攻击"><a href="#3-基于-DOM-的-XSS-攻击" class="headerlink" title="3.基于 DOM 的 XSS 攻击"></a>3.基于 DOM 的 XSS 攻击</h3><p>基于 DOM 的 XSS 攻击是不牵涉到页面 Web 服务器的</p>
+<p>黑客通过各种手段将恶意脚本注入用户的页面中，比如通过网络劫持在页面传输过程中修改 HTML 页面的内容</p>
+<p>在 Web 资源传输过程或者在用户使用页面的过程中修改 Web 页面的数据。</p>
+<h2 id="XSS防御"><a href="#XSS防御" class="headerlink" title="XSS防御"></a>XSS防御</h2><p>XSS 攻击和反射型 XSS 攻击都是需要经过 Web 服务器来处理的，因此可以认为这两种类型的漏洞是服务端的安全漏洞。而基于 DOM 的 XSS 攻击全部都是在浏览器端完成的，因此基于 DOM 的 XSS 攻击是属于前端的安全漏洞。</p>
+<p>无论是何种类型的 XSS 攻击，它们都有一个共同点，那就是首先往浏览器中注入恶意脚本，然后再通过恶意脚本将用户信息发送至黑客部署的恶意服务器上。</p>
+<p>所以要阻止 XSS 攻击，我们可以通过阻止恶意 JavaScript 脚本的注入和恶意消息的发送来实现。</p>
+<p>措施：</p>
+<p>1.进行转码或过滤，将js脚本转成乱码，浏览器就识别不出来了</p>
+<p>2.使用CSP(由开发者自己定义的网络安全协议)，可以做到</p>
+<ul>
+<li>限制加载其他域下的资源文件，这样即使黑客插入了一个 JavaScript 文件，这个 JavaScript 文件也是无法被加载的；</li>
+<li>禁止向第三方域提交数据，这样用户数据也不会外泄；</li>
+<li>禁止执行内联脚本和未授权的脚本；</li>
+<li>还提供了上报机制，这样可以帮助我们尽快发现有哪些 XSS 攻击，以便尽快修复问题。</li>
+</ul>
+<p>3.使用<code>HttpOnly</code>，把<code>cookie</code>中<code>http</code>的响应头的<code>HttpOnly</code>设置成<code>true</code>，cookie就不能被别人拿到</p>
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>CSRF：<strong>跨站请求伪造</strong></p>
+<p><strong>CSRF攻击就是黑客利用了用户的登录状态，并通过第三方的站点来做一些坏事。</strong></p>
+<p>主要是通过用户的登录状态去完成一些事情</p>
+<p>1.get请求</p>
+<p>比如说攻击者将一个转账的请求放到img标签了</p>
+<p>浏览器自动get到这个img，钱就被转走了</p>
+<p>2.post</p>
+<p>打开黑客的站点时，他将转账的操作放在提交表单，按钮中，你一点就没了</p>
+<p>3.诱导你去点一些东西</p>
+<p>比如什么美女图像，小视频网站，你一点进去，就无，就post了</p>
+<h2 id="CSRF防御"><a href="#CSRF防御" class="headerlink" title="CSRF防御"></a>CSRF防御</h2><p>发起 CSRF 攻击的三个必要条件:</p>
+<ul>
+<li>第一个，目标站点一定要有CSRF漏洞；</li>
+<li>第二个，用户要登录过目标站点，并且在浏览器上保持有该站点的登录状态；</li>
+<li>第三个，需要用户打开一个第三方站点,可以是黑客的站点，也可以是一些论坛。</li>
+</ul>
+<p>防止：</p>
+<p>1.Cookie的SameSite属性</p>
+<p>通常 CSRF 攻击都是从第三方站点发起的，要防止 CSRF 攻击，我们最好能实现从第三方站点发送请求时禁止 Cookie 的发送</p>
+<p><strong>在 HTTP 响应头中，通过 set-cookie 字段设置 Cookie 时，可以带上 SameSite 选项，如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: widget_session=abc123; SameSite=None; Secure</span><br></pre></td></tr></table></figure>
+
+<p>我们可以针对实际情况将一些关键的 Cookie 设置为 Strict 或者 Lax 模式</p>
+<p>2.验证请求的来源站点</p>
+<p>使用HTTP 请求头中的 Referer 和 Origin 属性</p>
+<p>3.CSRF Token</p>
+<p>除了使用以上两种方式来防止 CSRF 攻击之外，还可以采用 CSRF Token 来验证，这个流程比较好理解，大致分为两步。</p>
+<p>1.在浏览器向服务器发起请求时，服务器生成一个 CSRF Token</p>
+<p>2.在浏览器端如果要发起转账的请求，那么需要带上页面中的 CSRF Token，然后服务器会验证该 Token 是否合法。如果是从第三方站点发出的请求，那么将无法获取到 CSRF Token 的值，所以即使发出了请求，服务器也会因为 CSRF Token 不正确而拒绝请求。</p>
+<h1 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h1><h2 id="浏览器渲染过程"><a href="#浏览器渲染过程" class="headerlink" title="浏览器渲染过程"></a>浏览器渲染过程</h2><p>1.html渲染成html树（dom树）</p>
+<p>2.css渲染成css树</p>
+<p>3.dom树和css树生成渲染树（render tree）</p>
+<p>4.render tree 渲染完成，浏览器计算元素的大小和位置</p>
+<p>5.绘制内容上去</p>
+<h2 id="浏览器渲染优化"><a href="#浏览器渲染优化" class="headerlink" title="浏览器渲染优化"></a>浏览器渲染优化</h2><ol>
+<li>提前渲染：ssr服务器端渲染 </li>
+<li>避免渲染阻塞：CSS放在HTML的head中 JS放在HTML的body底部 </li>
+<li>避免无用渲染：懒加载 </li>
+<li>减少渲染次数：对dom查询进行缓存、将dom操作合并、使用减少重排的标签</li>
+</ol>
+<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>进程</p>
+<p>一个运行的exe就是一个进程，一个进程可以有多个线程</p>
+<p>线程</p>
+<p>进程中的一个执行任务（控制单元），负责当前进程中程序的执行。一个进程至少有一个线程，一个进程可以运行多个线程，多个线程可共享数据。</p>
+<p><strong>进程是资源分配的最小单位，线程是CPU调度的最小单位</strong></p>
+<p><strong>进程间不会相互影响 ；线程一个线程挂掉将导致整个进程挂掉</strong></p>
+<p><strong>线程间可以通过直接共享同一进程中的资源，而进程通信需要借助 进程间通信。</strong></p>
+<p><strong>调度</strong></p>
+<p><strong>系统开销</strong></p>
+<h2 id="进程间的通讯方式"><a href="#进程间的通讯方式" class="headerlink" title="进程间的通讯方式"></a>进程间的通讯方式</h2><p>1.<strong>管道</strong></p>
+<p>管道就是操作系统在内核中开辟的一段缓冲区，进程1可以将需要交互的数据拷贝到这段缓冲区，进程2就可以读取了。</p>
+<p>2.消息队列</p>
+<p>消息队列就是一个消息的列表。用户可以在消息队列中添加消息、读取消息等。消息队列提供了一种从一个进程向另一个进程发送一个数据块的方法。 </p>
+<p>但是和管道一样，有长度限制</p>
+<p>3.信号量</p>
+<p>这个就是设置信号量，如信号量的初始值是 1，然后 a 进程来访问内存1的时候，我们就把信号量的值设为 0</p>
+<p>b访问内存1的时候，发现是0，就访问不了</p>
+<p>4.共享内存</p>
+<p>共享内存就是映射一段能被其他进程所访问的内存，这段共享内存由一个进程创建，但多个进程都可以访问（使多个进程可以访问同一块内存空间）</p>
+<p>5.套接字通信</p>
+<p>其他都是一个主机上通信，socket是多个主机上通信</p>
+<h2 id="死锁产生原因和解决方法"><a href="#死锁产生原因和解决方法" class="headerlink" title="死锁产生原因和解决方法"></a>死锁产生原因和解决方法</h2><p>产生原因：</p>
+<p>1.竞争资源，两个进程同时需要一个内存，只有一个使用，其他的就阻塞了</p>
+<p>2.进程推进不合法，P1保持R1,P2保持R2，P1又要请求R2,P2又要请求R1,就造成死锁了</p>
+<p>产生死锁的必要条件：</p>
+<ul>
+<li>互斥条件：一个资源每次只能被一个进程使用。</li>
+<li>请求和保持条件：当进程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件：进程已获得的资源在未使用完之前，不能剥夺，只能在使用完时由自己释放。</li>
+<li>环路等待条件：若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
+<p><strong>预防死锁的方法：</strong></p>
+<p>破坏后面三个条件</p>
+<p>解决死锁：</p>
+<p>1.重启</p>
+<p>2.关闭进程</p>
+<p>3.进程回退，让进程回退到没有发生死锁的某个节点</p>
+<h1 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h1><p>含义：</p>
+<p>浏览器缓存（Browser Caching）是为了节约网络的资源加速浏览，浏览器在用户磁盘上对最近请求过的文档进行存储，当访问者再次请求这个页面时，浏览器就可以从本地磁盘显示文档，这样就可以加速页面的阅览。</p>
+<p>储存位置：</p>
+<p>优先度从高到低</p>
+<p>1.Service Worker，运行在浏览器背后的独立线程，就是一个线程，这个有请求，要用HTTPS保证安全</p>
+<p>2.Memory Cache，内存中的缓存</p>
+<p>3.Disk Cache，硬盘中的缓存</p>
+<p>4.Push Cache，在session中存在，HTTP2.0内容</p>
+<h2 id="缓存过程分析"><a href="#缓存过程分析" class="headerlink" title="缓存过程分析"></a>缓存过程分析</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/18/16f19164a117d8e7~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="img"></p>
+<p>1.浏览器每次发起http请求，都会先在浏览器缓存中查找<code>请求的结果以及缓存标识</code></p>
+<p>2.浏览器每次<code>请求的结果以及缓存标识</code>都会存入浏览器缓存</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>不会向服务器发起请求，直接从缓存中读取资源。</p>
+<p>强缓存可以通过设置两种 HTTP Header 实现： Expires 和 Cache-Control</p>
+<ol>
+<li>Expires</li>
+</ol>
+<p>缓存过期时间，用来指定资源到期的时间</p>
+<p>Expires=max-age + 请求时间，需要和 Last-modified 结合使用。</p>
+<ol start="2">
+<li>Cache-Control</li>
+</ol>
+<p>在 HTTP/1.1 中，Cache-Control 是最重要的规则，主要用于控制网页缓存。</p>
+<p>Cache-Control 可以在请求头或者响应头中设置，并且可以组合使用多种指令：</p>
+<p>public,private,no-cache,no-store,max-age,s-maxage,max-stale，min-fresh</p>
+<p>3.Expires 和 Cache-Control 两者对比</p>
+<p> Expires 是 http1.0 的产物，Cache-Control 是 http1.1 的产物，两者同时存在的话，Cache-Control 优先级高于 Expires；在某些不支持 HTTP1.1 的环境下，Expires 就会发挥用处。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><ul>
+<li>协商缓存生效，返回 304 和 Not Modified</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/18/16f1917d5231e17d~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="img"></p>
+<ul>
+<li>协商缓存成功，返回 200 和请求结果</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/12/18/16f19189449396ce~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="img"></p>
+<h1 id="浏览器组成"><a href="#浏览器组成" class="headerlink" title="浏览器组成"></a>浏览器组成</h1><h2 id="从输入URL到页面加载的全过程"><a href="#从输入URL到页面加载的全过程" class="headerlink" title="从输入URL到页面加载的全过程"></a>从输入URL到页面加载的全过程</h2><p>使用浏览器就是开一个进程，主要进程有</p>
+<ul>
+<li>浏览器进程 (Browser Process)：负责浏览器的TAB的前进、后退、地址栏、书签栏的工作和处理浏览器的一些不可见的底层操作，比如网络请求和文件访问。</li>
+<li> 渲染进程 (Renderer Process)：负责一个Tab内的显示相关的工作，也称渲染引擎。</li>
+<li> 插件进程 (Plugin Process)：负责控制网页使用到的插件</li>
+<li> GPU进程 (GPU Process)：负责处理整个应用程序的GPU任务</li>
+</ul>
+<p>1.输入URL</p>
+<p>进入Browser Process：</p>
+<p>2.查找此URL是否有浏览器缓存-系统缓存-路由缓存，没有的话就下一步</p>
+<p>3.DNS域名解析，服务器发送回IP地址</p>
+<p>4.客户端默认80端口和服务器的IP地址建立TCP连接</p>
+<p>5.发送HTTP请求，主要是get请求，拿到网页上的元素</p>
+<p>6.服务器返回对应的html</p>
+<p>7.关闭TCP连接</p>
+<p>进入Renderer Process：</p>
+<p>8.拿到解析的HTML内容，进入渲染过程</p>
+<p>html dom</p>
+<p>css css</p>
+<p>html css render tree</p>
+<p>元素 位置 大小</p>
+<p>绘制</p>
+<p>9.如果解析时遇到需要请求网络的资源，再次进入Browser Process</p>
+<p>10.遇到插件进入Plugin Process</p>
+<p>11.最后GPU加载出来</p>
+<h1 id="浏览器本地存储"><a href="#浏览器本地存储" class="headerlink" title="浏览器本地存储"></a>浏览器本地存储</h1><h2 id="Cookie，session，sessionStorage、localStorage-的区别"><a href="#Cookie，session，sessionStorage、localStorage-的区别" class="headerlink" title="Cookie，session，sessionStorage、localStorage 的区别"></a>Cookie，session，sessionStorage、localStorage 的区别</h2><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p> cookie是存储于访问者的计算机中的变量。可以让我们用同一个浏览器访问同一个域名的时候共享数据。</p>
+<p>特点：</p>
+<ul>
+<li>cookie 保存在浏览器本地</li>
+<li>正常设置的cookie 是不加密的，用户可以自由看到</li>
+<li>用户可以删除cookie，或者禁用它</li>
+<li>cookie 可以被篡改</li>
+<li>cookie 可以用于攻击</li>
+<li>cookie 存储量很小。未来实际上要被localStorage 替代，但是后者IE9 兼容。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>一个cookie的名称</td>
+</tr>
+<tr>
+<td>value</td>
+<td>一个cookie的值</td>
+</tr>
+<tr>
+<td>domain🔥</td>
+<td>域名 name = value:，是键值对，可以设置要保存 key/Value，注意这里的 name 不能和其他属性项的名字一样</td>
+</tr>
+<tr>
+<td>path🔥</td>
+<td>表示cookie 影响到的路径，如path=/。如果路径不能匹配时，浏览器则不发送这个Cookie</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>此cookie大小</td>
+</tr>
+<tr>
+<td>http</td>
+<td>是微软对COOKIE 做的扩展。如果在COOKIE 中设置了“httpOnly”属性，则通过程序（JS 脚本、applet 等）将无法读取到COOKIE 信息，防止XSS 攻击产生</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>当secure 值为true 时，cookie 在HTTP 中是无效，在HTTPS 中才有效</td>
+</tr>
+<tr>
+<td>maxAge/Expires</td>
+<td>最大失效时间（毫秒），设置在多少后失效</td>
+</tr>
+</tbody></table>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>当浏览器访问服务器并发送第一次请求时，服务器端会创建一个session 对象，生成一个类似于key,value</p>
+<p>的键值对， 然后将key(cookie)返回到浏览器(客户)端，浏览器下次再访问时，携带key(cookie)，找到对应</p>
+<p>的session(value)。</p>
+<p>特点：</p>
+<p>1.session 是另一种记录客户状态的机制，不同的是Cookie 保存在客户端浏览器中，而session 保存在服务器上。</p>
+<p>2.Cookie 数据存放在客户的浏览器上，Session 数据放在服务器上。Session 相比Cookie 要更安全一些</p>
+<p>3.由于Session 保存到服务器上，所以当访问量增多的时候，会比较占用服务器的性能。</p>
+<p>4.单个cookie 保存的数据大小不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。Session 没有这方面的限制。Session 是基于Cookie 进行工作的。</p>
+<h3 id="sessionStorage、localStorage、cookie的作用和区别"><a href="#sessionStorage、localStorage、cookie的作用和区别" class="headerlink" title="sessionStorage、localStorage、cookie的作用和区别"></a>sessionStorage、localStorage、cookie的作用和区别</h3><p>1、sessionStorage和localStorage都是用作存储数据，一些比较大的文件，图片，cookie存放用户的一些状态如path,demain</p>
+<p>cookie一般存储登录验证信息或者token，localStorage常用于存储不易变动的数据，减轻服务器压力，sessionStorage可以用来监测用户是否是刷新进入页面，如音乐播放器恢复进度条功能</p>
+<p>2、3者的数据共享都遵循同源原则，sessionStorage还限制必须是同一个页面 </p>
+<p>3、cookie存储空间大小约4kb， sessionStorage及localStorage空间比较大，大约5M </p>
+<p>4、cookie的数据会自动的传递到服务器；sessionStorage和localStorage数据保存在本地</p>
+<p>5、cookie设置的过期时间之前一直有效；localStorage永久存储，浏览器关闭后数据不丢失除非主动删除数据；sessionStorage数据在当前浏览器窗口关闭后自动删除</p>
+<h1 id="浏览器事件机制"><a href="#浏览器事件机制" class="headerlink" title="浏览器事件机制"></a>浏览器事件机制</h1><h2 id="事件是什么？事件模型？"><a href="#事件是什么？事件模型？" class="headerlink" title="事件是什么？事件模型？"></a>事件是什么？事件模型？</h2><p>事件：</p>
+<p>用户的操作，如click,move,文档加载，窗口滚动和大小调整</p>
+<p>因为dom是一个树结构，就会存在一个事件流</p>
+<p><img src="https://camo.githubusercontent.com/76f7593d991a23f13ba8d993f9121aa327097cfd4f8b52b16710a308dbd4d7b3/68747470733a2f2f7374617469632e7675652d6a732e636f6d2f33653961363435302d373463662d313165622d383566362d3666616337376330633962332e706e67" alt="img"></p>
+<p>事件模型：</p>
+<p>1.原始事件模型（DOM0级）</p>
+<p>事件绑定监听函数比较简单, 有两种方式：</p>
+<ul>
+<li>HTML代码中直接绑定</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;fun()&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过<code>JS</code>代码绑定</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;.btn&#x27;</span>);</span><br><span class="line">btn.<span class="property">onclick</span> = fun;</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ul>
+<li>只支持冒泡，不支持捕获</li>
+<li>同一个类型的事件只能绑定一次</li>
+</ul>
+<p>2.标准事件模型（DOM2级）</p>
+<p>绑定事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">addEventListener</span>(eventType, handler, useCapture)</span><br></pre></td></tr></table></figure>
+
+<p>移除事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">removeEventListener</span>(eventType, handler, useCapture)</span><br></pre></td></tr></table></figure>
+
+<p>eventType：事件类型</p>
+<p>handler：事件处理函数</p>
+<p>useCapture：</p>
+<p>默认为false，是冒泡阶段</p>
+<p>true，变成捕获阶段</p>
+<p>有些浏览器不兼容</p>
+<p><code>eventTarget.attachEvent()</code>方法将指定的监听器注册到 eventTarget（目标对象） 上</p>
+<p><code>eventTarget.detachEvent(eventNameWithOn,callback);</code>这个是删除</p>
+<h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eventTarget.<span class="property">onclick</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">   <span class="comment">// 这个 event 就是事件对象，我们还喜欢的写成 e 或者 evt </span></span><br><span class="line">&#125; </span><br><span class="line">eventTarget.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">   <span class="comment">// 这个 event 就是事件对象，我们还喜欢的写成 e 或者 evt  </span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个event表示事件的状态</p>
+<p>鼠标触发这个事件的话，得到鼠标位置</p>
+<p>键盘触发这个事件的话，得到按了哪个键</p>
+<p><strong>常见使用方法</strong></p>
+<p><code>e.target</code> 返回事件对象</p>
+<p><code>e.stopPropagation()</code> 阻止冒泡</p>
+<p><code>e.preventDefault()</code> 阻止默认行为</p>
+<p><code>e.target</code> 和 <code>this</code> 的区别：</p>
+<ul>
+<li>this 是事件绑定的元素， 这个函数的调用者（绑定这个事件的元素）</li>
+<li>e.target 是事件触发的元素。</li>
+</ul>
+<p>比如</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">       <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>abc<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">   &lt;/ul&gt;</span><br><span class="line">   </span><br><span class="line">   ul.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">               <span class="comment">// 我们给ul 绑定了事件  那么this 就指向ul  </span></span><br><span class="line">               <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">               <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">currentTarget</span>);</span><br><span class="line"></span><br><span class="line">               <span class="comment">// e.target 指向我们点击的那个对象 谁触发了这个事件 我们点击的是li e.target 指向的就是li</span></span><br><span class="line">               <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>);</span><br><span class="line"></span><br><span class="line">           &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>事件委托也称为事件代理</p>
+<p><code>事件委托的原理</code></p>
+<p><strong>不是每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  &lt;ul&gt;</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>知否知否，点我应有弹框在手！<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>知否知否，点我应有弹框在手！<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>知否知否，点我应有弹框在手！<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>知否知否，点我应有弹框在手！<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>知否知否，点我应有弹框在手！<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">// 事件委托的核心原理：给父节点添加侦听器， 利用事件冒泡影响每一个子节点</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="keyword">var</span> ul = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;ul&#x27;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      ul.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// alert(&#x27;知否知否，点我应有弹框在手！&#x27;);</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// e.target 这个可以得到我们点击的对象</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          e.<span class="property">target</span>.<span class="property">style</span>.<span class="property">backgroundColor</span> = <span class="string">&#x27;pink&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// 点了谁，就让谁的style里面的backgroundColor颜色变为pink</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>li上的事件会冒泡到ul上，ul上有绑定事件</p>
+<p>我们点击li，就可以让li颜色变为pink</p>
+<h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p>事件循环(event-loop)</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>JavaScript是单线程的</p>
+<p>JavaScript 有同步和异步的概念，这就解决了代码阻塞的问题：</p>
+<ul>
+<li><p><strong>同步</strong>：如果在一个函数返回的时候，调用者就能够得到预期结果，那么这个函数就是同步的；</p>
+</li>
+<li><p><strong>异步</strong>：如果在函数返回的时候，调用者还不能够得到预期结果，而是需要在将来通过一定的手段得到，那么这个函数就是异步的。</p>
+</li>
+<li><p><strong>同步任务：</strong> 在主线程上排队执行的任务，只有一个任务执行完毕，才能执行下一个任务，</p>
+</li>
+<li><p><strong>异步任务：</strong> 不进入主线程，而是放在任务队列中，若有多个异步任务则需要在任务队列中排队等待，任务队列类似于缓冲区，任务下一步会被移到执行栈然后主线程执行调用栈的任务。</p>
+</li>
+</ul>
+<h3 id="执行栈与任务队列"><a href="#执行栈与任务队列" class="headerlink" title="执行栈与任务队列"></a>执行栈与任务队列</h3><p>同步任务进执行栈，异步任务进任务队列</p>
+<p>1.执行栈</p>
+<p>他是一个栈，先进后出，同步任务进执行栈</p>
+<p>所以下面的代码先执行</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ec9e8a50c3de4aaf9f7a98d6faf561a5~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="20200815002745238.gif"></p>
+<p>2.任务队列</p>
+<p>JavaScript在执行代码时，会将同步的代码按照顺序排在执行栈中，然后依次执行里面的函数。</p>
+<p>当遇到异步任务时，就将其放入任务队列中，等待当前执行栈所有同步代码执行完成之后，就会从异步任务队列中取出已完成的异步任务的回调并将其放入执行栈中继续执行，如此循环往复，直到执行完所有任务。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7b1d13b5c77746f783045cd2f9dc1815~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="事件循环.png"></p>
+<h2 id="宏任务和微任务"><a href="#宏任务和微任务" class="headerlink" title="宏任务和微任务"></a>宏任务和微任务</h2><p>宏任务与微任务都属于异步任务，再执行上微任务的优先级高于宏任务，因此每一次都会先执行完微任务在执行宏任务。</p>
+<p>宏任务有：setTimeout、setInterval、I/O、UI 交互事件，Dom事件，ajax事件</p>
+<p>微任务有：promise的回调、MutationObserver 的回调 ,process.nextTick，async/await,.then（）</p>
+<p>注：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;同步代码2&#x27;</span>)<span class="comment">//同步任务</span></span><br><span class="line">  <span class="title function_">resolve</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;<span class="comment">//微任务</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;promise.then&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>一次 Eventloop 循环会处理一个宏任务和所有这次循环中产生的微任务。</strong></p>
+<p><strong>Promise的状态在发生变化之后，就不会再发生变化</strong></p>
+<h2 id="nodejs的事件循环"><a href="#nodejs的事件循环" class="headerlink" title="nodejs的事件循环"></a>nodejs的事件循环</h2><p>当Node.js启动时，它会初始化一个事件循环，来处理输入的脚本，这个脚本可能进行异步API的调用、调度计时器或调用process.nextTick()，然后开始处理事件循环。</p>
+<p>Node.js使用V8作为js的解析引擎，而I/O处理方面使用了自己设计的libuv，libuv是一个基于事件驱动的跨平台抽象层，封装了不同操作系统一些底层特性，对外提供统一的API</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4fca3d06b2464ce5a6694e0966fa93ff~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="img"></p>
+<p>根据上图，可以看到Node.js的运行机制如下:</p>
+<ol>
+<li>V8引擎负责解析JavaScript脚本；</li>
+<li>解析后的代码，调用Node API；</li>
+<li>libuv库负责Node API的执行。它将不同的任务分配给不同的线程，形成一个Event Loop（事件循环），以异步的方式将任务的执行结果返回给V8引擎；</li>
+<li>V8引擎将结果返回给用户；</li>
+</ol>
+<p>具体的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   ┌───────────────────────────┐</span><br><span class="line">┌─&gt;│           timers          │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │     pending callbacks     │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │       idle, prepare       │</span><br><span class="line">│  └─────────────┬─────────────┘      ┌───────────────┐</span><br><span class="line">│  ┌─────────────┴─────────────┐      │   incoming:   │</span><br><span class="line">│  │           poll            │&lt;─────┤  connections, │</span><br><span class="line">│  └─────────────┬─────────────┘      │   data, etc.  │</span><br><span class="line">│  ┌─────────────┴─────────────┐      └───────────────┘</span><br><span class="line">│  │           check           │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">└──┤      close callbacks      │</span><br><span class="line">   └───────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>分成六个阶段：</p>
+<p>1.<code>timers</code>：实现setTimeout、setInterval回调</p>
+<p>2.<code>I/O callbacks</code> 阶段：主要执行系统级别的回调函数，比如 TCP 连接失败的回调；</p>
+<p>3.<code>idle, prepare</code> 阶段：仅Node.js内部使用，可以忽略；</p>
+<p>4.<code>poll</code> 阶段：轮询等待新的链接和请求等事件，执行 I/O 回调等；</p>
+<p>5.<code>check</code> 阶段：执行 setImmediate() 的回调；</p>
+<p>6.<code>close callbacks</code> 阶段：执行关闭请求的回调函数</p>
+<p>比较重要的就是第四阶段：poll</p>
+<p>1.先等待timer的时间，然后清空poll队列</p>
+<p>2.</p>
+<p>如果有 setImmediate 回调需要执行，poll 阶段会停止并且进入到 check 阶段执行回调；</p>
+<p>如果没有 setImmediate 回调需要执行，会等待回调被加入到队列中并立即执行回调，这里同样会有个超时时间设置防止一直等待下去；</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dd424a6a6443420ba545a3a2467164c0~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="image.png"></p>
+<p>process.nexttick执行顺序</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;timeout&#x27;</span>);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">resolve</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;promise&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.<span class="title function_">nextTick</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;nextTick&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nextTick</span><br><span class="line">promise</span><br><span class="line">timeout</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，process.nextTick()是优先于promise的回调执行（微任务所有）。</p>
+<h1 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h1><h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><p>有两种机制：</p>
+<p>1、标记清除：将<code>可达</code>的对象标记起来，<code>不可达</code>的对象当成垃圾回收</p>
+<p>对所有活动对象进行标记，清除阶段会将没有标记的对象清除；标记整理算法：标记结束后，算法将活动对象压入内存一端，则需要清理的对象在边界，直接被清理掉就行。（内存空间不连续）</p>
+<p><img src="https://www.teqng.com/wp-content/uploads/2021/09/wxsync-2021-09-76349487667369b3a9301666d7057fb0.png" alt="img"></p>
+<p> 2、引用计数：找出每个对象的引用数，等于0就回收，大于0就回收</p>
+<p>并且如果两个对象互相引用，引用永远是1，所以不会被回收，造成内存泄露。</p>
+<h2 id="V8的垃圾回收"><a href="#V8的垃圾回收" class="headerlink" title="V8的垃圾回收"></a>V8的垃圾回收</h2><p>分代回收</p>
+<p><strong>新生代</strong>的垃圾只有<code>1-8M</code>的容量，比较容易处理</p>
+<p><strong>老生代</strong>的容量就大很多了，不易处理</p>
+<p>1.新生代</p>
+<p>在JavaScript中，任何对象的声明分配到的内存，将会先被放置在新生代中。</p>
+<p>在新生代中，主要使用<code>Scavenge</code>算法进行垃圾回收，<code>Scavenge</code>算法是一个典型的牺牲空间换取时间的复制算法，在占用空间不大的场景上非常适用。</p>
+<p><img src="https://www.teqng.com/wp-content/uploads/2021/09/wxsync-2021-09-50369819178d6e2db1827b0a2883fa23.png" alt="img"></p>
+<p>具体步骤：</p>
+<p>1、标记活动对象和非活动对象</p>
+<p>2、复制<code>from-space</code>的活动对象到<code>to-space</code>中并进行排序</p>
+<p>3、清除<code>from-space</code>中的非活动对象</p>
+<p>4、将<code>from-space</code>和<code>to-space</code>进行角色互换，以便下一次的<code>Scavenge算法</code>垃圾回收</p>
+<p><strong>怎么判断哪些对象是活动对象，哪些是非活动对象呢？</strong></p>
+<p>使用标记清除法</p>
+<p><strong>新生代中的对象什么时候变成老生代的对象？</strong></p>
+<p>在新生代中，还进一步进行了细分。分为<code>nursery子代</code>和<code>intermediate子代</code>两个区域</p>
+<p>对象第一次分配到nursery子代，如果下一次还在，到intermediate子代，还没有被回收，到老生代</p>
+<p>2.老生代</p>
+<p>老生代里使用了<code>Mark-Sweep算法(标记清理)</code>和<code>Mark-Compact算法(标记整理)</code>（会整理空位）</p>
+<p>老生代不需要复制，直接标记活动对象和非活动对象之后，就直接执行清理了。</p>
+<h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>以下四种情况会造成内存的泄漏：</p>
+<ul>
+<li><strong>意外的全局变量：</strong>由于使用未声明的变量，而意外的创建了一个全局变量，而使这个变量一直留在内存中无法被回收。</li>
+<li><strong>被遗忘的计时器或回调函数：</strong>设置了 setInterval 定时器，而忘记取消它，如果循环函数有对外部变量的引用的话，那么这个变量会被一直留在内存中，而无法被回收。</li>
+<li><strong>脱离 DOM 的引用：</strong>获取一个 DOM 元素的引用，而后面这个元素被删除，由于一直保留了对这个元素的引用，所以它也无法被回收。</li>
+<li><strong>闭包：</strong>不合理的使用闭包，从而导致某些变量一直被留在内存当中。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:1179339018@qq.com">Yu Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/">https://1179339018.github.io/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1179339018.github.io" target="_blank">yuchen</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://fastly.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/16/%E9%9D%A2%E8%AF%95/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%9D%A2/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">性能优化面</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/16/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E9%9D%A2/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计网面</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Yu Chen</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">41</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8E%9F%E7%90%86"><span class="toc-text">浏览器原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8"><span class="toc-text">浏览器安全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS"><span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AD%98%E5%82%A8%E5%9E%8B"><span class="toc-text">1.存储型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8D%E5%B0%84%E5%9E%8B"><span class="toc-text">2.反射型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%BA%E4%BA%8E-DOM-%E7%9A%84-XSS-%E6%94%BB%E5%87%BB"><span class="toc-text">3.基于 DOM 的 XSS 攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS%E9%98%B2%E5%BE%A1"><span class="toc-text">XSS防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF"><span class="toc-text">CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF%E9%98%B2%E5%BE%A1"><span class="toc-text">CSRF防御</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93"><span class="toc-text">浏览器渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B"><span class="toc-text">浏览器渲染过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93%E4%BC%98%E5%8C%96"><span class="toc-text">浏览器渲染优化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B"><span class="toc-text">进程和线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E7%9A%84%E9%80%9A%E8%AE%AF%E6%96%B9%E5%BC%8F"><span class="toc-text">进程间的通讯方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%BB%E9%94%81%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">死锁产生原因和解决方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98"><span class="toc-text">浏览器缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">缓存过程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-text">协商缓存</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BB%84%E6%88%90"><span class="toc-text">浏览器组成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E7%9A%84%E5%85%A8%E8%BF%87%E7%A8%8B"><span class="toc-text">从输入URL到页面加载的全过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="toc-text">浏览器本地存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie%EF%BC%8Csession%EF%BC%8CsessionStorage%E3%80%81localStorage-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Cookie，session，sessionStorage、localStorage 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie"><span class="toc-text">cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#session"><span class="toc-text">session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sessionStorage%E3%80%81localStorage%E3%80%81cookie%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%8C%BA%E5%88%AB"><span class="toc-text">sessionStorage、localStorage、cookie的作用和区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">浏览器事件机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%9E%8B%EF%BC%9F"><span class="toc-text">事件是什么？事件模型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1"><span class="toc-text">事件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-text">事件循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%A0%88%E4%B8%8E%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97"><span class="toc-text">执行栈与任务队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="toc-text">宏任务和微任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nodejs%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="toc-text">nodejs的事件循环</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">垃圾回收机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">V8的垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="toc-text">内存泄漏</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Yu Chen</div><div class="footer_custom_text">yuchen's blog</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://fastly.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '9uBlc4TiYDET6AInU3VDNmjM-9Nh9j0Va',
+      appKey: 'PHUY6kE6EGJG6Ax7hww6oI5d',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://fastly.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script data-pjax defer src="/js/custom/fixed_card_widget.js"></script><script data-pjax defer src="/js/custom/custom.js"></script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><script async data-pjax src="/js/randombg.js"></script><script async src="/js/diytitle.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="fixedcard-dashboard"><button class="fixedcard-activebtn" type="button" title="用户信息" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-info&quot;,&quot;0&quot;)"><i class="fas fa-address-book"></i></button><button class="fixedcard-activebtn" type="button" title="电子钟" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-clock&quot;,&quot;0&quot;)"><i class="fas fa-cloud-sun"></i></button><button class="fixedcard-activebtn" type="button" title="相关推荐" onclick="FixedCardWidget(&quot;class&quot;,&quot;card-recommend-post&quot;,&quot;0&quot;)"><i class="fas fa-dharmachakra"></i></button><div class="fixedcard-user-avatar fixedcard-activebtn" onclick="RemoveFixedCardWidget()"><img class="fixedcard-user-avatar-img" src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/img/%E5%A4%B4%E5%83%8F.jpg" title="Yu Chen"></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 380px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 320px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/bfd9032d1419bb81d204ef901cff16c.jpg);"> <a class="categoryBar-list-link" href="categories/react-vite/">react &amp; vite</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">快乐react</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/06ec8662ee828eb9a78a68019aec54a.jpg);"> <a class="categoryBar-list-link" href="categories/CSS-HTML/">CSS &amp; HTML</a><span class="categoryBar-list-count">7</span><span class="categoryBar-list-descr">简单的html</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/2e421c1938b68ca339b960f7d748abc.jpg);"> <a class="categoryBar-list-link" href="categories/JavaScript/">JavaScript</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">vue的学习</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/538921c5299ecdfba0521c4fdc66b48.jpg);"> <a class="categoryBar-list-link" href="categories/three-git/">three &amp; git</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">摆烂JS</span></li><li class="categoryBar-list-item" style="background:url(https://yuchenimage.oss-cn-shanghai.aliyuncs.com/background/5afba8fed45650255f8ab4f85b6c9da.jpg);"> <a class="categoryBar-list-link" href="categories/Vue/">Vue</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">一些工具</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/前端工具/">前端工具</a><span class="categoryBar-list-count">4</span><span class="categoryBar-list-descr">emm</span></li><li class="categoryBar-list-item" style="background:url(https://npm.elemecdn.com/akilar-candyassets/image/cover6.webp);"> <a class="categoryBar-list-link" href="categories/数据结构/">数据结构</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">只想摆</span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" href="categories/work/">work</a><span class="categoryBar-list-count">9</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><div id="ghbdages" style="overflow:hidden;max-height:90px;height:auto;text-align:center;margin-top:10px"><div class="swiper-wrapper"><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" title="博客框架为Hexo_v5.4.0"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" title="主题版本Butterfly_v3.8.2"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://www.jsdelivr.com/" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速"><img src="https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&amp;logo=jsDelivr" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，默认线路托管于Vercel"><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" title="本站采用双线部署，联通线路托管于Coding"><img src="https://img.shields.io/badge/Hosted-Coding-0cedbe?style=flat&amp;logo=Codio" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" title="本站项目由Github托管"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a></div><div class="swiper-slide"><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></div></div></div><style>a.github-badge:hover:before {display:none}</style>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://yuchenimage.oss-cn-shanghai.aliyuncs.com/js/runtime.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify/lib/swiperbdage_init.min.js"></script><!-- hexo injector body_end end --></body></html>
